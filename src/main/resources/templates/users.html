@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>LOGIN APP - users</title>
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+<link rel="icon" href="https://img.pokemondb.net/sprites/ruby-sapphire/normal/charizard.png">
+</head>
+<body>
+	<div class="container text-center">
+		<div>
+			<form  th:action="@{/logout}" method="post">
+				<p>
+					Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+				</p>
+				<input type="submit" value="LogOut"/>
+			</form>
+		</div>
+		<div>
+			<h1>Users List</h1>
+		</div>
+		<div>
+			<table class="table table-striped table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th>User ID</th>
+						<th>Email</th>
+						<th>FirstName</th>
+						<th>LastName</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user: ${listUsers}">
+					<td th:text="${user.id}">User ID</td>
+					<td th:text="${user.email}">Email</td>
+					<td th:text="${user.firstName}">FirstName</td>
+					<td th:text="${user.lastName}">LastName</td>
+				</tbody>
+			</table>
+		</div>
+		<br>
+		<div style="color:green">
+			<h1>Search</h1>
+		</div>
+		<form th:action="@{/searchCards}" method="get"
+			style="max-width: 600px; margin: 0 auto;">
+			<input type="text" th:name="name"/> 	
+		</form>
+	</div>
+	
+</body>
+</html>
