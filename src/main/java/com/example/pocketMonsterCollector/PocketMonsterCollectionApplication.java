@@ -1,13 +1,13 @@
-package com.example.loginApp;
+package com.example.pocketMonsterCollector;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LoginAppApplication {
+public class PocketMonsterCollectionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LoginAppApplication.class, args);
+		SpringApplication.run(PocketMonsterCollectionApplication.class, args);
 	}
 
 }

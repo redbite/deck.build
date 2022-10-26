@@ -1,4 +1,4 @@
-package com.example.loginApp.controller;
+package com.example.pocketMonsterCollector.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.loginApp.entity.Card;
-import com.example.loginApp.service.SearchService;
+import com.example.pocketMonsterCollector.entity.Card;
+import com.example.pocketMonsterCollector.service.SearchService;
 
 @Controller
 public class SearchController {

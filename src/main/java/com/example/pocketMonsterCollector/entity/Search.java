@@ -1,4 +1,4 @@
-package com.example.loginApp.entity;
+package com.example.pocketMonsterCollector.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

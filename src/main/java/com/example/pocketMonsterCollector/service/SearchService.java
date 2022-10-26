@@ -1,4 +1,4 @@
-package com.example.loginApp.service;
+package com.example.pocketMonsterCollector.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.loginApp.entity.Card;
+import com.example.pocketMonsterCollector.entity.Card;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

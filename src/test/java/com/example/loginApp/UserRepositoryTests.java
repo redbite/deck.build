@@ -10,8 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
-import com.example.loginApp.entity.User;
-import com.example.loginApp.repository.UserRepository;
+import com.example.pocketMonsterCollector.entity.User;
+import com.example.pocketMonsterCollector.repository.UserRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace=Replace.NONE)

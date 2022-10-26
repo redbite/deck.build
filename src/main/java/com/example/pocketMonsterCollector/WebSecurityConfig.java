@@ -1,4 +1,4 @@
-package com.example.loginApp;
+package com.example.pocketMonsterCollector;
 
 import javax.sql.DataSource;
 
@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.example.loginApp.service.CustomUserDetailsService;
+import com.example.pocketMonsterCollector.service.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity

@@ -1,4 +1,4 @@
-package com.example.loginApp.controller;
+package com.example.pocketMonsterCollector.controller;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.loginApp.entity.User;
-import com.example.loginApp.repository.UserRepository;
+import com.example.pocketMonsterCollector.entity.User;
+import com.example.pocketMonsterCollector.repository.UserRepository;
 
 @Controller
 public class LoginAppController {
