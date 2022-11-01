@@ -2,9 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>LOGIN APP - search</title>
-<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+<title>CARDS</title>
 <link rel="icon" href="https://img.pokemondb.net/sprites/silver/normal/charizard.png">
+    <style>
+        .cards-container{
+            display: flex;
+            flex-direction: row;
+            justify-content:center;
+            flex-wrap: wrap;
+        }
+
+        .card{
+        margin:10px;
+        padding:10px;
+        
+        display: flex;
+        flex-direction: row;
+        justify-content:center;
+        background-color:rgb(122, 255, 6);
+        }
+
+        .card_right_text{
+            max-width: 200px;
+            padding-left:5px;
+            border-left: 1px solid;
+        border-color:grey;
+        }
+
+        .card_left_img{
+        max-width:250px;
+        padding-right:5px;
+        }
+
+    </style>
 </head>
 <body>
 	<div class="container text-center">
@@ -12,33 +42,22 @@
 			<h1>Cards:</h1>
 		</div>
 		<div>
-			<table class="table table-striped table-bordered">
-				<thead class="thead-dark">
-					<tr>
-						<th>ID</th>
-						<th>NAME</th>
-						<th>N°</th>
-						<th>CARD</th>
-						<th>DESCRIPTION</th>
-						<th>ARTIST</th>
-						<th>RARITY</th>
-						<th>SERIES</th>
-						<th>SETNAME</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="card : ${listCard}">
-						<td><span  th:text="${card.id}">ID</span></td>
-						<td><span  th:text="${card.name}">Name</span></td>
-						<td><span  th:text="${card.nationalPokedexNumber}">N°</span></td>
-						<td><img   th:src="${card.imageSmall}" width="245" height="342"></td>
-						<td><span  th:text="${card.flavorText}">Description</span></td>
-						<td><span  th:text="${card.artist}">Artist</span></td>
-						<td><span  th:text="${card.rarity}">Rarity</span></td>
-						<td><span  th:text="${card.series}">Series</span></td>
-						<td><span  th:text="${card.set}">Set</span></td>
-				</tbody>
-			</table>
+			<div class="cards-container">
+                <div th:each="card : ${listCard}">
+                    <div class="card">
+                        <div class="card_left_img">
+                          <img   th:src="${card.imageSmall}">
+                        </div>
+                        <div class="card_right_text">
+                          <div class="card_name"><p th:text="${card.name}"></p></div>
+                          <div class="card_description"><p th:text="${card.flavorText}"></p></div>
+                          <div class="card_rarity"><p th:text="${card.rarity}"></p></div>
+                          <div class="card_set"><p th:text="${card.set}"></p></div>
+                          <div class="card_artist"><p th:text="${card.artist}"></p></div>
+                        </div>
+                      </div>
+                </div>
+            </div>
 		</div>
 	</div>
 	
