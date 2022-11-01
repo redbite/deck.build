@@ -15,8 +15,8 @@ public class Card {
     public String id;
     public String name;
     public int nationalPokedexNumber;
-    public String imageUrl;
-    public String imageUrlHiRes;
+    public String imageSmall;
+    public String imageLarge;
     public String supertype;
     public String subtype;
     public String evolvesFrom;
@@ -26,8 +26,50 @@ public class Card {
     public String rarity;
     public String series;
     public String setName;
-    public String setCode;
+    public int getIdCard() {
+		return idCard;
+	}
 
+	public void setIdCard(int idCard) {
+		this.idCard = idCard;
+	}
+
+	public String getImageSmall() {
+		return imageSmall;
+	}
+
+	public void setImageSmall(String imageSmall) {
+		this.imageSmall = imageSmall;
+	}
+
+	public String getImageLarge() {
+		return imageLarge;
+	}
+
+	public void setImageLarge(String imageLarge) {
+		this.imageLarge = imageLarge;
+	}
+
+	public String getSetName() {
+		return setName;
+	}
+
+	public void setSetName(String setName) {
+		this.setName = setName;
+	}
+
+	public String getFlavorText() {
+		return flavorText;
+	}
+
+	public void setFlavorText(String flavorText) {
+		this.flavorText = flavorText;
+	}
+
+
+	public String setCode;
+    public String flavorText;
+    
     public Card() {
     }
 
@@ -35,7 +77,7 @@ public class Card {
         this.id = id;
         this.name = name;
         this.nationalPokedexNumber = nationalPokedexNumber;
-        this.imageUrl = imageUrl;
+        this.imageLarge = imageUrl;
     }
 
     public String getId() {
@@ -63,19 +105,19 @@ public class Card {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return imageSmall;
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+        this.imageSmall = imageUrl;
     }
 
     public String getImageUrlHiRes() {
-        return imageUrlHiRes;
+        return imageLarge;
     }
 
     public void setImageUrlHiRes(String imageUrlHiRes) {
-        this.imageUrlHiRes = imageUrlHiRes;
+        this.imageLarge = imageUrlHiRes;
     }
 
     public String getSupertype() {
@@ -165,8 +207,8 @@ public class Card {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", nationalPokedexNumber=" + nationalPokedexNumber +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", imageUrlHiRes='" + imageUrlHiRes + '\'' +
+                ", imageUrl='" + imageSmall + '\'' +
+                ", imageUrlHiRes='" + imageLarge + '\'' +
                 ", supertype='" + supertype + '\'' +
                 ", subtype='" + subtype + '\'' +
                 ", evolvesFrom='" + evolvesFrom + '\'' +

@@ -45,16 +45,21 @@ public class SearchService {
 	
 	public List<Card> getPokemon (String name) throws IOException {
         List<Card> list = new ArrayList<>();
-        Integer pageSize = 10;
-        String url = "https://api.pokemontcg.io/v1/cards?name="+name+"&pageSize="+pageSize;
+        Integer pageSize = 20;
+//      String url = "https://api.pokemontcg.io/v2/cards?q="+name+"&pageSize="+pageSize;
+//        String url = "https://api.pokemontcg.io/v2/cards?page=1&pageSize="+pageSize;
+        String url = "https://api.pokemontcg.io/v2/cards?q=name:"+name;
         String pokejson = callApi(url).getBody();
+        System.out.println(pokejson);
         pokemonResultsList(pokejson,list);
         return list;
     }
 	
 	private void pokemonResultsList(String pokejson, List<Card> list) throws IOException {
         JsonNode response = mapper.readTree(pokejson);
-        JsonNode pokemonCards = response.path("cards");
+        JsonNode pokemonCards = response.path("data");
+        System.out.println(response.path("data"));        
+		
         for(JsonNode node : pokemonCards){
             Card pkmnCard = createPokeCard(node);
             list.add(pkmnCard);
@@ -62,12 +67,17 @@ public class SearchService {
     }
 	
     private Card createPokeCard(JsonNode node){
+    	System.out.println(" images: "+node.path("images").asText());
+    	System.out.println(" 	images large "+node.path("images").path("large").asText());
+    	System.out.println(" flavorText: "+node.path("flavorText").asText());
+    	System.out.println(" artist "+node.path("artist").asText());
+
         Card pkmnCard = new Card();
             pkmnCard.setId(node.path("id").asText());
             pkmnCard.setName(node.path("name").asText());
             pkmnCard.setNationalPokedexNumber(node.path("nationalPokedexNumber").asInt());
-            pkmnCard.setImageUrl(node.path("imageUrl").asText());
-            pkmnCard.setImageUrlHiRes(node.path("imageUrlHiRes").asText());
+            pkmnCard.setImageUrl(node.path("images").path("small").asText());
+            pkmnCard.setImageUrlHiRes(node.path("images").path("large").asText());
             pkmnCard.setSupertype(node.path("supertype").asText());
             pkmnCard.setSubtype(node.path("subtype").asText());
             pkmnCard.setEvolvesFrom(node.path("evolvesFrom").asText());
@@ -78,6 +88,7 @@ public class SearchService {
             pkmnCard.setSeries(node.path("series").asText());
             pkmnCard.setSet(node.path("set").asText());
             pkmnCard.setSetCode(node.path("setCode").asText());
+            pkmnCard.setFlavorText(node.path("flavorText").asText());
         return pkmnCard;
     }
 }
