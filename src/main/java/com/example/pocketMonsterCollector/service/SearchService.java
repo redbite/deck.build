@@ -45,9 +45,9 @@ public class SearchService {
 	
 	public List<Card> getPokemon (String name) throws IOException {
         List<Card> list = new ArrayList<>();
-        Integer pageSize = 20;
-//      String url = "https://api.pokemontcg.io/v2/cards?q="+name+"&pageSize="+pageSize;
-//        String url = "https://api.pokemontcg.io/v2/cards?page=1&pageSize="+pageSize;
+        Integer pageSize = 40;
+
+//        String url = "https://api.pokemontcg.io/v2/cards?q=name:"+name+"&pageSize="+pageSize;
         String url = "https://api.pokemontcg.io/v2/cards?q=name:"+name;
         String pokejson = callApi(url).getBody();
         System.out.println(pokejson);
@@ -58,7 +58,7 @@ public class SearchService {
 	private void pokemonResultsList(String pokejson, List<Card> list) throws IOException {
         JsonNode response = mapper.readTree(pokejson);
         JsonNode pokemonCards = response.path("data");
-        System.out.println(response.path("data"));        
+//        System.out.println(response.path("data"));        
 		
         for(JsonNode node : pokemonCards){
             Card pkmnCard = createPokeCard(node);
@@ -67,10 +67,10 @@ public class SearchService {
     }
 	
     private Card createPokeCard(JsonNode node){
-    	System.out.println(" images: "+node.path("images").asText());
-    	System.out.println(" 	images large "+node.path("images").path("large").asText());
-    	System.out.println(" flavorText: "+node.path("flavorText").asText());
-    	System.out.println(" artist "+node.path("artist").asText());
+//    	System.out.println(" images: "+node.path("images").asText());
+//    	System.out.println(" 	images large "+node.path("images").path("large").asText());
+//    	System.out.println(" flavorText: "+node.path("flavorText").asText());
+//    	System.out.println(" artist "+node.path("artist").asText());
 
         Card pkmnCard = new Card();
             pkmnCard.setId(node.path("id").asText());

@@ -5,6 +5,10 @@
 <title>CARDS</title>
 <link rel="icon" href="https://img.pokemondb.net/sprites/silver/normal/charizard.png">
     <style>
+        body {
+            background-color: rgb(38, 42, 44);
+            font-family: Roboto;
+        }
         .cards-container{
             display: flex;
             flex-direction: row;
@@ -13,41 +17,47 @@
         }
 
         .card{
-        margin:10px;
-        padding:10px;
-        
-        display: flex;
-        flex-direction: row;
-        justify-content:center;
-        background-color:rgb(122, 255, 6);
+	        margin:5px;   
+	        padding:5px;     
+	        display: flex;
+	        flex-direction: row;
+	        justify-content:center;
         }
 
         .card_right_text{
             max-width: 200px;
             padding-left:5px;
             border-left: 1px solid;
-        border-color:grey;
+	        border-color:grey;
+	        color:white;
         }
 
         .card_left_img{
-        max-width:250px;
-        padding-right:5px;
+	        padding-right:3px;
+	        padding-left:3px;
         }
 
+        .card_img{
+        	width:243px;
+        	height:352px;
+        }
     </style>
 </head>
 <body>
 	<div class="container text-center">
+	<!--  
 		<div>
 			<h1>Cards:</h1>
 		</div>
+	-->
 		<div>
 			<div class="cards-container">
                 <div th:each="card : ${listCard}">
                     <div class="card">
                         <div class="card_left_img">
-                          <img   th:src="${card.imageSmall}">
+                          <img  class="card_img" th:src="${card.imageSmall}">
                         </div>
+                      <!--  
                         <div class="card_right_text">
                           <div class="card_name"><p th:text="${card.name}"></p></div>
                           <div class="card_description"><p th:text="${card.flavorText}"></p></div>
@@ -55,6 +65,7 @@
                           <div class="card_set"><p th:text="${card.set}"></p></div>
                           <div class="card_artist"><p th:text="${card.artist}"></p></div>
                         </div>
+                      -->
                       </div>
                 </div>
             </div>
