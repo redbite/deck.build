@@ -9,13 +9,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.pocketMonsterCollector.entity.Post;
 import com.example.pocketMonsterCollector.entity.User;
+import com.example.pocketMonsterCollector.repository.PostRepository;
 import com.example.pocketMonsterCollector.repository.UserRepository;
 
 @Controller
 public class LoginAppController {
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private PostRepository postRepository;
 	
 	@GetMapping("")	
 	public String viewHomePage() {
@@ -45,5 +49,13 @@ public class LoginAppController {
 		model.addAttribute("listUsers", listUsers);
 		
 		return "users"; //	src/main/resources/templates/users
+	}
+	
+	@GetMapping("/home")
+	public String viewHome(Model model) {
+		List<Post> listPosts = postRepository.findAll();
+		model.addAttribute("listPosts", listPosts);
+		
+		return "home"; //	src/main/resources/templates/home
 	}
 }

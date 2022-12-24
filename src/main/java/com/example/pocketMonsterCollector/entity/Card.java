@@ -26,6 +26,7 @@ public class Card {
     public String rarity;
     public String series;
     public String setName;
+    
     public int getIdCard() {
 		return idCard;
 	}
@@ -65,7 +66,6 @@ public class Card {
 	public void setFlavorText(String flavorText) {
 		this.flavorText = flavorText;
 	}
-
 
 	public String setCode;
     public String flavorText;
