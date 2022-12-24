@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.pocketMonsterCollector.service.CustomUserDetailsService;
 
@@ -47,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/list_users").authenticated()
+		http.authorizeRequests().antMatchers("/list_users", "/searchCards").authenticated()
 			.anyRequest().permitAll()
 			.and().formLogin()
 				.usernameParameter("email")
@@ -57,5 +58,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			.logout().logoutSuccessUrl("/").permitAll();
 	}
 	
-	
+//	@Bean
+//	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//		http
+//			.authorizeHttpRequests((requests) -> requests
+//				.antMatchers("/", "/list_users").permitAll()
+////				.antMatchers("/list_users").permitAll()
+//				.anyRequest().authenticated()
+//			)
+//			.formLogin((form) -> form
+////				.loginPage("/login")
+////				.permitAll()
+//				.usernameParameter("email")
+//				.defaultSuccessUrl("/list_users")
+//				.permitAll()
+//			)
+//			.logout((logout) -> logout.permitAll());
+//
+//		return http.build();
+//	}
 }
