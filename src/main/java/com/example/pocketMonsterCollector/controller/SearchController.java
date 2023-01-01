@@ -19,6 +19,9 @@ public class SearchController {
 	@Autowired
 	SearchService searchService;
 	
+	/*
+	 * Testing purpose
+	 */
 	@GetMapping("/searchCardsJSON")
 	public ResponseEntity<?> getCardsJSON(@RequestParam(value = "name") String name, Model model){
 		try {
@@ -37,10 +40,18 @@ public class SearchController {
 				System.out.println(card.toString());
 			}
 			model.addAttribute("listCard",listCard);
+			model.addAttribute("name",name);
 			return "search_results";
 		}
 		catch(IOException ioe){
 			return "";
 		}
+	}
+	
+	@GetMapping("/openCard")
+	public String openCard(@RequestParam(value = "name") String name, String numberOfCards, Model model){
+		model.addAttribute("name", name);
+		model.addAttribute("numberOfCards", numberOfCards);
+		return "deck_builder"; //	src/main/resources/templates/???
 	}
 }

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Home</title>
+<title>Builder</title>
 <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
 <link rel="icon" href="https://img.pokemondb.net/sprites/ruby-sapphire/normal/charizard.png">
 <style>
@@ -50,40 +50,18 @@
 </head>
 <body>
 	<div class="container text-center">
-		<div>
-			<form  th:action="@{/logout}" method="post">
-				<p>
-					Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
-				</p>
-				<input type="submit" value="LogOut"/>
-			</form>
-		</div>
 		<br>
 		<div>
-			<h1>Home</h1>
+			<h1>Deck Builder</h1>
 		</div>
-		<div style="color:green">
-			<h1>Search</h1>
-		</div>
-		<form th:action="@{/searchCards}" method="get"
-			style="max-width: 600px; margin: 0 auto;">
-			<input type="text" th:name="name"/> 	
-		</form>
 		<div>
 		<div class="posts-container">
-                <div th:each="post: ${listPosts}">
+                <!-- <div th:each="post: ${listPosts}"> -->
                     <div class="post">
-                        <div class="post_left_img">
-                          <img  class="post_img" th:src="${post.cardImage}">                          
-                        </div>
-                       	<!--  
-                        <div class="post_right_text">
-                        	<div class="post-text"><span th:text:"${post.username}"></span></div>
-                        	<div class="post-text"><span th:text:"${post.idPost}"></span></div>
-                     	</div>   
-                     	-->
+                        <span th:text="${numberOfCards}"></span>
+                        <img  class="card_img" th:src="${name}" style="width:200px;">
 		            </div>
-                </div>
+                <!-- </div> -->
             </div>
 		</div>
 	</div>
