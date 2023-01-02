@@ -127,8 +127,9 @@
 			</h2>
 			<h3>Start by searching your favourite cards and then adding them to your custom decks.</h3>
 			<form  th:action="@{/logout}" method="post">
+			<!-- request.userPrincipal.principal gets its data from CustomUserDetails -->
 				<p>
-					Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b> <input type="submit" value="LogOut" style="margin-left:10px;" />
+					Welcome <b>[[${#request.userPrincipal.principal.email}]]</b> <input type="submit" value="LogOut" style="margin-left:10px;" />
 				</p>
 			</form>
 		</div>
@@ -136,9 +137,21 @@
 		
 		<form th:action="@{/searchCards}" method="get"
 			style="max-width: 600px; margin: 0 auto;">
-			<span>Search cards: </span><input type="text" th:name="name"/> 	
+			<img src="https://i.imgur.com/d9gpjKn.png" style="width:50px;"/> 
+			<span>Search cards: </span>
+			<input type="text" th:name="name"/> 	
 		</form>
-		<br>
+		<br><br>
+		
+		<form th:action="@{/createDeck}" method="get"
+			style="max-width: 1000px; margin: 0 auto;">
+			<img src="https://i.imgur.com/nIwJfXB.png" style="width:50px;"/>
+			<span>Create a new Deck: </span>
+			<input type="text" th:name="name"/> 
+			<input type="text" th:name="creator" th:value="${#request.userPrincipal.principal.email}" style="display:none;"/> 
+			<input type="submit" value="CREATE" />	
+		</form>
+		<br><br>
 		
 		<div>
 		<div class="posts-container">

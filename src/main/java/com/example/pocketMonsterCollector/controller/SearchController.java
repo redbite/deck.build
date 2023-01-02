@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.pocketMonsterCollector.entity.Card;
+import com.example.pocketMonsterCollector.entity.Deck;
+import com.example.pocketMonsterCollector.service.DeckService;
 import com.example.pocketMonsterCollector.service.SearchService;
 
 @Controller
 public class SearchController {
 	@Autowired
 	SearchService searchService;
+	@Autowired
+	DeckService deckService;
 	
 	/*
 	 * Testing purpose
@@ -53,5 +57,12 @@ public class SearchController {
 		model.addAttribute("name", name);
 		model.addAttribute("numberOfCards", numberOfCards);
 		return "deck_builder"; //	src/main/resources/templates/???
+	}
+	
+	@GetMapping("/createDeck")
+	public String createDeck(@RequestParam(value="name") String name, String creator, Model model) {
+		Deck deck = deckService.createDeck(name, creator);
+		model.addAttribute("deck",deck);
+		return "deck_builder";
 	}
 }

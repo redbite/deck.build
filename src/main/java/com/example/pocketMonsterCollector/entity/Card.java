@@ -10,22 +10,22 @@ public class Card {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public int idCard;
+    private int idCard;
 
-    public String id;
-    public String name;
-    public int nationalPokedexNumber;
-    public String imageSmall;
-    public String imageLarge;
-    public String supertype;
-    public String subtype;
-    public String evolvesFrom;
-    public String hp;
-    public String number;
-    public String artist;
-    public String rarity;
-    public String series;
-    public String setName;
+    private String id;
+    private String name;
+    private int nationalPokedexNumber;
+    private String imageSmall;
+    private String imageLarge;
+    private String supertype;
+    private String subtype;
+    private String evolvesFrom;
+    private String hp;
+    private String number;
+    private String artist;
+    private String rarity;
+    private String series;
+    private String setName;
     
     public int getIdCard() {
 		return idCard;
@@ -67,8 +67,8 @@ public class Card {
 		this.flavorText = flavorText;
 	}
 
-	public String setCode;
-    public String flavorText;
+	private String setCode;
+	private String flavorText;
     
     public Card() {
     }
