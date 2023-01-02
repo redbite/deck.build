@@ -151,7 +151,14 @@
 			<input type="text" th:name="creator" th:value="${#request.userPrincipal.principal.email}" style="display:none;"/> 
 			<input type="submit" value="CREATE" />	
 		</form>
-		<br><br>
+		<br>
+		   <div class="alert alert-success" role="alert"
+                             th:if="${message}">
+		       <span th:text="${message}"></span>
+		       <button aria-label="Close" class="btn-close" data-bs-dismiss="alert"
+		               type="button"></button>
+		   </div>
+		<br>
 		
 		<div>
 		<div class="posts-container">

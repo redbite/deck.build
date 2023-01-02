@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.pocketMonsterCollector.entity.Card;
 import com.example.pocketMonsterCollector.entity.Deck;
@@ -59,10 +60,17 @@ public class SearchController {
 		return "deck_builder"; //	src/main/resources/templates/???
 	}
 	
+	/*
+	 * refreshes the page giving a flash message (alert) feedback via RedirectAttributes
+	 */
 	@GetMapping("/createDeck")
-	public String createDeck(@RequestParam(value="name") String name, String creator, Model model) {
+	public String createDeck(@RequestParam(value="name") String name, String creator, Model model, RedirectAttributes redirAttrs) {
 		Deck deck = deckService.createDeck(name, creator);
 		model.addAttribute("deck",deck);
-		return "deck_builder";
+		
+		String message = "The deck "+name+" was created by the user "+creator; 
+		redirAttrs.addFlashAttribute("message", message);
+		model.addAttribute("message",message);
+		return "home";
 	}
 }
