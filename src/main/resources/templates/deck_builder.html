@@ -136,13 +136,12 @@
 		</div>
 		<div>
 		<div class="posts-container">
-                <!-- <div th:each="post: ${listPosts}"> -->
+                <div th:each="card: ${deck.cards}">
                     <div class="post">
-                        <img  class="card_img" th:src="${name}">
+                        <img  class="card_img" th:src="${card.key}">
                         <div class="post-number">
-                        	<span class="post-number-x">X </span><span th:text="${numberOfCards}" class="post-number-N"></span>
+                        	<span class="post-number-x">X </span><span th:text="${card.value}" class="post-number-N"></span>
                         </div>
-                        
 		            </div>
                 <!-- </div> -->
             </div>

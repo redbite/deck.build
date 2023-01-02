@@ -129,7 +129,7 @@
 		<div>
 			<div class="cards-container">
                 <div th:each="card : ${listCard}">
-                <form th:action="@{/openCard}" method="get" class="form-open-card">
+                <form th:action="@{/addCard}" method="get" class="form-open-card">
 					<div class="card">
                         <div class="card_left_img">
                           <img  class="card_img" th:src="${card.imageSmall}">
@@ -169,7 +169,15 @@
 				        <option value="20">20</option>
 				      </select>
 				      
-				    	<input type="text" th:name="name" th:value="${card.imageSmall}" style="display:none;"/> 
+				    	<input type="text" th:name="nameCard" th:value="${card.imageSmall}" style="display:none;"/> 
+				    	
+				    	<div class="deck-selector">
+					    	<select name="nameDeck">
+								<option th:each="deck : ${decks}" th:text="${deck}"/>
+							</select>
+							<!--  <span>Deck: <span th:text="${decks}"></span></span> -->
+						</div>
+						
 						<input type="submit" value="ADD" />	
 				    
 				</form>

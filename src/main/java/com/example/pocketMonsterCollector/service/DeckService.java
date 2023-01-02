@@ -19,7 +19,7 @@ public class DeckService {
 		Deck deck = new Deck();
 		
 		//check on name being unique
-		ArrayList<String> existingDecks = deckRepository.findAllByName(name);
+		ArrayList<Deck> existingDecks = deckRepository.findAllByName(name);
 		if(existingDecks.size() == 0) {
 			deck.setCreator(creator);
 			deck.setName(name);
@@ -27,5 +27,20 @@ public class DeckService {
 		}
 		
 		return deck;
+	}
+	
+	public Deck getDeck(String name) {
+		return deckRepository.findAllByName(name).get(0);
+	}
+	
+	public Deck addCardToDeck(String name, String card, Integer number) {
+		Deck deck = getDeck(name);
+		deck.getCards().put(card, number);
+		deckRepository.save(deck);
+		return deck;
+	}
+	
+	public ArrayList<String> getAllDeckNames() {
+		return deckRepository.findAllNames();
 	}
 }

@@ -1,6 +1,7 @@
 package com.example.pocketMonsterCollector.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,9 @@ public class SearchController {
 			}
 			model.addAttribute("listCard",listCard);
 			model.addAttribute("name",name);
+			
+			ArrayList<String> decks = deckService.getAllDeckNames();
+			model.addAttribute("decks",decks);
 			return "search_results";
 		}
 		catch(IOException ioe){
@@ -53,10 +57,10 @@ public class SearchController {
 		}
 	}
 	
-	@GetMapping("/openCard")
-	public String openCard(@RequestParam(value = "name") String name, String numberOfCards, Model model){
-		model.addAttribute("name", name);
-		model.addAttribute("numberOfCards", numberOfCards);
+	@GetMapping("/addCard")
+	public String addCard( String nameDeck, String nameCard, Integer numberOfCards, Model model){		
+		Deck deck = deckService.addCardToDeck(nameDeck, nameCard, numberOfCards);
+		model.addAttribute("deck",deck);
 		return "deck_builder"; //	src/main/resources/templates/???
 	}
 	
@@ -64,7 +68,7 @@ public class SearchController {
 	 * refreshes the page giving a flash message (alert) feedback via RedirectAttributes
 	 */
 	@GetMapping("/createDeck")
-	public String createDeck(@RequestParam(value="name") String name, String creator, Model model, RedirectAttributes redirAttrs) {
+	public String createDeck(String name, String creator, Model model, RedirectAttributes redirAttrs) {
 		Deck deck = deckService.createDeck(name, creator);
 		model.addAttribute("deck",deck);
 		

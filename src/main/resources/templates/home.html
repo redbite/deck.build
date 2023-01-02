@@ -110,6 +110,10 @@
 	.post-text{
 		color:white;
 	}
+	
+	.create-deck-msg{
+	color:green;
+	}
 </style>
 </head>
 <body>
@@ -154,28 +158,21 @@
 		<br>
 		   <div class="alert alert-success" role="alert"
                              th:if="${message}">
-		       <span th:text="${message}"></span>
-		       <button aria-label="Close" class="btn-close" data-bs-dismiss="alert"
-		               type="button"></button>
+		       <span class="create-deck-msg" th:text="${message}"></span>
 		   </div>
 		<br>
 		
 		<div>
-		<div class="posts-container">
+		<!-- 		<div class="posts-container">
                 <div th:each="post: ${listPosts}">
                     <div class="post">
                         <div class="post_left_img">
                           <img  class="post_img" th:src="${post.cardImage}">                          
                         </div>
-                       	<!--  
-                        <div class="post_right_text">
-                        	<div class="post-text"><span th:text:"${post.username}"></span></div>
-                        	<div class="post-text"><span th:text:"${post.idPost}"></span></div>
-                     	</div>   
-                     	-->
 		            </div>
                 </div>
-            </div>
+            </div> -->
+
 		</div>
 	</div>
 	<!--
