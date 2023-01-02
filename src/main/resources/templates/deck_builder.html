@@ -5,7 +5,125 @@
 <title>Builder</title>
 <!-- <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/> -->
 <link rel="icon" href="https://img.pokemondb.net/sprites/ruby-sapphire/normal/charizard.png">
-<link rel="stylesheet" href="style.css">
+<style>
+	body {
+	 font-family: 'Nunito Sans';
+	 /*font-style: italic;*/
+	 font-weight: 400;
+	 src: url(https://fonts.gstatic.com/s/nunitosans/v12/pe0oMImSLYBIv1o4X1M8cce4E9RKdmwp.woff2) format('woff2');
+	 margin:0px;
+	}
+	
+	html{
+		margin: 0px;
+	}
+	
+	.div-center{
+		text-align: center;
+	}
+	
+	.menu-pages{	
+		/*margin-left:20vw;
+		margin-right:20vw;*/
+		background-color:black;	
+		margin:0px;
+		padding:10px 0px 10px 0px;
+	}
+	
+	.menu-welcome{
+		text-align:center;
+		border-bottom: 1px solid red;
+		margin-left:20vw;
+		margin-right:20vw;
+	}
+	
+	
+	a{
+		padding:20px;
+	}
+	
+	
+	
+	.cards-container{
+	    display: flex;
+	    flex-direction: row;
+	    justify-content:center;
+	    flex-wrap: wrap;
+	}
+	
+	.card{
+		 margin:5px;   
+		 padding:5px;     
+		 display: flex;
+		 flex-direction: row;
+		 justify-content:center;
+	}
+	
+	.card_right_text{
+	    max-width: 200px;
+	    padding-left:5px;
+	    border-left: 1px solid;
+		border-color:grey;
+		color:white;
+	}
+	
+	.card_left_img{
+	 	padding-right:3px;
+	 	padding-left:3px;
+	}
+	
+	.card_img{
+		width:243px;
+		height:352px;
+	}
+	
+	.posts-container{
+		display:flex;
+		flex-direction: row;
+		justify-content: center;
+		flew-wrap: wrap;
+	}
+	
+	.post{
+	    margin:5px;   
+	    padding:5px;     
+	    display: flex;
+	    flex-direction: column;
+	    justify-content:center;
+	    text-align:center;
+	}
+	   
+	.post_right_text{
+	     max-width: 200px;
+	     padding-left:5px;
+	     color:white;
+	}
+	
+	.post_left_img{
+	     padding-right:3px;
+	     padding-left:3px;
+	}
+	
+	.post_img{
+	   	width:243px;
+	   	height:352px;
+	}
+	.post-number{
+		text-align:center;
+		display:inline;
+		font-size:25px;
+		margin-top:-30px;
+		margin-right:-50px;
+		font-family:'Impact';
+	}
+	.post-number-x{
+		font-style: italic;
+	}
+	.post-number-N{
+		font-weight: bold;
+		font-size: 45px;
+	}
+</style>
 </head>
 <body>
 	<div class="container text-center">
@@ -17,8 +135,11 @@
 		<div class="posts-container">
                 <!-- <div th:each="post: ${listPosts}"> -->
                     <div class="post">
-                        <span th:text="${numberOfCards}"></span>
-                        <img  class="card_img" th:src="${name}" style="width:200px;">
+                        <img  class="card_img" th:src="${name}">
+                        <div class="post-number">
+                        	<span class="post-number-x">X </span><span th:text="${numberOfCards}" class="post-number-N"></span>
+                        </div>
+                        
 		            </div>
                 <!-- </div> -->
             </div>

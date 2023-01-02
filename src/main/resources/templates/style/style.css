@@ -1,7 +1,33 @@
 body {
-    /*background-color: rgb(38, 42, 44);*/
-    font-family: Roboto;
+	 font-family: 'Nunito Sans';
+	 font-style: italic;
+	 font-weight: 400;
+	 src: url(https://fonts.gstatic.com/s/nunitosans/v12/pe0oMImSLYBIv1o4X1M8cce4E9RKdmwp.woff2) format('woff2');
 }
+
+.div-center{
+	text-align: center;
+}
+
+.menu-pages{
+  	border: 1px solid red;
+}
+
+.menu-welcome{
+	text-align:center;
+	border-bottom: 1px solid red;
+}
+
+.a{
+	padding:20px;
+}
+
+a{
+	padding:20px;
+}
+
+
+
 .cards-container{
     display: flex;
     flex-direction: row;
@@ -53,8 +79,6 @@ body {
 .post_right_text{
      max-width: 200px;
      padding-left:5px;
-     /*border-left: 1px solid;
-     border-color:grey;*/
      color:white;
 }
 

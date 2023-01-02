@@ -5,29 +5,141 @@
 <title>Home</title>
 <!-- <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/> -->
 <link rel="icon" href="https://img.pokemondb.net/sprites/ruby-sapphire/normal/charizard.png">
-<link rel="stylesheet" href="style.css">
+<style>
+	body {
+	 font-family: 'Nunito Sans';
+	 /*font-style: italic;*/
+	 font-weight: 400;
+	 src: url(https://fonts.gstatic.com/s/nunitosans/v12/pe0oMImSLYBIv1o4X1M8cce4E9RKdmwp.woff2) format('woff2');
+	 margin:0px;
+	}
+	
+	html{
+		margin: 0px;
+	}
+	
+	.div-center{
+		text-align: center;
+	}
+	
+	.menu-pages{	
+		/*margin-left:20vw;
+		margin-right:20vw;*/
+		background-color:black;	
+		margin:0px;
+		padding:10px 0px 10px 0px;
+	}
+	
+	.menu-welcome{
+		text-align:center;
+		border-bottom: 1px solid red;
+		margin-left:20vw;
+		margin-right:20vw;
+	}
+	
+	
+	a{
+		padding:20px;
+	}
+	
+	
+	
+	.cards-container{
+	    display: flex;
+	    flex-direction: row;
+	    justify-content:center;
+	    flex-wrap: wrap;
+	}
+	
+	.card{
+		 margin:5px;   
+		 padding:5px;     
+		 display: flex;
+		 flex-direction: row;
+		 justify-content:center;
+	}
+	
+	.card_right_text{
+	    max-width: 200px;
+	    padding-left:5px;
+	    border-left: 1px solid;
+		border-color:grey;
+		color:white;
+	}
+	
+	.card_left_img{
+	 	padding-right:3px;
+	 	padding-left:3px;
+	}
+	
+	.card_img{
+		width:243px;
+		height:352px;
+	}
+	
+	.posts-container{
+		display:flex;
+		flex-direction: row;
+		justify-content: center;
+		flew-wrap: wrap;
+	}
+	
+	.post{
+	    margin:5px;   
+	    padding:5px;     
+	    display: flex;
+	    flex-direction: row;
+	    justify-content:center;
+	}
+	   
+	.post_right_text{
+	     max-width: 200px;
+	     padding-left:5px;
+	     color:white;
+	}
+	
+	.post_left_img{
+	     padding-right:3px;
+	     padding-left:3px;
+	}
+	
+	.post_img{
+	   	width:243px;
+	   	height:352px;
+	}
+	.post-text{
+		color:white;
+	}
+</style>
 </head>
 <body>
-	<div class="container text-center">
-		<div>
+	<div class="div-center">
+		<div class="menu-pages">
+			<!-- redirects to loginAppController - @XMapping ("/...") -->
+			<h4><a th:href="@{/list_users}">List of all registered users</a>
+				<a th:href="@{/home}">Home</a>
+				<a th:href="@{/register}">Register</a>
+				<a th:href="@{/login}">Login</a></h4>
+		</div>
+		<div class="menu-welcome">
+			<h2>
+				Deck.build is a website that lets you build your TCG Decks!
+			</h2>
+			<h3>Start by searching your favourite cards and then adding them to your custom decks.</h3>
 			<form  th:action="@{/logout}" method="post">
 				<p>
-					Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+					Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b> <input type="submit" value="LogOut" style="margin-left:10px;" />
 				</p>
-				<input type="submit" value="LogOut"/>
 			</form>
 		</div>
 		<br>
-		<div>
-			<h1>Home</h1>
-		</div>
-		<div style="color:green">
-			<h1>Search</h1>
-		</div>
+		
 		<form th:action="@{/searchCards}" method="get"
 			style="max-width: 600px; margin: 0 auto;">
-			<input type="text" th:name="name"/> 	
+			<span>Search cards: </span><input type="text" th:name="name"/> 	
 		</form>
+		<br>
+		
 		<div>
 		<div class="posts-container">
                 <div th:each="post: ${listPosts}">
