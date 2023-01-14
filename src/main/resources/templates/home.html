@@ -7,11 +7,14 @@
 <link rel="icon" href="https://img.pokemondb.net/sprites/ruby-sapphire/normal/charizard.png">
 <style>
 	body {
+  	 background-color: rgba(31, 31, 31, 1);
 	 font-family: 'Nunito Sans';
 	 /*font-style: italic;*/
 	 font-weight: 400;
 	 src: url(https://fonts.gstatic.com/s/nunitosans/v12/pe0oMImSLYBIv1o4X1M8cce4E9RKdmwp.woff2) format('woff2');
 	 margin:0px;
+	 margin-bottom:50px;
+	 color:white;
 	}
 	
 	html{
@@ -35,6 +38,7 @@
 	
 	.navbar-logo-img{
 		height:100px;
+		margin-left:20px;
 	}
 	
 	.menu-welcome{
@@ -45,7 +49,7 @@
 		
 		margin:20vw;
 		margin-top:30px;
-		margin-top:30px;
+		margin-bottom:30px;
 
 	}
 	
@@ -63,6 +67,7 @@
 	}
 	
 	a{
+		color:orange;
 		padding:20px;
 	}
 	
@@ -144,7 +149,7 @@
 	<div class="div-center">
 		<div class="menu-pages">
 			<div class="navbar-logo">
-				<img class="navbar-logo-img" src="https://i.imgur.com/tw7PsBj.png"/>
+				<img class="navbar-logo-img" src="https://i.imgur.com/huA5cgZ.png"/>
 			</div>
 			<!-- redirects to loginAppController - @XMapping ("/...") -->
 			<h4><a th:href="@{/list_users}">List of all registered users</a>
@@ -160,11 +165,11 @@
 				<form  th:action="@{/logout}" method="post">
 					<!-- request.userPrincipal.principal gets its data from CustomUserDetails -->
 					<p>
-						Welcome <b>[[${#request.userPrincipal.principal.email}]]</b> <input type="submit" value="LogOut" style="margin-left:10px;" />
+						Welcome <b>[[${#request.userPrincipal.principal.email}]]</b>!<input type="submit" value="LogOut" style="margin-left:20px;" />
 					</p>
 				</form>
-				<h4><b>deck.build</b> is where you can build your favourite TCG decks!</h4>
-				<h5>Start by creating a deck, then searching for your favourite cards and adding them to your custom decks.</h5>
+				<p><b>deck.build</b> is where you can build your favourite TCG decks!</p>
+				<p>Start by creating a deck, then searching for your favourite cards and adding them to your custom decks.</p>
 			</div>
 		</div>
 		<br>
