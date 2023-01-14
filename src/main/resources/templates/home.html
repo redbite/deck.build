@@ -25,18 +25,42 @@
 	.menu-pages{	
 		/*margin-left:20vw;
 		margin-right:20vw;*/
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 		background-color:black;	
 		margin:0px;
 		padding:10px 0px 10px 0px;
 	}
 	
-	.menu-welcome{
-		text-align:center;
-		border-bottom: 1px solid red;
-		margin-left:20vw;
-		margin-right:20vw;
+	.navbar-logo-img{
+		height:100px;
 	}
 	
+	.menu-welcome{
+		/*text-align:center;*/
+		display:flex;
+		flex-direction:row;
+		justify-content:center;
+		
+		margin:20vw;
+		margin-top:30px;
+		margin-top:30px;
+
+	}
+	
+	.menu-welcome-pic{
+		display:flex;
+		justify-content:center;
+	}
+	.menu-welcome-img{
+		height:150px;
+		padding-right:10px;
+	}
+	.menu-welcome-text{
+		border-left: 1px solid black;
+		padding-left:5px;
+	}
 	
 	a{
 		padding:20px;
@@ -119,6 +143,9 @@
 <body>
 	<div class="div-center">
 		<div class="menu-pages">
+			<div class="navbar-logo">
+				<img class="navbar-logo-img" src="https://i.imgur.com/tw7PsBj.png"/>
+			</div>
 			<!-- redirects to loginAppController - @XMapping ("/...") -->
 			<h4><a th:href="@{/list_users}">List of all registered users</a>
 				<a th:href="@{/home}">Home</a>
@@ -126,16 +153,19 @@
 				<a th:href="@{/login}">Login</a></h4>
 		</div>
 		<div class="menu-welcome">
-			<h2>
-				Deck.build is a website that lets you build your TCG Decks!
-			</h2>
-			<h3>Start by searching your favourite cards and then adding them to your custom decks.</h3>
-			<form  th:action="@{/logout}" method="post">
-			<!-- request.userPrincipal.principal gets its data from CustomUserDetails -->
-				<p>
-					Welcome <b>[[${#request.userPrincipal.principal.email}]]</b> <input type="submit" value="LogOut" style="margin-left:10px;" />
-				</p>
-			</form>
+			<div class="menu-welcome-pic">
+				<img class="menu-welcome-img" src="https://i.imgur.com/S2ZybmF.png"/>
+			</div>
+			<div class="menu-welcome-text">
+				<form  th:action="@{/logout}" method="post">
+					<!-- request.userPrincipal.principal gets its data from CustomUserDetails -->
+					<p>
+						Welcome <b>[[${#request.userPrincipal.principal.email}]]</b> <input type="submit" value="LogOut" style="margin-left:10px;" />
+					</p>
+				</form>
+				<h4><b>deck.build</b> is where you can build your favourite TCG decks!</h4>
+				<h5>Start by creating a deck, then searching for your favourite cards and adding them to your custom decks.</h5>
+			</div>
 		</div>
 		<br>
 		
