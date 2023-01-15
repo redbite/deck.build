@@ -8,7 +8,7 @@
 <style>
 	body {
   	 background-color: rgba(31, 31, 31, 1);
-	 font-family: 'Nunito Sans';
+	 font-family: Roboto, 'Nunito Sans';
 	 /*font-style: italic;*/
 	 font-weight: 400;
 	 src: url(https://fonts.gstatic.com/s/nunitosans/v12/pe0oMImSLYBIv1o4X1M8cce4E9RKdmwp.woff2) format('woff2');
@@ -190,6 +190,30 @@
 		margin: 0 auto;
 		text-align:center;
 	}
+	
+	.deck-intro-container{
+		display:flex;
+		flex-direction:row;
+		justify-content:center;
+		margin:20vw;
+		margin-top:20px;
+		margin-bottom:30px;
+	}
+	.deck-deckBox{
+		height:50px;
+		padding-right:10px;
+	}
+	.deck-name{
+		font-size:20px;
+		border-bottom:1px solid yellow;
+		font-family:Impact;
+	}
+	.deck-info{
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		text-align:left;
+	}
 </style>
 </head>
 <body>
@@ -205,8 +229,14 @@
 				<a th:href="@{/login}">LOGIN</a></h4>
 		</div>
 		<br>
-		<div>
-			<h1>Deck Builder</h1>
+		<div class="deck-intro-container">
+			<div>
+				<img class="deck-deckBox" th:src="${deck.deckBox}"/>
+			</div>
+			<div class="deck-info">
+				<span class="deck-creator" th:text="${deck.creator}"></span>
+				<span class="deck-name" th:text="${deck.name}"></span>
+			</div>
 		</div>
 		<div>
 		<div class="posts-container">
@@ -214,7 +244,7 @@
                     <div class="post">
                         <img  class="card_img" th:src="${card.key}">
                         <div class="post-number">
-                        	<span class="post-number-x">X </span><span th:text="${card.value}" class="post-number-N"></span>
+                        	<span class="post-number-x">X</span><span th:text="${card.value}" class="post-number-N"></span>
                         </div>
 		            </div>
                 <!-- </div> -->
