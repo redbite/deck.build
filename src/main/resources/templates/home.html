@@ -223,10 +223,20 @@
 		
 		<form th:action="@{/searchCards}" method="get"
 			style="max-width: 600px; margin: 0 auto;">
-			<img src="https://i.imgur.com/d9gpjKn.png" style="width:50px;"/> 
-			<span class="home-title-section">SEARCH CARDS </span>
-			<input type="text" th:name="name"/> 	
-			<input type="submit" value="SEARCH CARDS" />	
+			<div class="home-section-container">
+				<div class="home-section-image">
+					<img src="https://i.imgur.com/d9gpjKn.png" style="width:50px;"/> 
+				</div>
+				<div class="home-section">
+					<div class="home-section-title">
+						<span class="home-title-section">SEARCH CARDS </span>
+					</div>
+					<div class="home-section-form">
+						<input type="text" th:name="name"/> 	
+						<input type="submit" value="SEARCH CARDS" />	
+					</div>
+				</div>
+			</div>
 		</form>
 		<br><br>
 		

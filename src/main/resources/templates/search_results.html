@@ -220,7 +220,31 @@
 			<div>
 				<h1>Cards: <span th:text="${name}"></span></h1>
 			</div>
+			<br>
 			 -->
+			<br>
+			<form th:action="@{/searchCards}" method="get"
+				style="max-width: 600px; margin: 0 auto;">
+				<div class="home-section-container">
+					<div class="home-section-image">
+						<img src="https://i.imgur.com/d9gpjKn.png" style="width:50px;"/> 
+					</div>
+					<div class="home-section">
+						<div class="home-section-title">
+							<span class="home-title-section">SEARCH CARDS </span>
+						</div>
+						<div class="home-section-form">
+							<input type="text" th:name="name"/> 	
+							<input type="submit" value="SEARCH CARDS" />	
+						</div>
+					</div>
+				</div>
+			</form>
+			<br>
+		   <div class="alert alert-success" role="alert"
+                             th:if="${message}" style="text-align:center;">
+		       <span class="create-deck-msg" th:text="${message}"></span>
+		   </div>
 			<br>
 			<div>
 				<div class="cards-container">
@@ -238,9 +262,8 @@
 	                          <div class="card_set"><p th:text="${card.set}"></p></div>
 	                          <div class="card_artist"><p th:text="${card.artist}"></p></div>
 	                        </div>
-	                      -->
-	                      	
-	                      </div>
+	                      --> 	
+	                     </div>
 	                      
                       	<div class="deck-selector">
 					    	<select name="nameDeck">
@@ -274,7 +297,6 @@
 						      </select>
 						      
 						    	<input type="text" th:name="nameCard" th:value="${card.imageSmall}" style="display:none;"/> 
-						    	
 								<input type="submit" value="ADD" />	
 	                    </div>
 	                    

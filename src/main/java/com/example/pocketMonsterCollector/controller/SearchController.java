@@ -3,6 +3,7 @@ package com.example.pocketMonsterCollector.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,12 +62,27 @@ public class SearchController {
 	public String addCard( String nameDeck, String nameCard, Integer numberOfCards, Model model){		
 		Deck deck = deckService.addCardToDeck(nameDeck, nameCard, numberOfCards);
 		model.addAttribute("deck",deck);
-		return "deck_builder"; //	src/main/resources/templates/???
+		String message = "The card has been added to the deck"; 
+		model.addAttribute("message",message);
+		return "deck_builder"; //	src/main/resources/templates/
 	}
 	
-	/*
-	 * refreshes the page giving a flash message (alert) feedback via RedirectAttributes
-	 */
+	@GetMapping("/deleteCard")
+	public String deleteCard(String name, String nameCard, String creator, Model model) {
+		Deck deck = deckService.getDeck(name);
+		Set<String> cardsSet = deck.getCards().keySet();
+		for(String card: cardsSet) {
+			if(nameCard.equals(card)) {
+				deck.getCards().remove(card);
+				String message = "The card selected has been deleted"; 
+				model.addAttribute("message",message);
+				break;
+			}
+		}
+		model.addAttribute("deck", deck);
+		return "deck_builder";
+	}
+	
 	@GetMapping("/createDeck")
 	public String createDeck(String name, String creator, String deckBox, Model model, RedirectAttributes redirAttrs) {
 		Deck deck = deckService.createDeck(name, creator, deckBox);
@@ -76,5 +92,12 @@ public class SearchController {
 		redirAttrs.addFlashAttribute("message", message);
 		model.addAttribute("message",message);
 		return "home";
+	}    
+	
+	@GetMapping("/viewDeck")
+	public String viewDeck(String name, String creator, Model model) {
+		Deck deck = deckService.getDeck(name);
+		model.addAttribute("deck",deck);
+		return "deck_builder";
 	}
 }

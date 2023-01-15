@@ -229,6 +229,23 @@
 				<a th:href="@{/login}">LOGIN</a></h4>
 		</div>
 		<br>
+		<form th:action="@{/searchCards}" method="get"
+				style="max-width: 600px; margin: 0 auto;">
+				<div class="home-section-container">
+					<div class="home-section-image">
+						<img src="https://i.imgur.com/d9gpjKn.png" style="width:50px;"/> 
+					</div>
+					<div class="home-section">
+						<div class="home-section-title">
+							<span class="home-title-section">SEARCH CARDS </span>
+						</div>
+						<div class="home-section-form">
+							<input type="text" th:name="name"/> 	
+							<input type="submit" value="SEARCH CARDS" />	
+						</div>
+					</div>
+				</div>
+			</form>
 		<div class="deck-intro-container">
 			<div>
 				<img class="deck-deckBox" th:src="${deck.deckBox}"/>
@@ -238,14 +255,30 @@
 				<span class="deck-name" th:text="${deck.name}"></span>
 			</div>
 		</div>
+		<br>
+		   <div class="alert alert-success" role="alert"
+                             th:if="${message}" style="text-align:center;">
+		       <span class="create-deck-msg" th:text="${message}"></span>
+		   </div>
+		<br>
 		<div>
 		<div class="posts-container">
                 <div th:each="card: ${deck.cards}">
                     <div class="post">
                         <img  class="card_img" th:src="${card.key}">
+                        <div class="post-delete">
+                        	<form th:action="@{/deleteCard}" method="get">
+                        		<input type="text" th:name="name" th:value="${deck.name}" style="display:none;"/> 
+                        		<input type="text" th:name="nameCard" th:value="${card.key}" style="display:none;"/> 
+                       	    	<input type="text" th:name="creator" th:value="${deck.creator}" style="display:none;"/> 
+                        		<input type="submit" value="REMOVE" />
+                        	</form>
+                        </div>
+                        <!--  
                         <div class="post-number">
                         	<span class="post-number-x">X</span><span th:text="${card.value}" class="post-number-N"></span>
                         </div>
+                        -->
 		            </div>
                 <!-- </div> -->
             </div>
