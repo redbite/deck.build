@@ -14,7 +14,7 @@ public class DeckService {
 	DeckRepository deckRepository;
 	
 	//Returns OK or error
-	public Deck createDeck(String name, String creator) {
+	public Deck createDeck(String name, String creator, String deckBox) {
 		//checking rules
 		Deck deck = new Deck();
 		
@@ -23,6 +23,7 @@ public class DeckService {
 		if(existingDecks.size() == 0) {
 			deck.setCreator(creator);
 			deck.setName(name);
+			deck.setDeckBox(deckBox);
 			deckRepository.save(deck);
 		}
 		

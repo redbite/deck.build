@@ -25,13 +25,15 @@ public class Deck {
 //	private HashMap<Card, Integer> cards = new HashMap<>();
 	private HashMap<String, Integer> cards = new HashMap<>();
 	private String creator; //username
+	private String deckBox;
 	private String notes;
 
-	public Deck(int idDeck, String name, HashMap<Card, Integer> cards, String creator, String notes) {
+	public Deck(int idDeck, String name, HashMap<Card, Integer> cards, String creator, String deckBox, String notes) {
 		this.idDeck = idDeck;
 		this.creator = creator;
 		this.notes = notes;
 		this.name=name;
+		this.deckBox=deckBox;
 	}
 
 	public Deck() {
@@ -76,6 +78,14 @@ public class Deck {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDeckBox() {
+		return deckBox;
+	}
+
+	public void setDeckBox(String deckBox) {
+		this.deckBox = deckBox;
 	}
 	
 	

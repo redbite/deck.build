@@ -68,8 +68,8 @@ public class SearchController {
 	 * refreshes the page giving a flash message (alert) feedback via RedirectAttributes
 	 */
 	@GetMapping("/createDeck")
-	public String createDeck(String name, String creator, Model model, RedirectAttributes redirAttrs) {
-		Deck deck = deckService.createDeck(name, creator);
+	public String createDeck(String name, String creator, String deckBox, Model model, RedirectAttributes redirAttrs) {
+		Deck deck = deckService.createDeck(name, creator, deckBox);
 		model.addAttribute("deck",deck);
 		
 		String message = "The deck "+name+" was created by the user "+creator; 

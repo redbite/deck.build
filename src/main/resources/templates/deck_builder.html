@@ -28,32 +28,55 @@
 	.menu-pages{	
 		/*margin-left:20vw;
 		margin-right:20vw;*/
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 		background-color:black;	
 		margin:0px;
 		padding:10px 0px 10px 0px;
 	}
 	
-	.menu-welcome{
-		text-align:center;
-		border-bottom: 1px solid red;
-		margin-left:20vw;
-		margin-right:20vw;
+	.navbar-logo-img{
+		height:100px;
+		margin-left:20px;
 	}
 	
+	.menu-welcome{
+		/*text-align:center;*/
+		display:flex;
+		flex-direction:row;
+		justify-content:center;
+		
+		margin:20vw;
+		margin-top:30px;
+		margin-bottom:30px;
+
+	}
+	
+	.menu-welcome-pic{
+		display:flex;
+		justify-content:center;
+	}
+	.menu-welcome-img{
+		height:150px;
+		padding-right:10px;
+	}
+	.menu-welcome-text{
+		border-left: 1px solid black;
+		padding-left:5px;
+	}
 	
 	a{
+		color:orange;
 		padding:20px;
+		font-size:20px;
 	}
-	
-	
-	
+		
 	.cards-container{
 	    display: flex;
 	    flex-direction: row;
 	    justify-content:center;
 	    flex-wrap: wrap;
-	    margin-left:20px;
-	    margin-right:20px;
 	}
 	
 	.card{
@@ -115,6 +138,14 @@
 	   	width:243px;
 	   	height:352px;
 	}
+	.post-text{
+		color:white;
+	}
+	
+	.create-deck-msg{
+	color:green;
+	}
+
 	.post-number{
 		text-align:center;
 		display:inline;
@@ -133,12 +164,27 @@
 		font-size: 45px;
 		color:black;
 		text-shadow: 2px 2px 0 white;
-		
+	}
+
+	.form-open-card{
+		max-width: 600px; 
+		margin: 0 auto;
+		text-align:center;
 	}
 </style>
 </head>
 <body>
 	<div class="container text-center">
+				<div class="menu-pages">
+			<div class="navbar-logo">
+				<img class="navbar-logo-img" src="https://i.imgur.com/huA5cgZ.png"/>
+			</div>
+			<!-- redirects to loginAppController - @XMapping ("/...") -->
+			<h4><a th:href="@{/list_users}">USERS</a>
+				<a th:href="@{/home}">HOME</a>
+				<a th:href="@{/register}">SIGN-UP</a>
+				<a th:href="@{/login}">LOGIN</a></h4>
+		</div>
 		<br>
 		<div>
 			<h1>Deck Builder</h1>

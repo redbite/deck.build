@@ -5,7 +5,7 @@
 <title>CARDS</title>
 <link rel="icon" href="https://img.pokemondb.net/sprites/silver/normal/charizard.png"/>
 <style>
-	body {
+		body {
   	 background-color: rgba(31, 31, 31, 1);
 	 font-family: 'Nunito Sans';
 	 /*font-style: italic;*/
@@ -27,24 +27,49 @@
 	.menu-pages{	
 		/*margin-left:20vw;
 		margin-right:20vw;*/
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 		background-color:black;	
 		margin:0px;
 		padding:10px 0px 10px 0px;
 	}
 	
-	.menu-welcome{
-		text-align:center;
-		border-bottom: 1px solid red;
-		margin-left:20vw;
-		margin-right:20vw;
+	.navbar-logo-img{
+		height:100px;
+		margin-left:20px;
 	}
 	
+	.menu-welcome{
+		/*text-align:center;*/
+		display:flex;
+		flex-direction:row;
+		justify-content:center;
+		
+		margin:20vw;
+		margin-top:30px;
+		margin-bottom:30px;
+
+	}
+	
+	.menu-welcome-pic{
+		display:flex;
+		justify-content:center;
+	}
+	.menu-welcome-img{
+		height:150px;
+		padding-right:10px;
+	}
+	.menu-welcome-text{
+		border-left: 1px solid black;
+		padding-left:5px;
+	}
 	
 	a{
+		color:orange;
 		padding:20px;
+		font-size:20px;
 	}
-	
-	
 	
 	.cards-container{
 	    display: flex;
@@ -80,18 +105,21 @@
 	}
 	
 	.posts-container{
-		display:flex;
-		flex-direction: row;
-		justify-content: center;
-		flew-wrap: wrap;
+	    display: flex;
+	    flex-direction: row;
+	    justify-content:center;
+	    flex-wrap: wrap;
+	    margin-left:20px;
+	    margin-right:20px;
 	}
 	
 	.post{
 	    margin:5px;   
 	    padding:5px;     
 	    display: flex;
-	    flex-direction: row;
+	    flex-direction: column;
 	    justify-content:center;
+	    text-align:center;
 	}
 	   
 	.post_right_text{
@@ -113,79 +141,111 @@
 		color:white;
 	}
 	
+	.create-deck-msg{
+	color:green;
+	}
+
+	.post-number{
+		text-align:center;
+		display:inline;
+		font-size:25px;
+		margin-top:-40px;
+		margin-right:-120px;
+		font-family:'Impact';
+	}
+	.post-number-x{
+		/*font-style: italic;*/
+		color:black;
+		text-shadow: 2px 2px 0 white;
+	}
+	.post-number-N{
+		font-weight: bold;
+		font-size: 45px;
+		color:black;
+		text-shadow: 2px 2px 0 white;
+	}
+
 	.form-open-card{
 		max-width: 600px; 
 		margin: 0 auto;
 		text-align:center;
-		
 	}
-	
 </style>
 </head>
 <body>
 	<div class="container text-center">
-		<div>
-			<h1>Cards: <span th:text="${name}"></span></h1>
-		</div>
-		<br>
-		<div>
-			<div class="cards-container">
-                <div th:each="card : ${listCard}">
-                <form th:action="@{/addCard}" method="get" class="form-open-card">
-					<div class="card">
-                        <div class="card_left_img">
-                          <img  class="card_img" th:src="${card.imageSmall}">
-                        </div>
-                      <!--  
-                        <div class="card_right_text">
-                          <div class="card_name"><p th:text="${card.name}"></p></div>
-                          <div class="card_description"><p th:text="${card.flavorText}"></p></div>
-                          <div class="card_rarity"><p th:text="${card.rarity}"></p></div>
-                          <div class="card_set"><p th:text="${card.set}"></p></div>
-                          <div class="card_artist"><p th:text="${card.artist}"></p></div>
-                        </div>
-                      -->
-                      	
-                      </div>
-                    <label for="lang">X </label>	
-                    <select name="numberOfCards" id="numberOfCards">
-				        <option value="1">1</option>
-				        <option value="2">2</option>
-				        <option value="3">3</option>
-				        <option value="4">4</option>
-				        <option value="5">5</option>
-				        <option value="6">6</option>
-				        <option value="7">7</option>
-				        <option value="8">8</option>
-				        <option value="9">9</option>
-				        <option value="10">10</option>
-				        <option value="11">11</option>
-				        <option value="12">12</option>
-				        <option value="13">13</option>
-				        <option value="14">14</option>
-				        <option value="15">15</option>
-				        <option value="16">16</option>
-				        <option value="17">17</option>
-				        <option value="18">18</option>
-				        <option value="19">19</option>
-				        <option value="20">20</option>
-				      </select>
-				      
-				    	<input type="text" th:name="nameCard" th:value="${card.imageSmall}" style="display:none;"/> 
-				    	
-				    	<div class="deck-selector">
-					    	<select name="nameDeck">
-								<option th:each="deck : ${decks}" th:text="${deck}"/>
-							</select>
-							<!--  <span>Deck: <span th:text="${decks}"></span></span> -->
-						</div>
-						
-						<input type="submit" value="ADD" />	
-				    
-				</form>
-                </div>
-            </div>
-		</div>
+			<div class="menu-pages">
+				<div class="navbar-logo">
+					<img class="navbar-logo-img" src="https://i.imgur.com/huA5cgZ.png"/>
+				</div>
+				<!-- redirects to loginAppController - @XMapping ("/...") -->
+				<h4><a th:href="@{/list_users}">USERS</a>
+					<a th:href="@{/home}">HOME</a>
+					<a th:href="@{/register}">SIGN-UP</a>
+					<a th:href="@{/login}">LOGIN</a></h4>
+			</div>	
+			<div>
+				<h1>Cards: <span th:text="${name}"></span></h1>
+			</div>
+			<br>
+			<div>
+				<div class="cards-container">
+	                <div th:each="card : ${listCard}">
+	                <form th:action="@{/addCard}" method="get" class="form-open-card">
+						<div class="card">
+	                        <div class="card_left_img">
+	                          <img  class="card_img" th:src="${card.imageSmall}">
+	                        </div>
+	                      <!--  
+	                        <div class="card_right_text">
+	                          <div class="card_name"><p th:text="${card.name}"></p></div>
+	                          <div class="card_description"><p th:text="${card.flavorText}"></p></div>
+	                          <div class="card_rarity"><p th:text="${card.rarity}"></p></div>
+	                          <div class="card_set"><p th:text="${card.set}"></p></div>
+	                          <div class="card_artist"><p th:text="${card.artist}"></p></div>
+	                        </div>
+	                      -->
+	                      	
+	                      </div>
+	                    <label for="lang">X </label>	
+	                    <select name="numberOfCards" id="numberOfCards">
+					        <option value="1">1</option>
+					        <option value="2">2</option>
+					        <option value="3">3</option>
+					        <option value="4">4</option>
+					        <option value="5">5</option>
+					        <option value="6">6</option>
+					        <option value="7">7</option>
+					        <option value="8">8</option>
+					        <option value="9">9</option>
+					        <option value="10">10</option>
+					        <option value="11">11</option>
+					        <option value="12">12</option>
+					        <option value="13">13</option>
+					        <option value="14">14</option>
+					        <option value="15">15</option>
+					        <option value="16">16</option>
+					        <option value="17">17</option>
+					        <option value="18">18</option>
+					        <option value="19">19</option>
+					        <option value="20">20</option>
+					      </select>
+					      
+					    	<input type="text" th:name="nameCard" th:value="${card.imageSmall}" style="display:none;"/> 
+					    	
+					    	<div class="deck-selector">
+						    	<select name="nameDeck">
+									<option th:each="deck : ${decks}" th:text="${deck}"/>
+								</select>
+								<!--  <span>Deck: <span th:text="${decks}"></span></span> -->
+							</div>
+							
+							<input type="submit" value="ADD" />	
+					    
+					</form>
+	                </div>
+	            </div>
+			</div>
 	</div>
 	
 </body>

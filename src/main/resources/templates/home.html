@@ -62,16 +62,16 @@
 		padding-right:10px;
 	}
 	.menu-welcome-text{
-		border-left: 1px solid black;
-		padding-left:5px;
+		border-left: 1px solid yellow;
+		padding-left:10px;
+		text-align:left;
 	}
 	
 	a{
 		color:orange;
 		padding:20px;
+		font-size:20px;
 	}
-	
-	
 	
 	.cards-container{
 	    display: flex;
@@ -107,18 +107,21 @@
 	}
 	
 	.posts-container{
-		display:flex;
-		flex-direction: row;
-		justify-content: center;
-		flew-wrap: wrap;
+	    display: flex;
+	    flex-direction: row;
+	    justify-content:center;
+	    flex-wrap: wrap;
+	    margin-left:20px;
+	    margin-right:20px;
 	}
 	
 	.post{
 	    margin:5px;   
 	    padding:5px;     
 	    display: flex;
-	    flex-direction: row;
+	    flex-direction: column;
 	    justify-content:center;
+	    text-align:center;
 	}
 	   
 	.post_right_text{
@@ -143,6 +146,32 @@
 	.create-deck-msg{
 	color:green;
 	}
+
+	.post-number{
+		text-align:center;
+		display:inline;
+		font-size:25px;
+		margin-top:-40px;
+		margin-right:-120px;
+		font-family:'Impact';
+	}
+	.post-number-x{
+		/*font-style: italic;*/
+		color:black;
+		text-shadow: 2px 2px 0 white;
+	}
+	.post-number-N{
+		font-weight: bold;
+		font-size: 45px;
+		color:black;
+		text-shadow: 2px 2px 0 white;
+	}
+
+	.form-open-card{
+		max-width: 600px; 
+		margin: 0 auto;
+		text-align:center;
+	}
 </style>
 </head>
 <body>
@@ -152,10 +181,10 @@
 				<img class="navbar-logo-img" src="https://i.imgur.com/huA5cgZ.png"/>
 			</div>
 			<!-- redirects to loginAppController - @XMapping ("/...") -->
-			<h4><a th:href="@{/list_users}">List of all registered users</a>
-				<a th:href="@{/home}">Home</a>
-				<a th:href="@{/register}">Register</a>
-				<a th:href="@{/login}">Login</a></h4>
+			<h4><a th:href="@{/list_users}">USERS</a>
+				<a th:href="@{/home}">HOME</a>
+				<a th:href="@{/register}">SIGN-UP</a>
+				<a th:href="@{/login}">LOGIN</a></h4>
 		</div>
 		<div class="menu-welcome">
 			<div class="menu-welcome-pic">
@@ -179,6 +208,7 @@
 			<img src="https://i.imgur.com/d9gpjKn.png" style="width:50px;"/> 
 			<span>Search cards: </span>
 			<input type="text" th:name="name"/> 	
+			<input type="submit" value="SEARCH CARDS" />	
 		</form>
 		<br><br>
 		
@@ -186,9 +216,23 @@
 			style="max-width: 1000px; margin: 0 auto;">
 			<img src="https://i.imgur.com/nIwJfXB.png" style="width:50px;"/>
 			<span>Create a new Deck: </span>
-			<input type="text" th:name="name"/> 
+			<input type="text" th:name="name" th:placeholder="new deck name"/> 
 			<input type="text" th:name="creator" th:value="${#request.userPrincipal.principal.email}" style="display:none;"/> 
-			<input type="submit" value="CREATE" />	
+			<label for="color">deck box: </label>	
+	                    <select name="deckBox" id="deckBox">
+					        <option value="https://i.imgur.com/AOen5V2.png">blue</option>
+					        <option value="https://i.imgur.com/e2dLg0Q.png">green</option>
+					        <option value="https://i.imgur.com/6waPMgR.png">green water</option>
+					        <option value="https://i.imgur.com/8Kd4iYC.png">orange</option>
+					        <option value="https://i.imgur.com/JvoBnT2.png">red</option>  
+					        <option value="https://i.imgur.com/itOCkMM.png">dark yellow</option>
+					        <option value="https://i.imgur.com/YPHXIcj.png">yellow</option>
+					        <option value="https://i.imgur.com/itOCkMM.png">brown</option>
+					        <option value="https://i.imgur.com/GmCxSqD.png">white</option>
+					        <option value="https://i.imgur.com/eAERjc1.png">pink</option>
+					        <option value="https://i.imgur.com/8kBEL2X.png">rainbow</option>
+					      </select>
+			<input type="submit" value="CREATE DECK" />	
 		</form>
 		<br>
 		   <div class="alert alert-success" role="alert"
