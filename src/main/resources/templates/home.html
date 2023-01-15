@@ -59,11 +59,11 @@
 	}
 	.menu-welcome-img{
 		height:150px;
-		padding-right:10px;
+		padding-right:20px;
 	}
 	.menu-welcome-text{
 		border-left: 1px solid yellow;
-		padding-left:10px;
+		padding-left:50px;
 		text-align:left;
 	}
 	
@@ -71,6 +71,24 @@
 		color:orange;
 		padding:20px;
 		font-size:20px;
+	}
+	
+	.home-section{
+		display:flex;
+		flex-direction:column;
+		justify-content: center;	
+		padding-left:10px;
+	}	
+	.home-section-title{
+		padding-bottom:5px;
+		font-size:22px;
+		text-align: left;
+	}
+
+	.home-section-container{
+		display:flex;
+		flex-direction:row;
+		justify-content: center;	
 	}
 	
 	.cards-container{
@@ -206,7 +224,7 @@
 		<form th:action="@{/searchCards}" method="get"
 			style="max-width: 600px; margin: 0 auto;">
 			<img src="https://i.imgur.com/d9gpjKn.png" style="width:50px;"/> 
-			<span>Search cards: </span>
+			<span class="home-title-section">SEARCH CARDS </span>
 			<input type="text" th:name="name"/> 	
 			<input type="submit" value="SEARCH CARDS" />	
 		</form>
@@ -214,25 +232,35 @@
 		
 		<form th:action="@{/createDeck}" method="get"
 			style="max-width: 1000px; margin: 0 auto;">
-			<img src="https://i.imgur.com/nIwJfXB.png" style="width:50px;"/>
-			<span>Create a new Deck: </span>
-			<input type="text" th:name="name" th:placeholder="new deck name"/> 
-			<input type="text" th:name="creator" th:value="${#request.userPrincipal.principal.email}" style="display:none;"/> 
-			<label for="color">deck box: </label>	
-	                    <select name="deckBox" id="deckBox">
-					        <option value="https://i.imgur.com/AOen5V2.png">blue</option>
-					        <option value="https://i.imgur.com/e2dLg0Q.png">green</option>
-					        <option value="https://i.imgur.com/6waPMgR.png">green water</option>
-					        <option value="https://i.imgur.com/8Kd4iYC.png">orange</option>
-					        <option value="https://i.imgur.com/JvoBnT2.png">red</option>  
-					        <option value="https://i.imgur.com/itOCkMM.png">dark yellow</option>
-					        <option value="https://i.imgur.com/YPHXIcj.png">yellow</option>
-					        <option value="https://i.imgur.com/itOCkMM.png">brown</option>
-					        <option value="https://i.imgur.com/GmCxSqD.png">white</option>
-					        <option value="https://i.imgur.com/eAERjc1.png">pink</option>
-					        <option value="https://i.imgur.com/8kBEL2X.png">rainbow</option>
-					      </select>
-			<input type="submit" value="CREATE DECK" />	
+			<div class="home-section-container">
+				<div class="home-section-image">
+					<img src="https://i.imgur.com/nIwJfXB.png" style="width:50px;"/>
+				</div>
+				<div class="home-section">
+					<div class="home-section-title">
+						<span>CREATE DECK </span>				
+					</div>
+					<div class="home-section-form">
+						<input type="text" th:name="name" placeholder="new deck name"/> 
+						<input type="text" th:name="creator" th:value="${#request.userPrincipal.principal.email}" style="display:none;"/> 
+						<label for="color">deck box: </label>	
+				                    <select name="deckBox" id="deckBox">
+								        <option value="https://i.imgur.com/AOen5V2.png">blue</option>
+								        <option value="https://i.imgur.com/e2dLg0Q.png">green</option>
+								        <option value="https://i.imgur.com/6waPMgR.png">green water</option>
+								        <option value="https://i.imgur.com/8Kd4iYC.png">orange</option>
+								        <option value="https://i.imgur.com/JvoBnT2.png">red</option>  
+								        <option value="https://i.imgur.com/itOCkMM.png">dark yellow</option>
+								        <option value="https://i.imgur.com/YPHXIcj.png">yellow</option>
+								        <option value="https://i.imgur.com/itOCkMM.png">brown</option>
+								        <option value="https://i.imgur.com/GmCxSqD.png">white</option>
+								        <option value="https://i.imgur.com/eAERjc1.png">pink</option>
+								        <option value="https://i.imgur.com/8kBEL2X.png">rainbow</option>
+								      </select>
+						<input type="submit" value="CREATE DECK" />	
+					</div>
+				</div>
+			</div>
 		</form>
 		<br>
 		   <div class="alert alert-success" role="alert"
