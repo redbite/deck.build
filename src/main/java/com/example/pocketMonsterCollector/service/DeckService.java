@@ -1,6 +1,7 @@
 package com.example.pocketMonsterCollector.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,13 @@ public class DeckService {
 	
 	public ArrayList<String> getAllDeckNames() {
 		return deckRepository.findAllNames();
+	}
+
+	public void save(Deck deck) {
+		deckRepository.save(deck);
+	}
+
+	public List<Deck> getAllDecks() {
+		return deckRepository.findAll();
 	}
 }

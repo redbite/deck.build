@@ -51,11 +51,11 @@ public class LoginAppController {
 		return "users"; //	src/main/resources/templates/users
 	}
 	
-	@GetMapping("/home")
-	public String viewHome(Model model) {
-		List<Post> listPosts = postRepository.findAll();
-		model.addAttribute("listPosts", listPosts);
-		
-		return "home"; //	src/main/resources/templates/home
-	}
+//	@GetMapping("/home")
+//	public String viewHome(Model model) {
+//		List<Post> listPosts = postRepository.findAll();
+//		model.addAttribute("listPosts", listPosts);
+//		
+//		return "home"; //	src/main/resources/templates/home
+//	}
 }

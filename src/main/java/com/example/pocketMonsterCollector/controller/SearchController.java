@@ -26,9 +26,7 @@ public class SearchController {
 	@Autowired
 	DeckService deckService;
 	
-	/*
-	 * Testing purpose
-	 */
+	//testing purpose 
 	@GetMapping("/searchCardsJSON")
 	public ResponseEntity<?> getCardsJSON(@RequestParam(value = "name") String name, Model model){
 		try {
@@ -58,6 +56,13 @@ public class SearchController {
 		}
 	}
 	
+	@GetMapping("/home")
+	public String loadHome(Model model) {
+		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
+		model.addAttribute("decks", decks);
+		return "home";
+	}
+	
 	@GetMapping("/addCard")
 	public String addCard( String nameDeck, String nameCard, Integer numberOfCards, Model model){		
 		Deck deck = deckService.addCardToDeck(nameDeck, nameCard, numberOfCards);
@@ -74,6 +79,7 @@ public class SearchController {
 		for(String card: cardsSet) {
 			if(nameCard.equals(card)) {
 				deck.getCards().remove(card);
+				deckService.save(deck);
 				String message = "The card selected has been deleted"; 
 				model.addAttribute("message",message);
 				break;
