@@ -18,6 +18,7 @@ import com.example.pocketMonsterCollector.entity.Card;
 import com.example.pocketMonsterCollector.entity.Deck;
 import com.example.pocketMonsterCollector.service.DeckService;
 import com.example.pocketMonsterCollector.service.SearchService;
+import com.example.pocketMonsterCollector.service.ServiceUtilsMisc;
 
 @Controller
 public class SearchController {
@@ -69,6 +70,8 @@ public class SearchController {
 		model.addAttribute("deck",deck);
 		String message = "The card has been added to the deck"; 
 		model.addAttribute("message",message);
+		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
+		model.addAttribute("count",countCards);
 		return "deck_builder"; //	src/main/resources/templates/
 	}
 	
@@ -86,6 +89,8 @@ public class SearchController {
 			}
 		}
 		model.addAttribute("deck", deck);
+		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
+		model.addAttribute("count",countCards);
 		return "deck_builder";
 	}
 	
@@ -108,6 +113,8 @@ public class SearchController {
 		System.out.println("searching deck "+name);
 		Deck deck = deckService.getDeck(name);
 		model.addAttribute("deck",deck);
+		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
+		model.addAttribute("count",countCards);
 		return "deck_builder";
 	}
 }

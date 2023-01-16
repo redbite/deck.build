@@ -218,6 +218,36 @@
 		margin-left:-80px;
 		z-index:2;
 	}
+	
+	.deck-count-container{
+		display:flex;
+		flex-direction:row;
+		flex-direction:start;
+	}
+	.deck-count{
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		margin-left:50px;
+	}
+	.deck-count-number-green,.deck-count-number-red{
+		font-weight:bold;
+		font-size:36px;
+		text-shadow: 1px 1px 0 black;
+	}
+	.deck-count-number-green{
+		color:rgb(155,255,4);
+	}
+	.deck-count-number-red{
+		color:rgb(255,100,4);		
+	}
+	.deck-count-text{
+		font-weight:bold;
+		font-size:22px;
+		color:white;
+		padding-top:15px;
+		padding-left:5px;
+	}
 </style>
 </head>
 <body>
@@ -257,6 +287,17 @@
 			<div class="deck-info">
 				<span class="deck-creator" th:text="${deck.creator}"></span>
 				<span class="deck-name" th:text="${deck.name}"></span>
+			</div>
+			<div class="deck-count">
+				<div class="deck-count-container">
+					<!-- OK if 40 .. 60, KO else  -->
+					<div th:if="${count} gt '60' or ${count} lt '40'">
+						<span class="deck-count-number-red" th:text="${count}"></span> <span class="deck-count-text">CARDS</span>
+					</div>
+					<div th:if="${count} le '60' and ${count} ge '40'">
+						<span class="deck-count-number-green" th:text="${count}"></span> <span class="deck-count-text">CARDS</span>
+					</div>				
+				</div>
 			</div>
 		</div>
 		<br>
