@@ -26,7 +26,7 @@ public class SearchController {
 	@Autowired
 	DeckService deckService;
 	
-	//testing purpose 
+	//testing purpose
 	@GetMapping("/searchCardsJSON")
 	public ResponseEntity<?> getCardsJSON(@RequestParam(value = "name") String name, Model model){
 		try {
