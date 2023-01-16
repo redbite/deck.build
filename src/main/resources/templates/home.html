@@ -226,6 +226,10 @@
 		justify-content:center;
 		text-align:left;
 	}
+	
+	.delete-deck-msg{
+		color:yellow;
+	}
 </style>
 </head>
 <body>
@@ -331,10 +335,21 @@
 									<input type="submit" value="VIEW" />
 								</div>	
 							</form>
+							<form th:action="@{/deleteDeck}" method="get">
+								<div style="text-align:left">
+									<input th:name="name" th:value="${deck.name}" style="display:none;"/> 	
+									<input type="submit" value="DELETE" />
+								</div>	
+							</form>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="alert alert-success" role="alert"
+                             th:if="${message_delete}">
+		       <span class="delete-deck-msg" th:text="${message_delete}"></span>
+		</div>
+		   
 		<div>
 		<!-- 		<div class="posts-container">
                 <div th:each="post: ${listPosts}">

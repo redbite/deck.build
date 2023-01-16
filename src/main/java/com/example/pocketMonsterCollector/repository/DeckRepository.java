@@ -16,4 +16,7 @@ public interface DeckRepository extends JpaRepository<Deck, Long>{
 	@Query("SELECT name FROM Deck")
 	ArrayList<String> findAllNames();
 	
+	@Query("DELETE FROM Deck WHERE name=:name ")
+	void delete(String name);
+	
 }

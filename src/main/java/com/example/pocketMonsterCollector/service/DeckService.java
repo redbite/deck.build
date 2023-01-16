@@ -35,6 +35,14 @@ public class DeckService {
 		return deckRepository.findAllByName(name).get(0);
 	}
 	
+	public String deleteDeck(String name) {
+		try {
+			deckRepository.delete(name);
+			return "deck deleted";
+		}catch(Exception e) {
+			return "deck delete: error "+e.toString();
+		}
+	}
 	public Deck addCardToDeck(String name, String card, Integer number) {
 		Deck deck = getDeck(name);
 		deck.getCards().put(card, number);

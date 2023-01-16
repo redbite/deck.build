@@ -106,6 +106,16 @@ public class SearchController {
 		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
 		model.addAttribute("decks", decks);
 		return "home";
+	}   
+	
+	@GetMapping("/deleteDeck")
+	public String deleteDeck(String name, Model model) {
+		String message = deckService.deleteDeck(name);
+		model.addAttribute("message_delete",message);
+		
+		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
+		model.addAttribute("decks", decks);
+		return "home";
 	}    
 	
 	@GetMapping("/viewDeck")
@@ -117,4 +127,6 @@ public class SearchController {
 		model.addAttribute("count",countCards);
 		return "deck_builder";
 	}
+	
+	
 }
