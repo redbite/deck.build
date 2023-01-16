@@ -213,7 +213,7 @@
 		margin-right:15px;
 	}
 	.deck-deckBox{
-		height:50px;
+		height:70px;
 		padding-right:10px;
 	}
 	.deck-name{
@@ -325,6 +325,12 @@
 					<div class="deck-info">
 						<span class="deck-creator" th:text="${deck.creator}"></span>
 						<span class="deck-name" th:text="${deck.name}"></span>
+							<form th:action="@{/viewDeck}" method="get">
+								<div style="text-align:left">
+									<input th:name="name" th:value="${deck.name}" style="display:none;"/> 	
+									<input type="submit" value="VIEW" />
+								</div>	
+							</form>
 					</div>
 				</div>
 			</div>

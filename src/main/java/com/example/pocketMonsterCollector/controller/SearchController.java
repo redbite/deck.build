@@ -97,11 +97,15 @@ public class SearchController {
 		String message = "The deck "+name+" was created by the user "+creator; 
 		redirAttrs.addFlashAttribute("message", message);
 		model.addAttribute("message",message);
+		
+		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
+		model.addAttribute("decks", decks);
 		return "home";
 	}    
 	
 	@GetMapping("/viewDeck")
-	public String viewDeck(String name, String creator, Model model) {
+	public String viewDeck(String name, Model model) {
+		System.out.println("searching deck "+name);
 		Deck deck = deckService.getDeck(name);
 		model.addAttribute("deck",deck);
 		return "deck_builder";
