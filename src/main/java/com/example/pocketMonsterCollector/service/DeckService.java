@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.pocketMonsterCollector.entity.Deck;
 import com.example.pocketMonsterCollector.repository.DeckRepository;
@@ -35,12 +36,13 @@ public class DeckService {
 		return deckRepository.findAllByName(name).get(0);
 	}
 	
+	@Transactional
 	public String deleteDeck(String name) {
 		try {
 			deckRepository.delete(name);
-			return "deck deleted";
+			return "Deck "+name+" deleted";
 		}catch(Exception e) {
-			return "deck delete: error "+e.toString();
+			return "Deck "+name+" couldn't be deleted";
 		}
 	}
 	public Deck addCardToDeck(String name, String card, Integer number) {
