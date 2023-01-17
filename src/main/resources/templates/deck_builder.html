@@ -169,21 +169,23 @@
 	.post-number{
 		text-align:center;
 		display:inline;
-		font-size:25px;
-		margin-top:-40px;
-		margin-right:-120px;
+		font-size:30px;
+		margin-top:-52px;
+		margin-right:-170px;
 		font-family:'Impact';
 	}
+
 	.post-number-x{
-		/*font-style: italic;*/
-		color:black;
-		text-shadow: 2px 2px 0 white;
+		color:orange;
+		text-shadow: -2px -2px 0 black;
+		margin-right:5px;
 	}
+
 	.post-number-N{
 		font-weight: bold;
-		font-size: 45px;
-		color:black;
-		text-shadow: 2px 2px 0 rgb(186, 235, 52);
+		font-size: 50px;
+		color:rgb(145, 0, 0);
+		text-shadow: -3px -3px 0 rgb(0, 0, 0);
 	}
 
 	.form-open-card{
@@ -206,7 +208,6 @@
 	}
 	.deck-name{
 		font-size:20px;
-		border-bottom:1px solid yellow;
 		font-family:Impact;
 	}
 	.deck-info{
@@ -248,6 +249,9 @@
 		color:white;
 		padding-top:15px;
 		padding-left:5px;
+	}
+	input,select{
+		border-radius: 5px;
 	}
 </style>
 </head>
@@ -321,7 +325,8 @@
                         	</form>
                         </div>
                         <div class="post-number">
-                        	<span class="post-number-x">X</span><span th:text="${card.value}" class="post-number-N"></span>
+                        	<span class="post-number-x">X</span>
+                        	<span th:text="${card.value}" class="post-number-N"></span>
                         </div>
 		            </div>
                 <!-- </div> -->
