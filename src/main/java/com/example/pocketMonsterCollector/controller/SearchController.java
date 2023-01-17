@@ -39,21 +39,28 @@ public class SearchController {
 	}
 	
 	@GetMapping("/searchCards")
-	public String getCards(@RequestParam(value = "name") String name, Model model){
-		try {
-			List<Card> listCard = searchService.getPokemon(name);
-			for(Card card: listCard) {
-				System.out.println(card.toString());
+	public String getCards(String name, Model model){
+		if(!name.contains(" ")) {
+			try {
+				List<Card> listCard = searchService.getPokemon(name);
+				for(Card card: listCard) {
+					System.out.println(card.toString());
+				}
+				model.addAttribute("listCard",listCard);
+				model.addAttribute("name",name);
+				
+				ArrayList<String> decks = deckService.getAllDeckNames();
+				model.addAttribute("decks",decks);
+				return "search_results";
 			}
-			model.addAttribute("listCard",listCard);
-			model.addAttribute("name",name);
-			
-			ArrayList<String> decks = deckService.getAllDeckNames();
-			model.addAttribute("decks",decks);
+			catch(IOException ioe){
+				return "";
+			}
+		}else {
+			String message="Try to search without inserting spaces";
+			model.addAttribute("message",message);
 			return "search_results";
-		}
-		catch(IOException ioe){
-			return "";
+
 		}
 	}
 	
