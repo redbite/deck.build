@@ -47,7 +47,7 @@
 		flex-direction:row;
 		justify-content:center;
 		
-		margin:20vw;
+		margin:28vw;
 		margin-top:30px;
 		margin-bottom:30px;
 
@@ -227,7 +227,11 @@
 		justify-content:center;
 		text-align:left;
 	}
-	
+	.deck-info-actions{
+		display:flex;
+		flex-direction:row;
+		justify-content:start;
+	}
 	.delete-deck-msg{
 		color:yellow;
 	}
@@ -253,10 +257,10 @@
 				<form  th:action="@{/logout}" method="post">
 					<!-- request.userPrincipal.principal gets its data from CustomUserDetails -->
 					<p>
-						Welcome <b>[[${#request.userPrincipal.principal.email}]]</b>!<input type="submit" value="LogOut" style="margin-left:20px;" />
+						Welcome <b>[[${#request.userPrincipal.principal.email}]]</b>!<input type="submit" value="LogOut" style="background-color:black; color:grey; font-weight:bold; margin-left:20px;" />
 					</p>
 				</form>
-				<p><b>deck.build</b> is where you can build your favourite TCG decks!</p>
+				<p><b>deck<span style="color:red">.</span>build</b> is where you can build your favourite TCG decks!</p>
 				<p>Start by creating a deck, then searching for your favourite cards and adding them to your custom decks.</p>
 			</div>
 		</div>
@@ -274,8 +278,8 @@
 							<span class="home-title-section">SEARCH CARDS </span>
 						</div>
 						<div class="home-section-form">
-							<input type="text" th:name="name"/> 	
-							<input type="submit" value="SEARCH CARDS" />	
+							<input type="text" th:name="name" style="background-color:black; color:white; font-weight:bold;"/> 	
+							<input type="submit" value="SEARCH CARDS" style="background-color:black; color:green; font-weight:bold;"/>	
 						</div>
 					</div>
 				</div>
@@ -292,10 +296,10 @@
 							<span>CREATE DECK </span>				
 						</div>
 						<div class="home-section-form">
-							<input type="text" th:name="name" placeholder="new deck name"/> 
+							<input type="text" th:name="name" placeholder="new deck name" style="background-color:black; color:white"/> 
 							<input type="text" th:name="creator" th:value="${#request.userPrincipal.principal.email}" style="display:none;"/> 
-							<label for="color">deck box: </label>	
-					                    <select name="deckBox" id="deckBox">
+							<label for="color">deckBox: </label>	
+					                    <select name="deckBox" id="deckBox" style="background-color:black; color:white; font-weight:bold;">
 									        <option value="https://i.imgur.com/AOen5V2.png">blue</option>
 									        <option value="https://i.imgur.com/e2dLg0Q.png">green</option>
 									        <option value="https://i.imgur.com/6waPMgR.png">green water</option>
@@ -308,7 +312,7 @@
 									        <option value="https://i.imgur.com/eAERjc1.png">pink</option>
 									        <option value="https://i.imgur.com/8kBEL2X.png">rainbow</option>
 									      </select>
-							<input type="submit" value="CREATE DECK" />	
+							<input type="submit" value="CREATE DECK" style="background-color:black; color:green; font-weight:bold;"/>	
 						</div>
 					</div>
 				</div>
@@ -330,18 +334,20 @@
 					<div class="deck-info">
 						<span class="deck-creator" th:text="${deck.creator}"></span>
 						<span class="deck-name" th:text="${deck.name}"></span>
-							<form th:action="@{/viewDeck}" method="get">
-								<div style="text-align:left">
-									<input th:name="name" th:value="${deck.name}" style="display:none;"/> 	
-									<input type="submit" value="VIEW" />
-								</div>	
-							</form>
-							<form th:action="@{/deleteDeck}" method="get">
-								<div style="text-align:left">
-									<input th:name="name" th:value="${deck.name}" style="display:none;"/> 	
-									<input type="submit" value="DELETE" />
-								</div>	
-							</form>
+							<div class="deck-info-actions">
+								<form th:action="@{/viewDeck}" method="get">
+									<div>
+										<input th:name="name" th:value="${deck.name}" style="display:none;"/> 	
+										<input type="submit" value="VIEW" style="background-color:black; color:white; font-weight:bold;"/>
+									</div>	
+								</form>
+								<form th:action="@{/deleteDeck}" method="get">
+									<div>
+										<input th:name="name" th:value="${deck.name}" style="display:none;"/> 	
+										<input type="submit" value="DELETE" style="margin-left:5px; background-color:black; color:red; font-weight:bold;"/>
+									</div>	
+								</form>
+							</div>
 					</div>
 				</div>
 			</div>

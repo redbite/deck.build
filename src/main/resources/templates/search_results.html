@@ -235,8 +235,8 @@
 							<span class="home-title-section">SEARCH CARDS </span>
 						</div>
 						<div class="home-section-form">
-							<input type="text" th:name="name"/> 	
-							<input type="submit" value="SEARCH CARDS" />	
+							<input type="text" th:name="name" style="background-color:black; color:white; font-weight:bold;"/> 	
+							<input type="submit" value="SEARCH CARDS" style="background-color:black; color:green; font-weight:bold;"/>	
 						</div>
 					</div>
 				</div>
@@ -267,14 +267,14 @@
 	                     </div>
 	                      
                       	<div class="deck-selector">
-					    	<select name="nameDeck">
-								<option th:each="deck : ${decks}" th:text="${deck}"/>
+					    	<select name="nameDeck" style="background-color:black; color:white; font-weight:bold;">
+								<option th:each="deck : ${decks}" th:text="${deck}" />
 							</select>
 						</div>
 	                      
 	                    <div class="add-menu">
 		                    <label for="lang">X </label>	
-		                    <select name="numberOfCards" id="numberOfCards">
+		                    <select name="numberOfCards" id="numberOfCards" style="background-color:black; color:white; font-weight:bold;">
 						        <option value="1">1</option>
 						        <option value="2">2</option>
 						        <option value="3">3</option>
@@ -298,7 +298,7 @@
 						      </select>
 						      
 						    	<input type="text" th:name="nameCard" th:value="${card.imageSmall}" style="display:none;"/> 
-								<input type="submit" value="ADD" />	
+								<input type="submit" value="ADD" style="background-color:black; color:rgb(186, 235, 52); font-weight:bold;"/>	
 	                    </div>
 	                    
 					    
