@@ -39,9 +39,12 @@ public class SearchController {
 	}
 	
 	@GetMapping("/searchCards")
-	public String getCards(String name, Model model){
+	public String getCards(String name, Model model, boolean partialcheckbox){
 		if(!name.contains(" ")) {
 			try {
+				if(partialcheckbox) {
+					name=name+"*";
+				}
 				List<Card> listCard = searchService.getPokemon(name);
 				for(Card card: listCard) {
 					System.out.println(card.toString());
