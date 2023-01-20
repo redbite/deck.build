@@ -16,9 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.pocketMonsterCollector.entity.Card;
 import com.example.pocketMonsterCollector.entity.Deck;
+import com.example.pocketMonsterCollector.entity.SetCards;
 import com.example.pocketMonsterCollector.service.DeckService;
 import com.example.pocketMonsterCollector.service.SearchService;
 import com.example.pocketMonsterCollector.service.ServiceUtilsMisc;
+import com.example.pocketMonsterCollector.service.SetService;
 
 @Controller
 public class SearchController {
@@ -26,12 +28,14 @@ public class SearchController {
 	SearchService searchService;
 	@Autowired
 	DeckService deckService;
+	@Autowired
+	SetService setService;
 	
 	//testing purpose
 	@GetMapping("/searchCardsJSON")
 	public ResponseEntity<?> getCardsJSON(@RequestParam(value = "name") String name, Model model){
 		try {
-			return new ResponseEntity<>(searchService.getPokemon(name), HttpStatus.OK);
+			return new ResponseEntity<>(searchService.getPokemon(name,"ALL_SETS"), HttpStatus.OK);
 		}
 		catch(IOException ioe){
 			return new ResponseEntity<>(ioe.getMessage(), HttpStatus.BAD_REQUEST);
@@ -39,13 +43,13 @@ public class SearchController {
 	}
 	
 	@GetMapping("/searchCards")
-	public String getCards(String name, Model model, boolean partialcheckbox){
+	public String getCards(String name, Model model, boolean partialcheckbox, String setSearch){
 		if(!name.contains(" ")) {
 			try {
 				if(partialcheckbox) {
 					name=name+"*";
 				}
-				List<Card> listCard = searchService.getPokemon(name);
+				List<Card> listCard = searchService.getPokemon(name, setSearch);
 				for(Card card: listCard) {
 					System.out.println(card.toString());
 				}
@@ -71,6 +75,12 @@ public class SearchController {
 	public String loadHome(Model model) {
 		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
 		model.addAttribute("decks", decks);
+		try {
+			ArrayList<SetCards> sets = new ArrayList<>(setService.getSets());
+			model.addAttribute("sets",sets);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return "home";
 	}
 	
@@ -115,6 +125,14 @@ public class SearchController {
 		
 		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
 		model.addAttribute("decks", decks);
+		
+		try {
+			ArrayList<SetCards> sets = new ArrayList<>(setService.getSets());
+			model.addAttribute("sets",sets);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		return "home";
 	}   
 	
@@ -125,6 +143,14 @@ public class SearchController {
 		
 		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
 		model.addAttribute("decks", decks);
+		
+		try {
+			ArrayList<SetCards> sets = new ArrayList<>(setService.getSets());
+			model.addAttribute("sets",sets);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		return "home";
 	}    
 	
@@ -138,5 +164,20 @@ public class SearchController {
 		return "deck_builder";
 	}
 	
+	//testing purpose
+	@GetMapping("/searchSetsJSON")
+	public ResponseEntity<?> getSetsJSON(Model model){
+		try {
+			return new ResponseEntity<>(setService.getSets(), HttpStatus.OK);
+		}
+		catch(IOException ioe){
+			return new ResponseEntity<>(ioe.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
 	
+//	@GetMapping("/searchSets")
+//	public String getSets getSets(Model model) {
+//		setService.getSets();
+//		return "Sets"; 
+//	}
 }

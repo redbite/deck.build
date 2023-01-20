@@ -28,7 +28,7 @@ public class SearchService {
     
     @PostConstruct
     private void init() {
-    	System.out.println(apiSecret);
+//    	System.out.println(apiSecret);
     }
     
     public SearchService (ObjectMapper mapper){
@@ -43,12 +43,15 @@ public class SearchService {
         return template.exchange(url, HttpMethod.GET, entity, String.class);
     }
 	
-	public List<Card> getPokemon (String name) throws IOException {
+	public List<Card> getPokemon (String name, String setSearch) throws IOException {
         List<Card> list = new ArrayList<>();
-        Integer pageSize = 40;
-
-//        String url = "https://api.pokemontcg.io/v2/cards?q=name:"+name+"&pageSize="+pageSize;
-        String url = "https://api.pokemontcg.io/v2/cards?q=name:"+name;
+//      Integer pageSize = 40;
+//      String url = "https://api.pokemontcg.io/v2/cards?q=name:"+name+"&pageSize="+pageSize;
+    	String url = "https://api.pokemontcg.io/v2/cards?q=name:"+name;
+        if(!"ALL_SETS".equals(setSearch)) {
+        	//filter by set
+        	url = "https://api.pokemontcg.io/v2/cards?q=name:"+name+"&set.name:"+setSearch;
+        }
         String pokejson = callApi(url).getBody();
         System.out.println(pokejson);
         pokemonResultsList(pokejson,list);
@@ -91,4 +94,5 @@ public class SearchService {
             pkmnCard.setFlavorText(node.path("flavorText").asText());
         return pkmnCard;
     }
+    
 }
