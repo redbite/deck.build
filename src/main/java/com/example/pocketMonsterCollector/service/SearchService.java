@@ -47,13 +47,20 @@ public class SearchService {
         List<Card> list = new ArrayList<>();
 //      Integer pageSize = 40;
 //      String url = "https://api.pokemontcg.io/v2/cards?q=name:"+name+"&pageSize="+pageSize;
+        
+//        setSearch=setSearch.replace(" ", "-");
+//        setSearch=setSearch.toLowerCase();
+        
     	String url = "https://api.pokemontcg.io/v2/cards?q=name:"+name;
+    	
         if(!"ALL_SETS".equals(setSearch)) {
         	//filter by set
-        	url = "https://api.pokemontcg.io/v2/cards?q=name:"+name+"&set.name:"+setSearch;
+        	url = "https://api.pokemontcg.io/v2/cards?q=name:"+name+" set.name:"+setSearch;
         }
+        System.out.println("URL: "+url);
+
         String pokejson = callApi(url).getBody();
-        System.out.println(pokejson);
+//        System.out.println(pokejson);
         pokemonResultsList(pokejson,list);
         return list;
     }

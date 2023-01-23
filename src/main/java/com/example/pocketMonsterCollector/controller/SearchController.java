@@ -43,16 +43,16 @@ public class SearchController {
 	}
 	
 	@GetMapping("/searchCards")
-	public String getCards(String name, Model model, boolean partialcheckbox, String setSearch){
+	public String getCards(String name, Model model, String setSearch){
 		if(!name.contains(" ")) {
 			try {
-				if(partialcheckbox) {
+//				if(partialcheckbox) {
 					name=name+"*";
-				}
+//				}
 				List<Card> listCard = searchService.getPokemon(name, setSearch);
-				for(Card card: listCard) {
-					System.out.println(card.toString());
-				}
+//				for(Card card: listCard) {
+//					System.out.println(card.toString());
+//				}
 				model.addAttribute("listCard",listCard);
 				model.addAttribute("name",name);
 				

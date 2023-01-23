@@ -56,9 +56,11 @@ public class SetService {
 
 	private SetCards createSet(JsonNode node) {
 		SetCards set = new SetCards();
+		set.setId(node.path("id").asText());
 		set.setName(node.path("name").asText());
 		set.setLogo(node.path("images").path("logo").asText());
 		set.setReleaseDate(node.path("releaseDate").asText());
+		set.setPath(set.getName().toLowerCase().replace(" ", "-") +"/"+ set.getId());
 		return set;
 	}
 

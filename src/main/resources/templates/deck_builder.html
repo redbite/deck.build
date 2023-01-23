@@ -280,7 +280,26 @@
 						</div>
 						<div class="home-section-form">
 							<input type="text" th:name="name" style="background-color:black; color:white; font-weight:bold;"/> 
-							<input type="checkbox" name="partialcheckbox" style="background-color:black; color:white;"/>		
+							<!--  <input type="checkbox" name="partialcheckbox" style="background-color:black; color:white;"/>	-->	
+							<label for="setSearch">Set:</label>	
+			                    <select name="setSearch" id="setSearch" style="background-color:black; color:white; font-weight:bold;">
+							        <option value="ALL_SETS"></option>
+									<!--  
+									<option th:each="set : ${sets}" th:text="${set.name}" th:value="${set.path}"/>					
+									-->				      
+									<option value="base">Base</option>
+									<option value="gym">Gym</option>
+									<option value="neo">Neo</option>
+									<option value="ex">E-card</option>
+									<option value="dp">D & P</option>
+									<option value="pop">POP</option>
+									<option value="platinum">Platinum</option>
+									<option value="hgss">HG & SS</option>
+									<option value="bw">B & W</option>
+									<option value="xy">X & Y</option>
+									<option value="sm">S & M</option>
+									<option value="swsh">SW & SH</option>
+								</select>
 							<input type="submit" value="SEARCH CARDS" style="background-color:black; color:green; font-weight:bold;"/>	
 						</div>
 					</div>

@@ -8,23 +8,25 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-@Entity
-@Table(name = "set")
 public class SetCards {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    
+
+    private String id;    
     private String name;
+    private String path;
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
 	private String logo;
 	private String releaseDate;
 	
 	
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -46,7 +48,7 @@ public class SetCards {
 		this.releaseDate = releaseDate;
 	}
 	
-	public SetCards(Integer id, String name, String logo, String releaseDate) {
+	public SetCards(String id, String name, String logo, String releaseDate) {
 		super();
 		this.id = id;
 		this.name = name;
