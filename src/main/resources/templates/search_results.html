@@ -276,7 +276,7 @@
 	                <form th:action="@{/addCard}" method="get" class="form-open-card">
 						<div class="card">
 	                        <div class="card_left_img">
-	                          <img  class="card_img" th:src="${card.imageSmall}">
+	                          <img  class="card_img" th:src="${card.imageLarge}">
 	                        </div>
 	                      <!--  
 	                        <div class="card_right_text">
@@ -320,7 +320,7 @@
 						        <option value="20">20</option>
 						      </select>
 						      
-						    	<input type="text" th:name="nameCard" th:value="${card.imageSmall}" style="display:none;"/> 
+						    	<input type="text" th:name="nameCard" th:value="${card.imageLarge}" style="display:none;"/> 
 								<input type="submit" value="ADD" style="background-color:black; color:rgb(186, 235, 52); font-weight:bold;"/>	
 	                    </div>
 	                    
