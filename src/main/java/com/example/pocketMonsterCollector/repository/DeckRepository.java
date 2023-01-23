@@ -11,7 +11,7 @@ import com.example.pocketMonsterCollector.entity.Deck;
 
 @Repository
 public interface DeckRepository extends JpaRepository<Deck, Long>{
-	@Query("SELECT d FROM Deck d WHERE name=:name")
+	@Query("SELECT d FROM Deck d WHERE name=:name ORDER BY idDeck DESC")
 	ArrayList<Deck> findAllByName(String name);
 
 	@Query("SELECT name FROM Deck")

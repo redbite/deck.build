@@ -2,6 +2,7 @@ package com.example.pocketMonsterCollector.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -57,6 +58,7 @@ public class SearchController {
 				model.addAttribute("name",name);
 				
 				ArrayList<String> decks = deckService.getAllDeckNames();
+				Collections.reverse(decks);
 				model.addAttribute("decks",decks);
 				return "search_results";
 			}
@@ -74,6 +76,7 @@ public class SearchController {
 	@GetMapping("/home")
 	public String loadHome(Model model) {
 		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
+		Collections.reverse(decks);
 		model.addAttribute("decks", decks);
 		try {
 			ArrayList<SetCards> sets = new ArrayList<>(setService.getSets());
@@ -124,6 +127,7 @@ public class SearchController {
 		model.addAttribute("message",message);
 		
 		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
+		Collections.reverse(decks);
 		model.addAttribute("decks", decks);
 		
 		try {
@@ -142,6 +146,7 @@ public class SearchController {
 		model.addAttribute("message_delete",message);
 		
 		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
+		Collections.reverse(decks);
 		model.addAttribute("decks", decks);
 		
 		try {
