@@ -91,12 +91,12 @@ public class SearchController {
 	}
 	
 	@GetMapping("/addCard")
-	public String addCard( String nameDeck, String nameCard, Integer numberOfCards, 
+	public String addCard(String nameDeck, String nameCard, Integer numberOfCards, 
 			String subtype, String evolvesFrom, String artist, String hp, 
 			String series, String setName, Model model){		
 		System.out.println("card before save, input data "+nameCard+" | SUBTYPE: "+subtype+", evolves from: "+evolvesFrom
-		+" HP="+hp+ " Artist "+artist+ " " +setName+"#"+series
-			);
+		+" HP="+hp+ " Artist "+artist+ " " +setName+"#"+series);
+		System.out.println("TESTINGSUBTYPES IN ADD: "+subtype);
 		Deck deck = deckService.addCardToDeck(nameDeck, nameCard, numberOfCards);
 		Card card = cardService.createCard(nameCard,subtype,evolvesFrom,artist, hp, series,setName);
 		System.out.println("card after save "+card.getImageLarge()+" | SUBTYPE: "+card.getSubtype()+", evolves from: "+card.getEvolvesFrom()
