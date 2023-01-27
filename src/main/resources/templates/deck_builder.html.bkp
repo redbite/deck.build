@@ -333,20 +333,20 @@
 		<br>
 		<div>
 		<div class="posts-container">
-                <div th:each="card: ${sortDeckHP}">
+                <div th:each="card: ${deck.cards}">
                     <div class="post">
-                        <img  class="card_img" th:src="${card.imageLarge}">
+                        <img  class="card_img" th:src="${card.key}">
                         <div class="post-delete">
                         	<form th:action="@{/deleteCard}" method="get">
                         		<input type="text" th:name="name" th:value="${deck.name}" style="display:none;"/> 
-                        		<input type="text" th:name="nameCard" th:value="${card.imageLarge}" style="display:none;"/> 
+                        		<input type="text" th:name="nameCard" th:value="${card.key}" style="display:none;"/> 
                        	    	<input type="text" th:name="creator" th:value="${deck.creator}" style="display:none;"/> 
                         		<input type="submit" value="REMOVE" style="background-color:black; color:red; font-weight:bold; margin-top:5px;"/>
                         	</form>
                         </div>
                         <div class="post-number">
                         	<span class="post-number-x">X</span>
-                        	<span th:text="${map.get(card.imageLarge)}" class="post-number-N"></span>
+                        	<span th:text="${card.value}" class="post-number-N"></span>
                         </div>
 		            </div>
                 <!-- </div> -->

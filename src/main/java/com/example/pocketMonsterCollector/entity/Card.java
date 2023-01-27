@@ -1,12 +1,15 @@
 package com.example.pocketMonsterCollector.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.Comparator;
+
 import javax.persistence.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "card")
-public class Card {
+public class Card{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,6 +24,8 @@ public class Card {
     private String subtype;
     private String evolvesFrom;
     private String hp;
+    private Integer hpInt;
+    
     private String number;
     private String artist;
     private String rarity;
@@ -150,6 +155,12 @@ public class Card {
 
     public void setHp(String hp) {
         this.hp = hp;
+        try {
+            this.hpInt = Integer.parseInt(hp);
+        }catch(Exception e) {
+        	System.out.println("Error parsing string hp to int - setting 0");
+        	hpInt=0;
+        }
     }
 
     public String getNumber() {
@@ -221,4 +232,23 @@ public class Card {
                 ", setCode='" + setCode + '\'' +
                 '}';
     }
+    
+    
+	public static Comparator<Card> compareHp = new Comparator<Card>() {
+		@Override
+		public int compare(Card c1, Card c2) {
+			int result = c1.getHpInt().compareTo(c2.getHpInt());
+			if(result ==0) result = c1.getHpInt().compareTo(c2.getHpInt());
+			return result;
+		}
+	};
+
+	public Integer getHpInt() {
+		return hpInt;
+	}
+
+	public void setHpInt(Integer hpInt) {
+		this.hpInt = hpInt;
+	}    
+	
 }

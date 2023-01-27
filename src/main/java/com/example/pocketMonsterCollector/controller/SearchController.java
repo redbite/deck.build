@@ -3,6 +3,7 @@ package com.example.pocketMonsterCollector.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.pocketMonsterCollector.entity.Card;
+import com.example.pocketMonsterCollector.entity.CardCompositeX;
 import com.example.pocketMonsterCollector.entity.Deck;
 import com.example.pocketMonsterCollector.entity.SetCards;
 import com.example.pocketMonsterCollector.service.CardService;
@@ -94,7 +96,7 @@ public class SearchController {
 		Deck deck = deckService.addCardToDeck(nameDeck, nameCard, numberOfCards);
 		Card card = cardService.createCard(nameCard,subtype,supertype,evolvesFrom,artist, hp, series,setName);
 		System.out.println("card after save "+card.getImageLarge()+" | SUBTYPE: "+card.getSubtype()+", evolves from: "+card.getEvolvesFrom()
-			+" HP="+card.getHp()+ " Artist "+card.getArtist()+ " " +card.getSetName()+"#"+card.getSeries());
+			+" HP="+card.getHp()+ " Artist "+card.getArtist());
 		
 		model.addAttribute("deck",deck);
 		String message = "The card has been added to the deck"; 
@@ -168,8 +170,16 @@ public class SearchController {
 	@GetMapping("/viewDeck")
 	public String viewDeck(String name, Model model) {
 		System.out.println("searching deck "+name);
-		Deck deck = deckService.getDeck(name);
+		Deck deck = deckService.getDeck(name);		
 		model.addAttribute("deck",deck);
+
+//		HashMap<String,Integer> sortedDeck= deckService.sortDeck(deck); 
+//		HashMap<Integer,CardCompositeX> sortedCards= deckService.sortDeck(deck); 
+//		model.addAttribute("sortedCards",sortedCards);
+
+		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+		model.addAttribute("sortDeckHP",sortDeckHP);
+		
 		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
 		model.addAttribute("count",countCards);
 		return "deck_builder";

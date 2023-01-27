@@ -91,12 +91,13 @@ public class SearchService {
             if (node.path("subtypes").isArray()) {
             	pkmnCard.setSupertype(node.path("supertype").asText());
             }
-           
             if (node.path("subtypes").isArray()) {
                 pkmnCard.setSubtype(node.path("subtypes").get(0).asText());
             }
             pkmnCard.setEvolvesFrom(node.path("evolvesFrom").asText());
-            pkmnCard.setHp(node.path("hp").asText());
+            if (node.path("hp").isArray()) {
+            	pkmnCard.setHp(node.path("hp").asText());
+            }
             pkmnCard.setNumber(node.path("number").asText());
             pkmnCard.setArtist(node.path("artist").asText());
             pkmnCard.setRarity(node.path("rarity").asText());
