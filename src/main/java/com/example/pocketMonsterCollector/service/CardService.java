@@ -16,8 +16,8 @@ public class CardService {
 	CardRepository cardRepository;
 	
 	//Returns OK or error
-	public Card createCard(String nameCard, String subtype, String evolvesFrom,
-			String artist, String hp, String series,String setName) {
+	public Card createCard(String nameCard, String subtype, String supertype,
+			String evolvesFrom, String artist, String hp, String series, String setName) {
 		//checking rules
 		Card card = new Card();
 		
@@ -26,6 +26,7 @@ public class CardService {
 		if(existingCards.size() == 0) {
 			card.setImageLarge(nameCard);
 			card.setSubtype(subtype);
+			card.setSupertype(supertype);
 			card.setEvolvesFrom(evolvesFrom);
 			card.setArtist(artist);
 			card.setHp(hp);

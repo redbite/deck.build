@@ -82,14 +82,16 @@ public class SearchService {
 //    	System.out.println(" flavorText: "+node.path("flavorText").asText());
 //    	System.out.println(" artist "+node.path("artist").asText());
     	
-    	System.out.println("TESTINGSUBTYPES: "+node.path("subtypes").get(0).asText());
         Card pkmnCard = new Card();
             pkmnCard.setId(node.path("id").asText());
             pkmnCard.setName(node.path("name").asText());
             pkmnCard.setNationalPokedexNumber(node.path("nationalPokedexNumber").asInt());
             pkmnCard.setImageUrl(node.path("images").path("small").asText());
             pkmnCard.setImageUrlHiRes(node.path("images").path("large").asText());
-            pkmnCard.setSupertype(node.path("supertype").asText());
+            if (node.path("subtypes").isArray()) {
+            	pkmnCard.setSupertype(node.path("supertype").asText());
+            }
+           
             if (node.path("subtypes").isArray()) {
                 pkmnCard.setSubtype(node.path("subtypes").get(0).asText());
             }

@@ -54,9 +54,6 @@ public class SearchController {
 					name=name+"*";
 //				}
 				List<Card> listCard = searchService.getPokemon(name, setSearch);
-				for(Card card: listCard) {
-					System.out.println(card.toString());
-				}
 				model.addAttribute("listCard",listCard);
 				model.addAttribute("name",name);
 				
@@ -92,16 +89,12 @@ public class SearchController {
 	
 	@GetMapping("/addCard")
 	public String addCard(String nameDeck, String nameCard, Integer numberOfCards, 
-			String subtype, String evolvesFrom, String artist, String hp, 
+			String subtype, String supertype, String evolvesFrom, String artist, String hp, 
 			String series, String setName, Model model){		
-		System.out.println("card before save, input data "+nameCard+" | SUBTYPE: "+subtype+", evolves from: "+evolvesFrom
-		+" HP="+hp+ " Artist "+artist+ " " +setName+"#"+series);
-		System.out.println("TESTINGSUBTYPES IN ADD: "+subtype);
 		Deck deck = deckService.addCardToDeck(nameDeck, nameCard, numberOfCards);
-		Card card = cardService.createCard(nameCard,subtype,evolvesFrom,artist, hp, series,setName);
+		Card card = cardService.createCard(nameCard,subtype,supertype,evolvesFrom,artist, hp, series,setName);
 		System.out.println("card after save "+card.getImageLarge()+" | SUBTYPE: "+card.getSubtype()+", evolves from: "+card.getEvolvesFrom()
-			+" HP="+card.getHp()+ " Artist "+card.getArtist()+ " " +card.getSetName()+"#"+card.getSeries()
-				);
+			+" HP="+card.getHp()+ " Artist "+card.getArtist()+ " " +card.getSetName()+"#"+card.getSeries());
 		
 		model.addAttribute("deck",deck);
 		String message = "The card has been added to the deck"; 
