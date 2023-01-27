@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.pocketMonsterCollector.entity.Card;
 import com.example.pocketMonsterCollector.entity.Deck;
 import com.example.pocketMonsterCollector.entity.SetCards;
+import com.example.pocketMonsterCollector.service.CardService;
 import com.example.pocketMonsterCollector.service.DeckService;
 import com.example.pocketMonsterCollector.service.SearchService;
 import com.example.pocketMonsterCollector.service.ServiceUtilsMisc;
@@ -31,17 +32,19 @@ public class SearchController {
 	DeckService deckService;
 	@Autowired
 	SetService setService;
+	@Autowired
+	CardService cardService;
 	
 	//testing purpose
-	@GetMapping("/searchCardsJSON")
-	public ResponseEntity<?> getCardsJSON(@RequestParam(value = "name") String name, Model model){
-		try {
-			return new ResponseEntity<>(searchService.getPokemon(name,"ALL_SETS"), HttpStatus.OK);
-		}
-		catch(IOException ioe){
-			return new ResponseEntity<>(ioe.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-	}
+//	@GetMapping("/searchCardsJSON")
+//	public ResponseEntity<?> getCardsJSON(@RequestParam(value = "name") String name, Model model){
+//		try {
+//			return new ResponseEntity<>(searchService.getPokemon(name,"ALL_SETS"), HttpStatus.OK);
+//		}
+//		catch(IOException ioe){
+//			return new ResponseEntity<>(ioe.getMessage(), HttpStatus.BAD_REQUEST);
+//		}
+//	}
 	
 	@GetMapping("/searchCards")
 	public String getCards(String name, Model model, String setSearch){
@@ -88,8 +91,15 @@ public class SearchController {
 	}
 	
 	@GetMapping("/addCard")
-	public String addCard( String nameDeck, String nameCard, Integer numberOfCards, Model model){		
+	public String addCard( String nameDeck, String nameCard, Integer numberOfCards, 
+			String subtypes, String evolvesFrom, String artist, String hp, 
+			String series, String setName, Model model){		
 		Deck deck = deckService.addCardToDeck(nameDeck, nameCard, numberOfCards);
+		Card card = cardService.createCard(nameCard,subtypes,evolvesFrom,artist, hp, series,setName);
+		System.out.println("card after save "+card.getImageLarge()+" | SUBTYPE: "+card.getSubtype()+", evolves from: "+card.getEvolvesFrom()
+			+" HP="+card.getHp()+ " Artist "+card.getArtist()+ " " +card.getSetName()+"#"+card.getSeries()
+				);
+		
 		model.addAttribute("deck",deck);
 		String message = "The card has been added to the deck"; 
 		model.addAttribute("message",message);
@@ -97,7 +107,7 @@ public class SearchController {
 		model.addAttribute("count",countCards);
 		return "deck_builder"; //	src/main/resources/templates/
 	}
-	
+
 	@GetMapping("/deleteCard")
 	public String deleteCard(String name, String nameCard, String creator, Model model) {
 		Deck deck = deckService.getDeck(name);
@@ -170,15 +180,15 @@ public class SearchController {
 	}
 	
 	//testing purpose
-	@GetMapping("/searchSetsJSON")
-	public ResponseEntity<?> getSetsJSON(Model model){
-		try {
-			return new ResponseEntity<>(setService.getSets(), HttpStatus.OK);
-		}
-		catch(IOException ioe){
-			return new ResponseEntity<>(ioe.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-	}
+//	@GetMapping("/searchSetsJSON")
+//	public ResponseEntity<?> getSetsJSON(Model model){
+//		try {
+//			return new ResponseEntity<>(setService.getSets(), HttpStatus.OK);
+//		}
+//		catch(IOException ioe){
+//			return new ResponseEntity<>(ioe.getMessage(), HttpStatus.BAD_REQUEST);
+//		}
+//	}
 	
 //	@GetMapping("/searchSets")
 //	public String getSets getSets(Model model) {
