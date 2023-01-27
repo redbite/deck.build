@@ -81,7 +81,8 @@ public class SearchService {
 //    	System.out.println(" 	images large "+node.path("images").path("large").asText());
 //    	System.out.println(" flavorText: "+node.path("flavorText").asText());
 //    	System.out.println(" artist "+node.path("artist").asText());
-
+    	
+    	System.out.println("TESTINGSUBTYPES: "+node.path("subtypes").get(0).asText());
         Card pkmnCard = new Card();
             pkmnCard.setId(node.path("id").asText());
             pkmnCard.setName(node.path("name").asText());
@@ -89,7 +90,9 @@ public class SearchService {
             pkmnCard.setImageUrl(node.path("images").path("small").asText());
             pkmnCard.setImageUrlHiRes(node.path("images").path("large").asText());
             pkmnCard.setSupertype(node.path("supertype").asText());
-            pkmnCard.setSubtype(node.path("subtype").asText());
+            if (node.path("subtypes").isArray()) {
+                pkmnCard.setSubtype(node.path("subtypes").get(0).asText());
+            }
             pkmnCard.setEvolvesFrom(node.path("evolvesFrom").asText());
             pkmnCard.setHp(node.path("hp").asText());
             pkmnCard.setNumber(node.path("number").asText());
