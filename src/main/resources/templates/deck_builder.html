@@ -203,8 +203,13 @@
 		margin-bottom:30px;
 	}
 	.deck-deckBox{
-		height:50px;
+		height:80px;
 		padding-right:10px;
+	}
+	.deck-deckLeadImage{
+		height:60px;
+		margin-left:-40px;
+		margin-right:15px;
 	}
 	.deck-name{
 		font-size:20px;
@@ -308,6 +313,7 @@
 		<div class="deck-intro-container">
 			<div>
 				<img class="deck-deckBox" th:src="${deck.deckBox}"/>
+				<img class="deck-deckLeadImage" th:src="${deck.DeckLeadImage}"/>
 			</div>
 			<div class="deck-info">
 				<span class="deck-creator" th:text="${deck.creator}"></span>

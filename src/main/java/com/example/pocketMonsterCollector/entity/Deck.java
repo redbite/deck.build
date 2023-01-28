@@ -27,6 +27,16 @@ public class Deck {
 	private String creator; //username
 	private String deckBox;
 	private String notes;
+	
+	private String deckLeadImage;
+
+	public String getDeckLeadImage() {
+		return deckLeadImage;
+	}
+
+	public void setDeckLeadImage(String deckLeadImage) {
+		this.deckLeadImage = deckLeadImage;
+	}
 
 	public Deck(int idDeck, String name, HashMap<Card, Integer> cards, String creator, String deckBox, String notes) {
 		this.idDeck = idDeck;

@@ -79,13 +79,26 @@ public class SearchController {
 	public String loadHome(Model model) {
 		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
 		Collections.reverse(decks);
-		model.addAttribute("decks", decks);
-		try {
-			ArrayList<SetCards> sets = new ArrayList<>(setService.getSets());
-			model.addAttribute("sets",sets);
-		} catch (IOException e) {
-			e.printStackTrace();
+		
+		//adding deck leader image
+		for(Deck deck: decks) {
+			if(deck.getCards().isEmpty()) {
+				deck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+			}else {
+				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+			}
 		}
+		
+		model.addAttribute("decks", decks);
+		
+				
+//		try {
+//			ArrayList<SetCards> sets = new ArrayList<>(setService.getSets());
+//			model.addAttribute("sets",sets);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		return "home";
 	}
 	
@@ -99,8 +112,14 @@ public class SearchController {
 			+" HP="+card.getHp()+ " Artist "+card.getArtist());
 		
 		model.addAttribute("deck",deck);
-		
 		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+		//setting deck lead image
+		if(deck.getCards().isEmpty()) {
+			deck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+		}else {
+			deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+		}
+		
 		model.addAttribute("sortDeckHP",sortDeckHP);
 		String message = "The card has been added to the deck"; 
 		model.addAttribute("message",message);
@@ -124,6 +143,11 @@ public class SearchController {
 		}
 		model.addAttribute("deck", deck);
 		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+		if(deck.getCards().isEmpty()) {
+			deck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+		}else {
+			deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+		}
 		model.addAttribute("sortDeckHP",sortDeckHP);
 		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
 		model.addAttribute("count",countCards);
@@ -132,8 +156,9 @@ public class SearchController {
 	
 	@GetMapping("/createDeck")
 	public String createDeck(String name, String creator, String deckBox, Model model, RedirectAttributes redirAttrs) {
-		Deck deck = deckService.createDeck(name, creator, deckBox);
-		model.addAttribute("deck",deck);
+		Deck newDeck = deckService.createDeck(name, creator, deckBox);
+		newDeck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+		model.addAttribute("deck",newDeck);
 		
 		String message = "The deck "+name+" was created by the user "+creator; 
 		redirAttrs.addFlashAttribute("message", message);
@@ -141,14 +166,25 @@ public class SearchController {
 		
 		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
 		Collections.reverse(decks);
+		
+		//adding deck leader image
+		for(Deck deck: decks) {
+			if(deck.getCards().isEmpty()) {
+				deck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+			}else {
+				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+			}
+		}
+		
 		model.addAttribute("decks", decks);
 		
-		try {
-			ArrayList<SetCards> sets = new ArrayList<>(setService.getSets());
-			model.addAttribute("sets",sets);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			ArrayList<SetCards> sets = new ArrayList<>(setService.getSets());
+//			model.addAttribute("sets",sets);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		
 		return "home";
 	}   
@@ -160,6 +196,17 @@ public class SearchController {
 		
 		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
 		Collections.reverse(decks);
+		
+		//adding deck leader image
+		for(Deck deck: decks) {
+			if(deck.getCards().isEmpty()) {
+				deck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+			}else {
+				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+			}
+		}
+				
 		model.addAttribute("decks", decks);
 		
 		try {
@@ -183,6 +230,12 @@ public class SearchController {
 //		model.addAttribute("sortedCards",sortedCards);
 
 		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+		//setting deck lead image
+		if(deck.getCards().isEmpty()) {
+			deck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+		}else {
+			deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+		}
 		model.addAttribute("sortDeckHP",sortDeckHP);
 		
 		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
