@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.pocketMonsterCollector.entity.Card;
@@ -62,13 +63,17 @@ public class SearchService {
         String pokejson = callApi(url).getBody();
 //        System.out.println(pokejson);
         pokemonResultsList(pokejson,list);
+        
+        for(Card card : list) {
+        	System.out.println("card:"+card.getName()+" hp:"+card.getHp()+" -> int "+card.getHpInt());
+        }
         return list;
     }
 	
 	private void pokemonResultsList(String pokejson, List<Card> list) throws IOException {
         JsonNode response = mapper.readTree(pokejson);
         JsonNode pokemonCards = response.path("data");
-//        System.out.println(response.path("data"));        
+        System.out.println(response.path("data"));        
 		
         for(JsonNode node : pokemonCards){
             Card pkmnCard = createPokeCard(node);
@@ -95,8 +100,9 @@ public class SearchService {
                 pkmnCard.setSubtype(node.path("subtypes").get(0).asText());
             }
             pkmnCard.setEvolvesFrom(node.path("evolvesFrom").asText());
-            if (node.path("hp").isArray()) {
+            if (!StringUtils.isEmpty(node.path("hp").asText())) {
             	pkmnCard.setHp(node.path("hp").asText());
+            	pkmnCard.setHpInt(pkmnCard.getHp());
             }
             pkmnCard.setNumber(node.path("number").asText());
             pkmnCard.setArtist(node.path("artist").asText());

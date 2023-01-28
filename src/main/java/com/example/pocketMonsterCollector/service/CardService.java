@@ -30,6 +30,7 @@ public class CardService {
 			card.setEvolvesFrom(evolvesFrom);
 			card.setArtist(artist);
 			card.setHp(hp);
+			card.setHpInt(hp);
 			card.setSeries(series);
 			card.setSetName(setName);
 			cardRepository.save(card);

@@ -155,12 +155,6 @@ public class Card{
 
     public void setHp(String hp) {
         this.hp = hp;
-        try {
-            this.hpInt = Integer.parseInt(hp);
-        }catch(Exception e) {
-        	System.out.println("Error parsing string hp to int - setting 0");
-        	hpInt=0;
-        }
     }
 
     public String getNumber() {
@@ -247,8 +241,13 @@ public class Card{
 		return hpInt;
 	}
 
-	public void setHpInt(Integer hpInt) {
-		this.hpInt = hpInt;
+	public void setHpInt(String hp) {
+		try {
+            this.hpInt = Integer.parseInt(hp);
+        }catch(Exception e) {
+        	System.out.println("Error parsing string hp ["+hp+"] to int - setting 0 "+e);
+        	hpInt=0;
+        }
 	}    
 	
 }

@@ -99,6 +99,9 @@ public class SearchController {
 			+" HP="+card.getHp()+ " Artist "+card.getArtist());
 		
 		model.addAttribute("deck",deck);
+		
+		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+		model.addAttribute("sortDeckHP",sortDeckHP);
 		String message = "The card has been added to the deck"; 
 		model.addAttribute("message",message);
 		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
