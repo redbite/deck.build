@@ -123,6 +123,8 @@ public class SearchController {
 			}
 		}
 		model.addAttribute("deck", deck);
+		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+		model.addAttribute("sortDeckHP",sortDeckHP);
 		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
 		model.addAttribute("count",countCards);
 		return "deck_builder";
