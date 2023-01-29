@@ -1,4 +1,4 @@
-package com.example.pocketMonsterCollector.controller;
+package deck.build.controller;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.pocketMonsterCollector.entity.Post;
-import com.example.pocketMonsterCollector.entity.User;
-import com.example.pocketMonsterCollector.repository.PostRepository;
-import com.example.pocketMonsterCollector.repository.UserRepository;
+import deck.build.entity.Post;
+import deck.build.entity.User;
+import deck.build.repository.PostRepository;
+import deck.build.repository.UserRepository;
 
 @Controller
 public class LoginAppController {

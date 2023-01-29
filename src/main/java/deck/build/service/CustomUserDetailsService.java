@@ -1,13 +1,13 @@
-package com.example.pocketMonsterCollector.service;
+package deck.build.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.example.pocketMonsterCollector.entity.CustomUserDetails;
-import com.example.pocketMonsterCollector.entity.User;
-import com.example.pocketMonsterCollector.repository.UserRepository;
+import deck.build.entity.CustomUserDetails;
+import deck.build.entity.User;
+import deck.build.repository.UserRepository;
 
 public class CustomUserDetailsService implements UserDetailsService{
 	@Autowired

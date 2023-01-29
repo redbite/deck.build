@@ -1,4 +1,4 @@
-package com.example.pocketMonsterCollector.service;
+package deck.build.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import com.example.pocketMonsterCollector.entity.Card;
-import com.example.pocketMonsterCollector.entity.CardCompositeX;
-import com.example.pocketMonsterCollector.entity.Deck;
-import com.example.pocketMonsterCollector.repository.DeckRepository;
+import deck.build.entity.Card;
+import deck.build.entity.CardCompositeX;
+import deck.build.entity.Deck;
+import deck.build.repository.DeckRepository;
 
 @Service
 public class DeckService {

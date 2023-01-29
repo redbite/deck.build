@@ -1,4 +1,4 @@
-package com.example.pocketMonsterCollector.entity;
+package deck.build.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

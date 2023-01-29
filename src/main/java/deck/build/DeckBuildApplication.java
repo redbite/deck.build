@@ -1,13 +1,13 @@
-package com.example.pocketMonsterCollector;
+package deck.build;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PocketMonsterCollectionApplication {
+public class DeckBuildApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PocketMonsterCollectionApplication.class, args);
+		SpringApplication.run(DeckBuildApplication.class, args);
 	}
 
 }

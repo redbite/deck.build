@@ -1,4 +1,4 @@
-package com.example.pocketMonsterCollector.controller;
+package deck.build.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.pocketMonsterCollector.entity.Card;
-import com.example.pocketMonsterCollector.entity.CardCompositeX;
-import com.example.pocketMonsterCollector.entity.Deck;
-import com.example.pocketMonsterCollector.entity.SetCards;
-import com.example.pocketMonsterCollector.service.CardService;
-import com.example.pocketMonsterCollector.service.DeckService;
-import com.example.pocketMonsterCollector.service.SearchService;
-import com.example.pocketMonsterCollector.service.ServiceUtilsMisc;
-import com.example.pocketMonsterCollector.service.SetService;
+import deck.build.entity.Card;
+import deck.build.entity.CardCompositeX;
+import deck.build.entity.Deck;
+import deck.build.entity.SetCards;
+import deck.build.service.CardService;
+import deck.build.service.DeckService;
+import deck.build.service.SearchService;
+import deck.build.service.ServiceUtilsMisc;
+import deck.build.service.SetService;
 
 @Controller
 public class SearchController {

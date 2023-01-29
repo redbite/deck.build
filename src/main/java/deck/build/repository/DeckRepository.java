@@ -1,4 +1,4 @@
-package com.example.pocketMonsterCollector.repository;
+package deck.build.repository;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.example.pocketMonsterCollector.entity.Deck;
+import deck.build.entity.Deck;
 
 @Repository
 public interface DeckRepository extends JpaRepository<Deck, Long>{

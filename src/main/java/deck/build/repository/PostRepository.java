@@ -1,11 +1,11 @@
-package com.example.pocketMonsterCollector.repository;
+package deck.build.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.example.pocketMonsterCollector.entity.Post;
-import com.example.pocketMonsterCollector.entity.User;
+import deck.build.entity.Post;
+import deck.build.entity.User;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long>{

@@ -1,4 +1,4 @@
-package com.example.loginApp;
+package deck.build.tests;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,8 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
-import com.example.pocketMonsterCollector.entity.User;
-import com.example.pocketMonsterCollector.repository.UserRepository;
+import deck.build.entity.User;
+import deck.build.repository.UserRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace=Replace.NONE)

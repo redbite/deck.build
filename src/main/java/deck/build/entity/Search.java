@@ -1,4 +1,4 @@
-package com.example.pocketMonsterCollector.entity;
+package deck.build.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
