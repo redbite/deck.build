@@ -33,14 +33,16 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		background-color:black;	
+		/*background-color:black;	*/
+ 		background-image: url("https://i.imgur.com/5GWoh8p.png");
+ 	    background-size: cover;	
 		margin:0px;
 		padding:10px 0px 10px 0px;
 	}
 	
 	.navbar-logo-img{
-		height:100px;
-		margin-left:20px;
+		height:80px;
+		margin-left:35px;
 	}
 	
 	.menu-welcome{
@@ -48,11 +50,9 @@
 		display:flex;
 		flex-direction:row;
 		justify-content:center;
-		
-		margin:28vw;
-		margin-top:30px;
-		margin-bottom:30px;
-
+		margin:5vw;
+		margin-top:20px;
+		margin-bottom:20px;
 	}
 	
 	.menu-welcome-pic{
@@ -60,13 +60,13 @@
 		justify-content:center;
 	}
 	.menu-welcome-img{
-		height:150px;
-		padding-right:20px;
+		height:250px;
+		padding-right:0px;
 	}
-	.menu-welcome-text{
-		border-left: 1px solid yellow;
-		padding-left:50px;
-		text-align:left;
+	.menu-welcome-text {
+	    /*border-left: 1px solid green;*/
+	    padding-left: 15px;
+	    text-align: left;
 	}
 	
 	a{
@@ -87,22 +87,27 @@
 		font-size:22px;
 		text-align: left;
 	}
-
+	.home-section-submit{
+		display:flex;
+		flex-direction:row;
+		justify-content: end;
+		margin-top:5px;
+	}
 	.home-section-container{
 		display:flex;
 		flex-direction:row;
 		justify-content: center;	
 	}
 	
-	.home-actions{
-		display:flex;
-		flex-direction:row;
-		justify-content:center;
-		margin:12vw;
-		margin-top:50px;
-		margin-bottom:50px;
+	.home-actions {
+	    display: flex;
+	    flex-direction: row;
+	    justify-content: center;
+	    margin: 0.5vw;
+	    margin-top: 50px;
+	    margin-bottom: 50px;
 	}
-	
+		
 	.cards-container{
 	    display: flex;
 	    flex-direction: row;
@@ -246,23 +251,29 @@
 	input,select{
 		border-radius: 5px;
 	}
+	.input-name{
+		width:120px;
+	}
+	.input-name-deck{
+		width:80px;
+	}
 </style>
 </head>
 <body>
 	<div class="div-center">
 		<div class="menu-pages">
 			<div class="navbar-logo">
-				<img class="navbar-logo-img" src="https://i.imgur.com/0HlmE6G.png"/>
+				<a th:href="@{/home}"><img class="navbar-logo-img" src="https://i.imgur.com/GaMfXSu.png"/></a>
 			</div>
 			<!-- redirects to loginAppController - @XMapping ("/...") -->
-			<p><a th:href="@{/list_users}">USERS</a>
+			<!--  <p><a th:href="@{/list_users}">USERS</a>
 				<a th:href="@{/home}">HOME</a>
 				<a th:href="@{/register}">SIGN-UP</a>
-				<a th:href="@{/login}">LOGIN</a></p>
+				<a th:href="@{/login}">LOGIN</a></p> -->
 		</div>
 		<div class="menu-welcome">
 			<div class="menu-welcome-pic">
-				<img class="menu-welcome-img" src="https://i.imgur.com/S2ZybmF.png"/>
+				<img class="menu-welcome-img" src="https://i.imgur.com/CxfSygo.jpg"/>
 			</div>
 			<div class="menu-welcome-text">
 				<form  th:action="@{/logout}" method="post">
@@ -271,84 +282,91 @@
 						Welcome <b>[[${#request.userPrincipal.principal.email}]]</b>!<input type="submit" value="LogOut" style="background-color:black; color:grey; font-weight:bold; margin-left:20px;" />
 					</p>
 				</form>
-				<p><b>deck<span style="color:red">.</span>build</b> is where you can build your favourite TCG decks!</p>
-				<p>Start by creating a deck, then searching for your favourite cards and adding them to your custom decks.</p>
+				<!-- <p><b>deck<span style="color:red">.</span>build</b> lets you build custom decks with your favourite TCG cards.</p> -->
+				<p>Start by creating a deck choosing the name and the deckBox color, then you can search for your favourite cards, filtering by name and sets.</p>
+				<p>Any card you choose can be added in a selectable number to a deck you want to. The decks can contain a number of cards between 40 and 60.</p>
+				<div>
+					<div class="home-actions">
+						<form th:action="@{/searchCards}" method="get"
+							style="max-width: 600px; margin: 0 auto;">
+							<div class="home-section-container">
+								<div class="home-section-image">
+									<img src="https://i.imgur.com/ndR9kmy.png" style="height:75px;"/> 
+								</div>
+								<div class="home-section">
+									<div class="home-section-title">
+										<span class="home-title-section">SEARCH CARDS </span>
+									</div>
+									<div class="home-section-form">
+										<input type="text" th:name="name" style="background-color:black; color:white; font-weight:bold;"/> 
+										<label for="setSearch">Set:</label>	
+						                    <select name="setSearch" id="setSearch" style="background-color:black; color:white; font-weight:bold;">
+										        <option value="ALL_SETS"></option>
+												<!--  
+												<option th:each="set : ${sets}" th:text="${set.name}" th:value="${set.path}"/>					
+												-->				      
+												<option value="base">Base</option>
+												<option value="gym">Gym</option>
+												<option value="neo">Neo</option>
+												<option value="ex">Ex</option>
+												<option value="dp">D & P</option>
+												<option value="pop">POP</option>
+												<option value="platinum">Platinum</option>
+												<option value="hgss">HG & SS</option>
+												<option value="bw">B & W</option>
+												<option value="xy">X & Y</option>
+												<option value="sm">S & M</option>
+												<option value="swsh">SW & SH</option>
+											</select>
+										<!-- <input type="checkbox" name="partialcheckbox" style="background-color:black; color:white;"/> -->
+										<div class="home-section-submit">
+											<input type="submit" value="SEARCH" style="background-color:black; color:green; font-weight:bold;"/>	
+										</div>						
+									</div>
+								</div>
+							</div>
+						</form>
+						
+						<form th:action="@{/createDeck}" method="get"
+							style="max-width: 1000px; margin: 0 auto;">
+							<div class="home-section-container">
+								<div class="home-section-image">
+									<img src="https://i.imgur.com/4OMBzPZ.png" style="height:75px;"/>
+								</div>
+								<div class="home-section">
+									<div class="home-section-title">
+										<span>CREATE DECK </span>				
+									</div>
+									<div class="home-section-form">
+										<input type="text" th:name="name" placeholder="new deck name" style="background-color:black; color:white"/> 
+										<input type="text" th:name="creator" th:value="${#request.userPrincipal.principal.email}" style="display:none;"/> 
+										<label for="color">deckBox: </label>	
+								                    <select name="deckBox" id="deckBox" style="background-color:black; color:white; font-weight:bold;">
+												        <option value="https://i.imgur.com/AOen5V2.png">blue</option>
+												        <option value="https://i.imgur.com/e2dLg0Q.png">green</option>
+												        <option value="https://i.imgur.com/6waPMgR.png">green water</option>
+												        <option value="https://i.imgur.com/8Kd4iYC.png">orange</option>
+												        <option value="https://i.imgur.com/JvoBnT2.png">red</option>  
+												        <option value="https://i.imgur.com/itOCkMM.png">dark yellow</option>
+												        <option value="https://i.imgur.com/YPHXIcj.png">yellow</option>
+												        <option value="https://i.imgur.com/itOCkMM.png">brown</option>
+												        <option value="https://i.imgur.com/GmCxSqD.png">white</option>
+												        <option value="https://i.imgur.com/eAERjc1.png">pink</option>
+												        <option value="https://i.imgur.com/8kBEL2X.png">rainbow</option>
+												      </select>
+										<div class="home-section-submit">
+											<input class="input-name-deck" type="submit" value="CREATE" style="background-color:black; color:green; font-weight:bold;"/>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 		<br>
 		
-		<div class="home-actions">
-			<form th:action="@{/searchCards}" method="get"
-				style="max-width: 600px; margin: 0 auto;">
-				<div class="home-section-container">
-					<div class="home-section-image">
-						<img src="https://i.imgur.com/d9gpjKn.png" style="width:75px;"/> 
-					</div>
-					<div class="home-section">
-						<div class="home-section-title">
-							<span class="home-title-section">SEARCH CARDS </span>
-						</div>
-						<div class="home-section-form">
-							<input type="text" th:name="name" style="background-color:black; color:white; font-weight:bold;"/> 
-							<label for="setSearch">Set:</label>	
-			                    <select name="setSearch" id="setSearch" style="background-color:black; color:white; font-weight:bold;">
-							        <option value="ALL_SETS"></option>
-									<!--  
-									<option th:each="set : ${sets}" th:text="${set.name}" th:value="${set.path}"/>					
-									-->				      
-									<option value="base">Base</option>
-									<option value="gym">Gym</option>
-									<option value="neo">Neo</option>
-									<option value="ex">Ex</option>
-									<option value="dp">D & P</option>
-									<option value="pop">POP</option>
-									<option value="platinum">Platinum</option>
-									<option value="hgss">HG & SS</option>
-									<option value="bw">B & W</option>
-									<option value="xy">X & Y</option>
-									<option value="sm">S & M</option>
-									<option value="swsh">SW & SH</option>
-								</select>
-							<!-- <input type="checkbox" name="partialcheckbox" style="background-color:black; color:white;"/> -->
-							<input type="submit" value="SEARCH CARDS" style="background-color:black; color:green; font-weight:bold;"/>	
-						</div>
-					</div>
-				</div>
-			</form>
-			
-			<form th:action="@{/createDeck}" method="get"
-				style="max-width: 1000px; margin: 0 auto;">
-				<div class="home-section-container">
-					<div class="home-section-image">
-						<img src="https://i.imgur.com/nIwJfXB.png" style="width:60px;"/>
-					</div>
-					<div class="home-section">
-						<div class="home-section-title">
-							<span>CREATE DECK </span>				
-						</div>
-						<div class="home-section-form">
-							<input type="text" th:name="name" placeholder="new deck name" style="background-color:black; color:white"/> 
-							<input type="text" th:name="creator" th:value="${#request.userPrincipal.principal.email}" style="display:none;"/> 
-							<label for="color">deckBox: </label>	
-					                    <select name="deckBox" id="deckBox" style="background-color:black; color:white; font-weight:bold;">
-									        <option value="https://i.imgur.com/AOen5V2.png">blue</option>
-									        <option value="https://i.imgur.com/e2dLg0Q.png">green</option>
-									        <option value="https://i.imgur.com/6waPMgR.png">green water</option>
-									        <option value="https://i.imgur.com/8Kd4iYC.png">orange</option>
-									        <option value="https://i.imgur.com/JvoBnT2.png">red</option>  
-									        <option value="https://i.imgur.com/itOCkMM.png">dark yellow</option>
-									        <option value="https://i.imgur.com/YPHXIcj.png">yellow</option>
-									        <option value="https://i.imgur.com/itOCkMM.png">brown</option>
-									        <option value="https://i.imgur.com/GmCxSqD.png">white</option>
-									        <option value="https://i.imgur.com/eAERjc1.png">pink</option>
-									        <option value="https://i.imgur.com/8kBEL2X.png">rainbow</option>
-									      </select>
-							<input type="submit" value="CREATE DECK" style="background-color:black; color:green; font-weight:bold;"/>	
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
 				
 	   <div class="alert alert-success" role="alert"
                              th:if="${message}">

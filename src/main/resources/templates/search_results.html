@@ -32,14 +32,16 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		background-color:black;	
+		/*background-color:black;	*/
+ 		background-image: url("https://i.imgur.com/5GWoh8p.png");
+ 	    background-size: cover;	
 		margin:0px;
 		padding:10px 0px 10px 0px;
 	}
 	
 	.navbar-logo-img{
-		height:100px;
-		margin-left:20px;
+		height:80px;
+		margin-left:35px;
 	}
 	
 	.menu-welcome{
@@ -86,7 +88,12 @@
 		font-size:22px;
 		text-align: left;
 	}
-
+	.home-section-submit{
+		display:flex;
+		flex-direction:row;
+		justify-content: end;
+		margin-top:5px;
+	}
 	.home-section-container{
 		display:flex;
 		flex-direction:row;
@@ -208,19 +215,22 @@
 	input,select{
 		border-radius: 5px;
 	}
+	.input-name{
+		width:140px;
+	}
 </style>
 </head>
 <body>
 	<div class="container text-center">
 			<div class="menu-pages">
 				<div class="navbar-logo">
-					<img class="navbar-logo-img" src="https://i.imgur.com/0HlmE6G.png"/>
+					<a th:href="@{/home}"><img class="navbar-logo-img" src="https://i.imgur.com/GaMfXSu.png"/></a>
 				</div>
 				<!-- redirects to loginAppController - @XMapping ("/...") -->
-				<p><a th:href="@{/list_users}">USERS</a>
+				<!--  <p><a th:href="@{/list_users}">USERS</a>
 					<a th:href="@{/home}">HOME</a>
 					<a th:href="@{/register}">SIGN-UP</a>
-					<a th:href="@{/login}">LOGIN</a></p>
+					<a th:href="@{/login}">LOGIN</a></p> -->
 			</div>	
 			<!-- 
 			<div>
@@ -233,7 +243,7 @@
 				style="max-width: 600px; margin: 0 auto;">
 				<div class="home-section-container">
 					<div class="home-section-image">
-						<img src="https://i.imgur.com/d9gpjKn.png" style="width:50px;"/> 
+						<img src="https://i.imgur.com/ndR9kmy.png" style="height:75px;"/> 
 					</div>
 					<div class="home-section">
 						<div class="home-section-title">
@@ -261,7 +271,9 @@
 									<option value="sm">S & M</option>
 									<option value="swsh">SW & SH</option>
 								</select>
-							<input type="submit" value="SEARCH CARDS" style="background-color:black; color:green; font-weight:bold;"/>	
+							<div class="home-section-submit">
+								<input class="input-name" type="submit" value="SEARCH" style="background-color:black; color:green; font-weight:bold;"/>	
+							</div>						
 						</div>
 					</div>
 				</div>

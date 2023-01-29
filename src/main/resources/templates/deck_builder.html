@@ -34,14 +34,16 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		background-color:black;	
+		/*background-color:black;	*/
+ 		background-image: url("https://i.imgur.com/5GWoh8p.png");
+ 	    background-size: cover;	
 		margin:0px;
 		padding:10px 0px 10px 0px;
 	}
 	
 	.navbar-logo-img{
-		height:100px;
-		margin-left:20px;
+		height:80px;
+		margin-left:35px;
 	}
 	
 	.menu-welcome{
@@ -88,7 +90,12 @@
 		font-size:22px;
 		text-align: left;
 	}
-
+	.home-section-submit{
+		display:flex;
+		flex-direction:row;
+		justify-content: end;
+		margin-top:5px;
+	}
 	.home-section-container{
 		display:flex;
 		flex-direction:row;
@@ -201,9 +208,8 @@
 		display:flex;
 		flex-direction:row;
 		justify-content:center;
-		margin:20vw;
-		margin-top:20px;
 		margin-bottom:30px;
+		margin-left:10px;
 	}
 	.deck-deckBox{
 		height:80px;
@@ -223,6 +229,7 @@
 		flex-direction:column;
 		justify-content:center;
 		text-align:left;
+		font-size:13px;
 	}
 	.post-delete{
 		margin-left:-80px;
@@ -237,8 +244,9 @@
 	.deck-count{
 		display:flex;
 		flex-direction:column;
-		justify-content:center;
-		margin-left:50px;
+		justify-content:end;
+		margin-left:10px;
+		margin-bottom:5px;
 	}
 	.deck-count-number-green,.deck-count-number-red{
 		font-weight:bold;
@@ -261,33 +269,65 @@
 	input,select{
 		border-radius: 5px;
 	}
+	.input-name{
+		width:140px;
+	}
+	.containers-container {
+	    display: flex;
+	    flex-direction: row;
+	    justify-content: space-around;
+	    margin: 18vw;
+	    margin-top: 10px;
+	    margin-bottom: 5px;
+	}
 </style>
 </head>
 <body>
 	<div class="container text-center">
-				<div class="menu-pages">
+		<div class="menu-pages">
 			<div class="navbar-logo">
-				<img class="navbar-logo-img" src="https://i.imgur.com/0HlmE6G.png"/>
+				<a th:href="@{/home}"><img class="navbar-logo-img" src="https://i.imgur.com/GaMfXSu.png"/></a>
 			</div>
 			<!-- redirects to loginAppController - @XMapping ("/...") -->
-			<p><a th:href="@{/list_users}">USERS</a>
+			<!--  <p><a th:href="@{/list_users}">USERS</a>
 				<a th:href="@{/home}">HOME</a>
 				<a th:href="@{/register}">SIGN-UP</a>
-				<a th:href="@{/login}">LOGIN</a></p>
+				<a th:href="@{/login}">LOGIN</a></p> -->
 		</div>
 		<br>
-		<form th:action="@{/searchCards}" method="get"
-				style="max-width: 600px; margin: 0 auto;">
+		<div class="containers-container">
+			<div class="deck-intro-container">
+				<div>
+					<img class="deck-deckBox" th:src="${deck.deckBox}"/>
+					<img class="deck-deckLeadImage" th:src="${deck.DeckLeadImage}"/>
+				</div>
+				<div class="deck-info">
+					<span class="deck-creator" th:text="${deck.creator}"></span>
+					<span class="deck-name" th:text="${deck.name}"></span>
+				</div>
+				<div class="deck-count">
+					<div class="deck-count-container">
+						<!-- OK if 40 .. 60, KO else  -->
+						<div th:if="${count} gt '60' or ${count} lt '40'">
+							<span class="deck-count-number-red" th:text="${count}"></span> <span class="deck-count-text">CARDS</span>
+						</div>
+						<div th:if="${count} le '60' and ${count} ge '40'">
+							<span class="deck-count-number-green" th:text="${count}"></span> <span class="deck-count-text">CARDS</span>
+						</div>				
+					</div>
+				</div>
+			</div>
+			<form th:action="@{/searchCards}" method="get">
 				<div class="home-section-container">
 					<div class="home-section-image">
-						<img src="https://i.imgur.com/d9gpjKn.png" style="width:50px;"/> 
+						<img src="https://i.imgur.com/ndR9kmy.png" style="height:75px;"/> 
 					</div>
 					<div class="home-section">
 						<div class="home-section-title">
 							<span class="home-title-section">SEARCH CARDS </span>
 						</div>
 						<div class="home-section-form">
-							<input type="text" th:name="name" style="background-color:black; color:white; font-weight:bold;"/> 
+							<input class="input-name" type="text" th:name="name" style="background-color:black; color:white; font-weight:bold;"/> 
 							<!--  <input type="checkbox" name="partialcheckbox" style="background-color:black; color:white;"/>	-->	
 							<label for="setSearch">Set:</label>	
 			                    <select name="setSearch" id="setSearch" style="background-color:black; color:white; font-weight:bold;">
@@ -308,32 +348,15 @@
 									<option value="sm">S & M</option>
 									<option value="swsh">SW & SH</option>
 								</select>
-							<input type="submit" value="SEARCH CARDS" style="background-color:black; color:green; font-weight:bold;"/>	
+						</div>
+						<div class="home-section-submit">
+							<input class="input-name" type="submit" value="SEARCH" style="background-color:black; color:green; font-weight:bold;"/>	
 						</div>
 					</div>
 				</div>
 			</form>
-		<div class="deck-intro-container">
-			<div>
-				<img class="deck-deckBox" th:src="${deck.deckBox}"/>
-				<img class="deck-deckLeadImage" th:src="${deck.DeckLeadImage}"/>
-			</div>
-			<div class="deck-info">
-				<span class="deck-creator" th:text="${deck.creator}"></span>
-				<span class="deck-name" th:text="${deck.name}"></span>
-			</div>
-			<div class="deck-count">
-				<div class="deck-count-container">
-					<!-- OK if 40 .. 60, KO else  -->
-					<div th:if="${count} gt '60' or ${count} lt '40'">
-						<span class="deck-count-number-red" th:text="${count}"></span> <span class="deck-count-text">CARDS</span>
-					</div>
-					<div th:if="${count} le '60' and ${count} ge '40'">
-						<span class="deck-count-number-green" th:text="${count}"></span> <span class="deck-count-text">CARDS</span>
-					</div>				
-				</div>
-			</div>
 		</div>
+
 		<br>
 		   <div class="alert alert-success" role="alert"
                              th:if="${message}" style="text-align:center;">

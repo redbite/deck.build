@@ -37,6 +37,9 @@ public class SearchController {
 	@Autowired
 	CardService cardService;
 	
+	
+	String defaultCard = "https://i.imgur.com/nbO7LSF.png";
+	
 	//testing purpose
 //	@GetMapping("/searchCardsJSON")
 //	public ResponseEntity<?> getCardsJSON(@RequestParam(value = "name") String name, Model model){
@@ -83,7 +86,7 @@ public class SearchController {
 		//adding deck leader image
 		for(Deck deck: decks) {
 			if(deck.getCards().isEmpty()) {
-				deck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+				deck.setDeckLeadImage(defaultCard);
 			}else {
 				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
 				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
@@ -115,7 +118,7 @@ public class SearchController {
 		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
 		//setting deck lead image
 		if(deck.getCards().isEmpty()) {
-			deck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+			deck.setDeckLeadImage(defaultCard);
 		}else {
 			deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
 		}
@@ -144,7 +147,7 @@ public class SearchController {
 		model.addAttribute("deck", deck);
 		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
 		if(deck.getCards().isEmpty()) {
-			deck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+			deck.setDeckLeadImage(defaultCard);
 		}else {
 			deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
 		}
@@ -157,7 +160,7 @@ public class SearchController {
 	@GetMapping("/createDeck")
 	public String createDeck(String name, String creator, String deckBox, Model model, RedirectAttributes redirAttrs) {
 		Deck newDeck = deckService.createDeck(name, creator, deckBox);
-		newDeck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+		newDeck.setDeckLeadImage(defaultCard);
 		model.addAttribute("deck",newDeck);
 		
 		String message = "The deck "+name+" was created by the user "+creator; 
@@ -170,7 +173,7 @@ public class SearchController {
 		//adding deck leader image
 		for(Deck deck: decks) {
 			if(deck.getCards().isEmpty()) {
-				deck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+				deck.setDeckLeadImage(defaultCard);
 			}else {
 				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
 				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
@@ -200,7 +203,7 @@ public class SearchController {
 		//adding deck leader image
 		for(Deck deck: decks) {
 			if(deck.getCards().isEmpty()) {
-				deck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+				deck.setDeckLeadImage(defaultCard);
 			}else {
 				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
 				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
@@ -232,7 +235,7 @@ public class SearchController {
 		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
 		//setting deck lead image
 		if(deck.getCards().isEmpty()) {
-			deck.setDeckLeadImage("https://i.imgur.com/Nhk3f6k.png");
+			deck.setDeckLeadImage(defaultCard);
 		}else {
 			deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
 		}
