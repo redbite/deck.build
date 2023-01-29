@@ -15,6 +15,8 @@
 	 margin:0px;
 	 margin-bottom:50px;
 	 color:white;
+	 width:100%;
+	 overflow-x:hidden;
 	}
 	
 	html{
@@ -236,6 +238,7 @@
 		display:flex;
 		flex-direction:row;
 		justify-content:start;
+		margin-top:5px;
 	}
 	.delete-deck-msg{
 		color:yellow;
@@ -361,8 +364,8 @@
 						<img class="deck-deckLeadImage" th:src="${deck.DeckLeadImage}"/>
 					</div>
 					<div class="deck-info">
-						<span class="deck-creator" th:text="${deck.creator}"></span>
 						<span class="deck-name" th:text="${deck.name}"></span>
+						<span class="deck-creator" th:text="${deck.creator}"></span>
 							<div class="deck-info-actions">
 								<form th:action="@{/viewDeck}" method="get">
 									<div>
