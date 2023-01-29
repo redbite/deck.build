@@ -6,6 +6,8 @@ import java.util.Comparator;
 
 import javax.persistence.*;
 
+import org.springframework.util.StringUtils;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "card")
@@ -243,7 +245,20 @@ public class Card{
 
 	public void setHpInt(String hp) {
 		try {
-            this.hpInt = Integer.parseInt(hp);
+			if(StringUtils.isEmpty(hp)) {
+				//trainer or energy card
+				switch(this.supertype) {
+					case "Energy":
+						this.hpInt=0;
+						break;
+					case "":
+						this.hpInt=1;
+				}
+			}else {
+				//Pokemon card
+				this.hpInt = Integer.parseInt(hp);
+			}
+            
         }catch(Exception e) {
         	System.out.println("Error parsing string hp ["+hp+"] to int - setting 0 "+e);
         	hpInt=0;

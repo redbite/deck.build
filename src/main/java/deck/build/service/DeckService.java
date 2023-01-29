@@ -95,7 +95,6 @@ public class DeckService {
 		//ordering cards for HP
 		Collections.sort(cards, Card.compareHp);
 		Collections.reverse(cards);
-		System.out.println("Printing Cards by HP desc");
 		
 //		ArrayList<Card> cardsAux = cards;
 //		
@@ -123,7 +122,12 @@ public class DeckService {
 		return sortedDeck;
 	}
 	
-	
+	/*
+	 * returns an arrayList which contains the card ordered by HP decreasing:
+	 * cards with populated HP value
+	 * cards with HP value 1 (cards which have supertype!= pokemon and energy (trainer cards))
+	 * cards with Hp valye 0 (cards which have supertype== energy (energy cards))
+	 */
 	public ArrayList<Card> sortDeckHP(Deck deck) {
 		HashMap<Integer, CardCompositeX> sortedDeck = new HashMap<>(); //KEY: order		VALUE: data
 		ArrayList<Card> cards = new ArrayList<>();
@@ -135,12 +139,11 @@ public class DeckService {
 		}
 		
 		//find maximum hp
-		Integer maximumHp=findMaxHP(cards);
+//		Integer maximumHp=findMaxHP(cards);
 		
 		//ordering cards for HP
 		Collections.sort(cards, Card.compareHp);
 		Collections.reverse(cards);
-		System.out.println("Printing Cards by HP desc");
 		
 		return cards;
 	}

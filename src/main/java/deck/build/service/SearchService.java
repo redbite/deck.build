@@ -59,22 +59,18 @@ public class SearchService {
         	//filter by set
         	url = "https://api.pokemontcg.io/v2/cards?q=name:"+name+" set.name:"+setSearch;
         }
-        System.out.println("URL: "+url);
 
         String pokejson = callApi(url).getBody();
 //        System.out.println(pokejson);
         pokemonResultsList(pokejson,list);
-        
-        for(Card card : list) {
-        	System.out.println("card:"+card.getName()+" hp:"+card.getHp()+" -> int "+card.getHpInt());
-        }
+
         return list;
     }
 	
 	private void pokemonResultsList(String pokejson, List<Card> list) throws IOException {
         JsonNode response = mapper.readTree(pokejson);
         JsonNode pokemonCards = response.path("data");
-        System.out.println(response.path("data"));        
+//        System.out.println(response.path("data"));        
 		
         for(JsonNode node : pokemonCards){
             Card pkmnCard = createPokeCard(node);
