@@ -5,20 +5,32 @@
 <title>Index</title>
 <!-- <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/> -->
 <link rel="icon" href="https://img.pokemondb.net/sprites/ruby-sapphire/normal/charizard.png">
-<link rel="stylesheet" href="style.css">
+<style>
+	body {
+		 margin:0px;
+		 background-image: url("https://i.imgur.com/En05i0i.jpg");
+		 background-size: cover;	
+  	 }
+  	 .logo{
+	  	 display:flex;
+	  	 flex-direction:row;
+	  	 justify-content:center;
+  	 }
+  	 .logo-img{
+  	 	width:400px; 
+  	 	margin-top:30vh;
+  	 	border: 5px solid rgba(220,220,220,0.0);
+  	  	padding:2px;
+  	 }
+  	 .logo-img:hover{
+  	 	border: 5px solid white;
+		
+  	 }
+</style>
 </head>
 <body>
-	<div class="container text-center">
-		<div>
-			<h1>Deck.build is a website that lets you build your TCG Pokémon Decks! Start by searching your favourite cards and then adding them to your custom decks.</h1>
-		</div>
-		<div>
-			<!-- redirects to loginAppController - @XMapping ("/...") -->
-			<h2><a th:href="@{/list_users}">List of all registered users</a></h2>
-			<h2><a th:href="@{/home}">Home</a></h2>
-			<h2><a th:href="@{/register}">Register</a></h2>
-			<h2><a th:href="@{/login}">Login</a></h2>
-		</div>
+	<div class=logo>
+		<a th:href="@{/home}"><img class="logo-img" src="https://i.imgur.com/7OCI36I.png"></a>
 	</div>
 </body>
 </html>
