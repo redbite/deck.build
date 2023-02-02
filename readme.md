@@ -13,7 +13,7 @@
 The landing page lets the user access the home page by sign-in or login.
 <h2>HOME</h2>
 <p align="center">
-<img src="https://i.imgur.com/JUT3O6x.png" style="width:1000px;">
+<img src="https://i.imgur.com/EbFTnDg.png" style="width:1000px;">
 </p>
 From the home the user has 5 different options:
 <ul>
