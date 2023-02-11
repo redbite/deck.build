@@ -285,11 +285,11 @@
 	    flex-direction: row;
 	    justify-content: center;
 	    z-index: 2;
-	    /*margin-top: -25px;
-	    margin-right: -55px;	*/
+	    margin-top: -25px;
+	    margin-right: -55px;
 	}
 	.card-star{
-		width:10px;
+		width:25px;
 	}
 </style>
 </head>
@@ -396,11 +396,12 @@
 									<img src="https://i.imgur.com/ubMMW1I.png" class="card-star">
 								</div>
 								<div th:unless="${card.imageLarge} == ${deck.deckLeadImage}"> <!-- other cards -->
+									<!--  
 									<img src="https://i.imgur.com/RJA9hNm.png" class="card-star">
-								</div>
-								<div class="home-section-submit">
 									<input type="submit" value="STAR" style="background-color:black; color:orange; font-weight:bold; margin-top:5px;"/>
-                        		</div>
+									-->
+									<input type="image" src="https://i.imgur.com/RJA9hNm.png" class="card-star">
+								</div>
                         	</form>
                         </div>
                         <div class="post-number">

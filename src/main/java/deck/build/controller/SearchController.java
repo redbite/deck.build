@@ -120,7 +120,6 @@ public class SearchController {
 //		System.out.println("card after save "+card.getImageLarge()+" | SUBTYPE: "+card.getSubtype()+", evolves from: "+card.getEvolvesFrom()
 //			+" HP="+card.getHp()+ " Artist "+card.getArtist());
 		
-		model.addAttribute("deck",deck);
 		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
 		//setting deck lead image
 		if(deck.getCards().isEmpty()) {
@@ -128,7 +127,8 @@ public class SearchController {
 		}else {
 			deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
 		}
-		
+		model.addAttribute("deck",deck);
+
 		model.addAttribute("sortDeckHP",sortDeckHP);
 		String message = "The card has been added to the deck"; 
 		model.addAttribute("message",message);
@@ -144,19 +144,22 @@ public class SearchController {
 		for(String card: cardsSet) {
 			if(nameCard.equals(card)) {
 				deck.getCards().remove(card);
+				if(deck.getDeckLeadImage().equals(nameCard)) {
+					deck.setDeckLeadImage("");
+				}
 				deckService.save(deck);
 				String message = "The card selected has been deleted"; 
 				model.addAttribute("message",message);
 				break;
 			}
 		}
-		model.addAttribute("deck", deck);
 		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
 		if(deck.getCards().isEmpty()) {
 			deck.setDeckLeadImage(defaultCard);
 		}else {
 			deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
 		}
+		model.addAttribute("deck", deck);
 		model.addAttribute("sortDeckHP",sortDeckHP);
 		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
 		model.addAttribute("count",countCards);
