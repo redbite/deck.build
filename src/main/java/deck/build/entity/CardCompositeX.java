@@ -6,7 +6,6 @@ public class CardCompositeX {
 	private Integer quantity;
 	private Boolean pkmnType; //true pkmnType, false trainer or energy
 	
-	
 	public CardCompositeX(Card card, Integer quantity, Boolean pkmnType) {
 		this.card = card;
 		this.quantity = quantity;
@@ -45,7 +44,6 @@ public class CardCompositeX {
 
 	public void setPkmnType(Boolean pkmnType) {
 		this.pkmnType = pkmnType;
-	}
-	
+	}	
 	
 }

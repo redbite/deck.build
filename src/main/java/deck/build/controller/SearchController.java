@@ -111,8 +111,8 @@ public class SearchController {
 			String series, String setName, Model model){		
 		Deck deck = deckService.addCardToDeck(nameDeck, nameCard, numberOfCards);
 		Card card = cardService.createCard(nameCard,subtype,supertype,evolvesFrom,artist, hp, series,setName);
-		System.out.println("card after save "+card.getImageLarge()+" | SUBTYPE: "+card.getSubtype()+", evolves from: "+card.getEvolvesFrom()
-			+" HP="+card.getHp()+ " Artist "+card.getArtist());
+//		System.out.println("card after save "+card.getImageLarge()+" | SUBTYPE: "+card.getSubtype()+", evolves from: "+card.getEvolvesFrom()
+//			+" HP="+card.getHp()+ " Artist "+card.getArtist());
 		
 		model.addAttribute("deck",deck);
 		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
@@ -244,6 +244,29 @@ public class SearchController {
 		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
 		model.addAttribute("count",countCards);
 		return "deck_builder";
+	}
+	
+	@GetMapping("/starCard")
+	public String starCard(String name, String nameCard, String creator, Model model) {
+		Deck deck = deckService.getDeck(name);		
+		
+		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+		
+		int indexStarCard = 0;
+		for (String card : deck.getCards().keySet()) {
+			if(card.equals(nameCard)) {
+				indexStarCard=deck.getCards().get(card);
+				break;
+			}
+		}
+		deck.setDeckLeadImage(sortDeckHP.get(indexStarCard).getImageLarge());
+		model.addAttribute("deck",deck);
+
+		model.addAttribute("sortDeckHP",sortDeckHP);
+		
+		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
+		model.addAttribute("count",countCards);
+		return "deck_builder";	
 	}
 	
 	//testing purpose
