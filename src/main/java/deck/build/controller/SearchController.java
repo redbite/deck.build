@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -89,7 +90,12 @@ public class SearchController {
 				deck.setDeckLeadImage(defaultCard);
 			}else {
 				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
-				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+				if(StringUtils.isEmpty(deck.getDeckLeadImage())){
+					//if it is not set any deck leader, show the one with more HP
+					deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+				}else {
+					//show chosen leader
+				}
 			}
 		}
 		
@@ -176,8 +182,12 @@ public class SearchController {
 				deck.setDeckLeadImage(defaultCard);
 			}else {
 				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
-				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
-			}
+				if(StringUtils.isEmpty(deck.getDeckLeadImage())){
+					//if it is not set any deck leader, show the one with more HP
+					deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+				}else {
+					//show chosen leader
+				}			}
 		}
 		
 		model.addAttribute("decks", decks);
@@ -206,8 +216,12 @@ public class SearchController {
 				deck.setDeckLeadImage(defaultCard);
 			}else {
 				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
-				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
-			}
+				if(StringUtils.isEmpty(deck.getDeckLeadImage())){
+					//if it is not set any deck leader, show the one with more HP
+					deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+				}else {
+					//show chosen leader
+				}			}
 		}
 				
 		model.addAttribute("decks", decks);
@@ -237,7 +251,12 @@ public class SearchController {
 		if(deck.getCards().isEmpty()) {
 			deck.setDeckLeadImage(defaultCard);
 		}else {
-			deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+			if(StringUtils.isEmpty(deck.getDeckLeadImage())){
+				//if it is not set any deck leader, show the one with more HP
+				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+			}else {
+				//show chosen leader
+			}
 		}
 		model.addAttribute("sortDeckHP",sortDeckHP);
 		
@@ -248,18 +267,23 @@ public class SearchController {
 	
 	@GetMapping("/starCard")
 	public String starCard(String name, String nameCard, String creator, Model model) {
+		System.out.println("starCard "+name+" by "+creator+" :"+nameCard);
 		Deck deck = deckService.getDeck(name);		
 		
 		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
 		
 		int indexStarCard = 0;
-		for (String card : deck.getCards().keySet()) {
-			if(card.equals(nameCard)) {
-				indexStarCard=deck.getCards().get(card);
+		for (Card card : sortDeckHP) {
+			if(card.getImageLarge().equals(nameCard)) {
+				indexStarCard=sortDeckHP.indexOf(card);
+				System.out.println("Starring card "+nameCard+"="+card.getImageLarge()+" at index "+indexStarCard);
+				String message = "New card starred as deck leader";
+				model.addAttribute("message",message);
 				break;
 			}
 		}
 		deck.setDeckLeadImage(sortDeckHP.get(indexStarCard).getImageLarge());
+		deckService.save(deck);
 		model.addAttribute("deck",deck);
 
 		model.addAttribute("sortDeckHP",sortDeckHP);
