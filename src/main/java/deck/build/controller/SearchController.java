@@ -190,7 +190,8 @@ public class SearchController {
 					deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
 				}else {
 					//show chosen leader
-				}			}
+				}			
+			}
 		}
 		
 		model.addAttribute("decks", decks);
