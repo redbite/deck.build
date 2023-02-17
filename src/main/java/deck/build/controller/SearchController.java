@@ -175,13 +175,18 @@ public class SearchController {
 	
 	@GetMapping("/createDeck")
 	public String createDeck(String name, String creator, String deckBox, Model model, RedirectAttributes redirAttrs) {
-		Deck newDeck = deckService.createDeck(name, creator, deckBox);
-		newDeck.setDeckLeadImage(defaultCard);
-		model.addAttribute("deck",newDeck);
-		
-		String message = "The deck "+name+" was created by the user "+creator; 
-		redirAttrs.addFlashAttribute("message", message);
-		model.addAttribute("message",message);
+		if(name.length()>15) {
+			String message = "The deck "+name+" is too long: the maximum lenght is 15"; 
+			model.addAttribute("message",message);
+		}else {
+			Deck newDeck = deckService.createDeck(name, creator, deckBox);
+			newDeck.setDeckLeadImage(defaultCard);
+			model.addAttribute("deck",newDeck);
+			
+			String message = "The deck "+name+" was created by the user "+creator; 
+			redirAttrs.addFlashAttribute("message", message);
+			model.addAttribute("message",message);
+		}
 		
 		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
 		Collections.reverse(decks);
@@ -203,14 +208,8 @@ public class SearchController {
 		
 		model.addAttribute("decks", decks);
 		
-//		try {
-//			ArrayList<SetCards> sets = new ArrayList<>(setService.getSets());
-//			model.addAttribute("sets",sets);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		
 		return "home";
+
 	}   
 	
 	@GetMapping("/deleteDeck")
