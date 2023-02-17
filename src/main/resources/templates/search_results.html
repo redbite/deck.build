@@ -199,7 +199,7 @@
 		margin: 0 auto;
 		text-align:center;
 	}
-	
+	/*
 	.add-menu{
 		display:flex;
 		flex-direction:row;
@@ -207,15 +207,23 @@
     	padding-left: 70px;
     	padding-right: 70px;
 	}
-	
+	*/
 	.deck-selector{
-		margin-top: -10px;
+		/*margin-top: -10px;*/
 	    display: flex;
 	    justify-content: center;
 	}
 	.deck-selector-image{
 		width:15px; 
 		margin-right:10px;
+	}
+	.card-menu{
+		display:flex;
+		flex-direction:row;
+		justify-content:space-around;
+		padding-left: 10px;
+	    padding-right: 10px;
+	    margin-top: -10px;
 	}
 	input,select{
 		border-radius: 5px;
@@ -308,56 +316,58 @@
 	                      --> 	
 	                     </div>
 	                      
-                      	<div class="deck-selector">
-                      		<img src="https://i.imgur.com/fvmtXgP.png" class="deck-selector-image"/>
-							    <div th:if="${deckViewName} == 'NODECK'"> <!-- deck pre-selected is deckViewName -->
-									<select name="nameDeck" style="background-color:black; color:white; font-weight:bold;">
-										<option th:each="deck : ${decks}" th:text="${deck}" />
-									</select>
-								</div>
-								<div th:unless="${deckViewName} == 'NODECK'"> <!-- No deck was pre-selected -->
-									<select name="nameDeck" style="background-color:black; color:white; font-weight:bold;">
-										<option th:text="${deckViewName}" style="color:green"/>
-										<option th:each="deck : ${decks}" th:text="${deck}" />
-									</select>	
-								</div>
-						</div>
-	                      
-	                    <div class="add-menu">
-		                    <label for="lang">X </label>	
-		                    <select name="numberOfCards" id="numberOfCards" style="background-color:black; color:white; font-weight:bold;">
-						        <option value="1">1</option>
-						        <option value="2">2</option>
-						        <option value="3">3</option>
-						        <option value="4">4</option>
-						        <option value="5">5</option>
-						        <option value="6">6</option>
-						        <option value="7">7</option>
-						        <option value="8">8</option>
-						        <option value="9">9</option>
-						        <option value="10">10</option>
-						        <option value="11">11</option>
-						        <option value="12">12</option>
-						        <option value="13">13</option>
-						        <option value="14">14</option>
-						        <option value="15">15</option>
-						        <option value="16">16</option>
-						        <option value="17">17</option>
-						        <option value="18">18</option>
-						        <option value="19">19</option>
-						        <option value="20">20</option>
-						      </select>
-						      
-						    	<input type="text" th:name="nameCard" th:value="${card.imageLarge}" style="display:none;"/> 
-						    	<input type="text" th:name="evolvesFrom" th:value="${card.evolvesFrom}" style="display:none;"/> 
-						    	<input type="text" th:name="subtype" th:value="${card.subtype}" style="display:none"/>
-						    	<input type="text" th:name="supertype" th:value="${card.supertype}" style="display:none"/>
-						    	<input type="text" th:name="artist" th:value="${card.artist}" style="display:none"/>
-						    	<input type="text" th:name="hp" th:value="${card.hp}" style="display:none"/>
-						    	<input type="text" th:name="series" th:value="${card.series}" style="display:none"/>
-						    	<input type="text" th:name="setName" th:value="${card.setName}" style="display:none"/>
-								<input type="submit" value="ADD" style="background-color:black; color:rgb(186, 235, 52); font-weight:bold;"/>	
-	                    </div>
+            			<div class = "card-menu">
+            				<div class="deck-selector">
+	                      		<img src="https://i.imgur.com/fvmtXgP.png" class="deck-selector-image"/>
+								    <div th:if="${deckViewName} == 'NODECK'"> <!-- deck pre-selected is deckViewName -->
+										<select name="nameDeck" style="background-color:black; color:white; font-weight:bold;">
+											<option th:each="deck : ${decks}" th:text="${deck}" />
+										</select>
+									</div>
+									<div th:unless="${deckViewName} == 'NODECK'"> <!-- No deck was pre-selected -->
+										<select name="nameDeck" style="background-color:black; color:white; font-weight:bold;">
+											<option th:text="${deckViewName}" style="color:green"/>
+											<option th:each="deck : ${decks}" th:text="${deck}" />
+										</select>	
+									</div>
+							</div>
+		                      
+		                    <div class="add-menu">
+			                    <!-- <label for="lang">X </label>	 -->
+			                    <select name="numberOfCards" id="numberOfCards" style="background-color:black; color:white; font-weight:bold;">
+							        <option value="1">1</option>
+							        <option value="2">2</option>
+							        <option value="3">3</option>
+							        <option value="4">4</option>
+							        <option value="5">5</option>
+							        <option value="6">6</option>
+							        <option value="7">7</option>
+							        <option value="8">8</option>
+							        <option value="9">9</option>
+							        <option value="10">10</option>
+							        <option value="11">11</option>
+							        <option value="12">12</option>
+							        <option value="13">13</option>
+							        <option value="14">14</option>
+							        <option value="15">15</option>
+							        <option value="16">16</option>
+							        <option value="17">17</option>
+							        <option value="18">18</option>
+							        <option value="19">19</option>
+							        <option value="20">20</option>
+							      </select>
+							      
+							    	<input type="text" th:name="nameCard" th:value="${card.imageLarge}" style="display:none;"/> 
+							    	<input type="text" th:name="evolvesFrom" th:value="${card.evolvesFrom}" style="display:none;"/> 
+							    	<input type="text" th:name="subtype" th:value="${card.subtype}" style="display:none"/>
+							    	<input type="text" th:name="supertype" th:value="${card.supertype}" style="display:none"/>
+							    	<input type="text" th:name="artist" th:value="${card.artist}" style="display:none"/>
+							    	<input type="text" th:name="hp" th:value="${card.hp}" style="display:none"/>
+							    	<input type="text" th:name="series" th:value="${card.series}" style="display:none"/>
+							    	<input type="text" th:name="setName" th:value="${card.setName}" style="display:none"/>
+									<input type="submit" value="ADD" style="background-color:black; color:rgb(186, 235, 52); font-weight:bold;"/>	
+		                    </div>
+            			</div>
 	                    
 					    
 					</form>
