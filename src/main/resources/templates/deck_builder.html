@@ -285,11 +285,18 @@
 	    flex-direction: row;
 	    justify-content: center;
 	    z-index: 2;
-	    margin-top: -25px;
-	    margin-right: -55px;
+	    margin-top: -27px;
+	    width:27px;
+	    padding-left:18px;
 	}
 	.card-star{
-		width:25px;
+		width:27px;
+	}
+	.card-remove{
+		margin-bottom:-2px;
+		margin-top:5px;
+		width:30px; 
+		height:23px;
 	}
 </style>
 </head>
@@ -300,10 +307,12 @@
 				<a th:href="@{/home}"><img class="navbar-logo-img" src="https://i.imgur.com/GaMfXSu.png"/></a>
 			</div>
 			<!-- redirects to loginAppController - @XMapping ("/...") -->
-			<!--  <p><a th:href="@{/list_users}">USERS</a>
+			<!--<p>
+				<a th:href="@{/list_users}">USERS</a>
 				<a th:href="@{/home}">HOME</a>
 				<a th:href="@{/register}">SIGN-UP</a>
-				<a th:href="@{/login}">LOGIN</a></p> -->
+				<a th:href="@{/login}">LOGIN</a>
+				</p> -->
 		</div>
 		<br>
 		<div class="containers-container">
@@ -361,6 +370,7 @@
 								</select>
 						</div>
 						<div class="home-section-submit">
+							<input type="text" th:name="deckViewName" th:value="${deck.name} style="display:none"/>
 							<input class="input-name" type="submit" value="SEARCH" style="background-color:black; color:green; font-weight:bold;"/>	
 						</div>
 					</div>
@@ -384,7 +394,8 @@
                         		<input type="text" th:name="name" th:value="${deck.name}" style="display:none;"/> 
                         		<input type="text" th:name="nameCard" th:value="${card.imageLarge}" style="display:none;"/> 
                        	    	<input type="text" th:name="creator" th:value="${deck.creator}" style="display:none;"/> 
-                        		<input type="submit" value="REMOVE" style="background-color:black; color:red; font-weight:bold; margin-top:5px;"/>
+                        		<!-- <input type="submit" value="REMOVE" style="background-color:black; color:red; font-weight:bold; margin-top:5px;"/> -->
+                        		<input type="image" src="https://i.imgur.com/ylVqeqC.png" class="card-remove" />
                         	</form>
                         </div>
                         <div class="leader-star">

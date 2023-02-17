@@ -53,7 +53,7 @@ public class SearchController {
 //	}
 	
 	@GetMapping("/searchCards")
-	public String getCards(String name, Model model, String setSearch){
+	public String getCards(String name, Model model, String setSearch, String deckViewName){
 		if(!name.contains(" ")) {
 			try {
 //				if(partialcheckbox) {
@@ -66,6 +66,8 @@ public class SearchController {
 				ArrayList<String> decks = deckService.getAllDeckNames();
 				Collections.reverse(decks);
 				model.addAttribute("decks",decks);
+				
+				model.addAttribute("deckViewName", deckViewName);
 				return "search_results";
 			}
 			catch(IOException ioe){
