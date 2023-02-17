@@ -54,6 +54,7 @@ public class SearchController {
 	
 	@GetMapping("/searchCards")
 	public String getCards(String name, Model model, String setSearch, String deckViewName){
+		System.out.println("Request search cards: ["+name+"] ["+setSearch+"] ["+deckViewName+"].");
 		if(!name.contains(" ")) {
 			try {
 //				if(partialcheckbox) {
@@ -64,9 +65,13 @@ public class SearchController {
 				model.addAttribute("name",name);
 				
 				ArrayList<String> decks = deckService.getAllDeckNames();
+				//remove deckViewName, is not empty
 				Collections.reverse(decks);
 				model.addAttribute("decks",decks);
 				
+				if(StringUtils.isEmpty(deckViewName)) {
+					deckViewName = "NODECK";
+				}
 				model.addAttribute("deckViewName", deckViewName);
 				return "search_results";
 			}
