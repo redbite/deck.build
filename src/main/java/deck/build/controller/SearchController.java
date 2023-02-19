@@ -59,15 +59,18 @@ public class SearchController {
 			name=name.replace(" ", "*");
 		}
 		try {
-//			if(partialcheckbox) {
+//			if(partialcheckbox)
 				name=name+"*";
-//			}
 			List<Card> listCard = searchService.getPokemon(name, setSearch);
 			model.addAttribute("listCard",listCard);
 			model.addAttribute("name",name);
 			
 			ArrayList<String> decks = deckService.getAllDeckNames();
-			//remove deckViewName, is not empty
+			//remove deckViewName, if it is not empty
+			int indexDeck = deckService.findDeckIndex(deckViewName, decks);
+			if(indexDeck!=-1) {
+				decks.remove(indexDeck);
+			}
 			Collections.reverse(decks);
 			model.addAttribute("decks",decks);
 			

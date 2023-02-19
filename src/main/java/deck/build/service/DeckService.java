@@ -161,9 +161,21 @@ public class DeckService {
 		return max;
 	}
 	
-	
-	
-	
+	/*
+	 * given a deck name and an arraylist of deck names, 
+	 * return the index of the element which has the same name
+	 * returns -1 if it's not present
+	 */
+	public Integer findDeckIndex(String deckName, ArrayList<String> decks) {
+		int index=0;
+		for(String str: decks) {
+			if(deckName.equals(str)) {
+				return index;
+			}
+			index++;
+		}
+		return -1;
+	}
 	
 	
 }
