@@ -55,34 +55,30 @@ public class SearchController {
 	@GetMapping("/searchCards")
 	public String getCards(String name, Model model, String setSearch, String deckViewName){
 		System.out.println("Request search cards: ["+name+"] ["+setSearch+"] ["+deckViewName+"].");
-		if(!name.contains(" ")) {
-			try {
-//				if(partialcheckbox) {
-					name=name+"*";
-//				}
-				List<Card> listCard = searchService.getPokemon(name, setSearch);
-				model.addAttribute("listCard",listCard);
-				model.addAttribute("name",name);
-				
-				ArrayList<String> decks = deckService.getAllDeckNames();
-				//remove deckViewName, is not empty
-				Collections.reverse(decks);
-				model.addAttribute("decks",decks);
-				
-				if(StringUtils.isEmpty(deckViewName)) {
-					deckViewName = "NODECK";
-				}
-				model.addAttribute("deckViewName", deckViewName);
-				return "search_results";
+		if(name.contains(" ")) {
+			name=name.replace(" ", "*");
+		}
+		try {
+//			if(partialcheckbox) {
+				name=name+"*";
+//			}
+			List<Card> listCard = searchService.getPokemon(name, setSearch);
+			model.addAttribute("listCard",listCard);
+			model.addAttribute("name",name);
+			
+			ArrayList<String> decks = deckService.getAllDeckNames();
+			//remove deckViewName, is not empty
+			Collections.reverse(decks);
+			model.addAttribute("decks",decks);
+			
+			if(StringUtils.isEmpty(deckViewName)) {
+				deckViewName = "NODECK";
 			}
-			catch(IOException ioe){
-				return "";
-			}
-		}else {
-			String message="Try to search without inserting spaces";
-			model.addAttribute("message",message);
+			model.addAttribute("deckViewName", deckViewName);
 			return "search_results";
-
+		}
+		catch(IOException ioe){
+			return "";
 		}
 	}
 	

@@ -214,6 +214,10 @@
 	    flex-wrap: wrap;
 	    margin-top:15px;
 	}
+	.deck-container{
+		margin-bottom:5px;	
+		margin-top:5px;	
+	}
 	.deck-intro-container{
 		display:flex;
 		flex-direction:row;
@@ -377,7 +381,7 @@
 		<br>
 		
 		<div class="decks-container">
-			<div th:each="deck : ${decks}">
+			<div th:each="deck : ${decks}" class="deck-container">
 				<div class="deck-intro-container">
 					<div>
 						<img class="deck-deckBox" th:src="${deck.deckBox}"/>
