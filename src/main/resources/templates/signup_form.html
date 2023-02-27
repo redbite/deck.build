@@ -4,15 +4,20 @@
 <meta charset="ISO-8859-1">
 <title>LOGIN APP - Registration</title>
 <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+<style>
+	label{
+		color:white;
+	}
+</style>
 </head>
-<body>
+<body style="background-color:rgba(31, 31, 31, 1);">
 	<div class="container text-center">
 		<div>
-			<h1>User signup</h1><br>
+			<img src="https://i.imgur.com/7OCI36I.png" style="max-width:350px;margin-top:40px;margin-bottom:50px;"/>
 		</div>
 		<!-- sends to loginAppController - @PostMapping ("/process_register") -->
 		<form th:action="@{/process_register}" method="post"
-			style="max-width: 600px; margin: 0 auto;"
+			style="max-width: 400px; margin: 0 auto;"
 			th:object="${user}"
 			>
 			<div class="m-3">
@@ -52,6 +57,12 @@
 				</div>
 			</div>
 		</form>
+		
+		<p>
+			<a th:href="@{/login}">
+				<label class="btn btn-primary" style="background-color:green;">LOGIN</label>
+			</a>
+		</p>
 	</div>
 	
 </body>
