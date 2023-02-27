@@ -33,7 +33,7 @@ public class LoginAppController {
 	public String showSignUpForm(Model model) {
 		model.addAttribute("user",new User());
 		
-		return "signup_form"; //	src/main/resources/templates/signup_form
+		return "register"; //	src/main/resources/templates/register
 	}
 	
 	@GetMapping("/login")
