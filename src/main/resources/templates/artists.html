@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+<!-- <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/> -->
+<link rel="icon" href="https://img.pokemondb.net/sprites/ruby-sapphire/normal/charizard.png">
+<style>
+	body {
+  	 background-color: rgba(31, 31, 31, 1);
+	 font-family: Roboto, 'Nunito Sans';
+	 /*font-style: italic;*/
+	 font-weight: 400;
+	 src: url(https://fonts.gstatic.com/s/nunitosans/v12/pe0oMImSLYBIv1o4X1M8cce4E9RKdmwp.woff2) format('woff2');
+	 margin:0px;
+	 margin-bottom:50px;
+	 color:white;
+	 width:100%;
+	 overflow-x:hidden;
+	}
+	
+	html{
+		margin: 0px;
+	}
+	
+	.div-center{
+		text-align: center;
+	}
+	
+	.menu-pages{	
+		/*margin-left:20vw;
+		margin-right:20vw;*/
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		/*background-color:black;	*/
+ 		background-image: url("https://i.imgur.com/5GWoh8p.png");
+ 	    background-size: cover;	
+		margin:0px;
+		padding:10px 0px 10px 0px;
+	}
+	
+	.navbar-logo-img{
+		height:80px;
+		margin-left:35px;
+	}
+	
+	.menu-welcome{
+		/*text-align:center;*/
+		display:flex;
+		flex-direction:row;
+		justify-content:center;
+		margin:5vw;
+		margin-top:20px;
+		margin-bottom:20px;
+	}
+	
+	.menu-welcome-pic{
+		display:flex;
+		justify-content:center;
+	}
+	.menu-welcome-img{
+		height:160px;
+		padding-right:0px;
+	}
+	.menu-welcome-text {
+	    /*border-left: 1px solid green;*/
+	    padding-left: 15px;
+	    text-align: left;
+	}
+	
+	a{
+		color:rbg(250,250,250);
+		padding:20px;
+		font-size:20px;
+		color:rgb(250,250,250);
+	}
+	
+	.home-section{
+		display:flex;
+		flex-direction:column;
+		justify-content: center;	
+		padding-left:10px;
+	}	
+	.home-section-title{
+		padding-bottom:5px;
+		font-size:22px;
+		text-align: left;
+	}
+	.home-section-submit{
+		display:flex;
+		flex-direction:row;
+		justify-content: end;
+		margin-top:5px;
+	}
+	.home-section-container{
+		display:flex;
+		flex-direction:row;
+		justify-content: center;	
+	}
+	
+	.home-actions {
+	    display: flex;
+	    flex-direction: row;
+	    justify-content: center;
+	    margin: 15vw;
+	    margin-top: 20px;
+	    margin-bottom: 30px;
+	}
+		
+	.cards-container{
+	    display: flex;
+	    flex-direction: row;
+	    justify-content:center;
+	    flex-wrap: wrap;
+	}
+	
+	.card{
+		 margin:5px;   
+		 padding:5px;     
+		 display: flex;
+		 flex-direction: row;
+		 justify-content:center;
+	}
+	
+	.card_right_text{
+	    max-width: 200px;
+	    padding-left:5px;
+	    border-left: 1px solid;
+		border-color:grey;
+		color:white;
+	}
+	
+	.card_left_img{
+	 	padding-right:3px;
+	 	padding-left:3px;
+	}
+	
+	.card_img{
+		width:243px;
+		height:352px;
+	}
+	
+	.posts-container{
+	    display: flex;
+	    flex-direction: row;
+	    justify-content:center;
+	    flex-wrap: wrap;
+	    margin-left:20px;
+	    margin-right:20px;
+	}
+	
+	.post{
+	    margin:5px;   
+	    padding:5px;     
+	    display: flex;
+	    flex-direction: column;
+	    justify-content:center;
+	    text-align:center;
+	}
+	   
+	.post_right_text{
+	     max-width: 200px;
+	     padding-left:5px;
+	     color:white;
+	}
+	
+	.post_left_img{
+	     padding-right:3px;
+	     padding-left:3px;
+	}
+	
+	.post_img{
+	   	width:243px;
+	   	height:352px;
+	}
+	.post-text{
+		color:white;
+	}
+	
+	.create-deck-msg{
+	color:green;
+	}
+
+	.post-number{
+		text-align:center;
+		display:inline;
+		font-size:25px;
+		margin-top:-40px;
+		margin-right:-120px;
+		font-family:'Impact';
+	}
+	.post-number-x{
+		/*font-style: italic;*/
+		color:black;
+		text-shadow: 2px 2px 0 white;
+	}
+	.post-number-N{
+		font-weight: bold;
+		font-size: 45px;
+		color:black;
+		text-shadow: 2px 2px 0 white;
+	}
+
+	.form-open-card{
+		max-width: 600px; 
+		margin: 0 auto;
+		text-align:center;
+	}
+	.decks-container{
+		display: flex;
+	    flex-direction: row;
+	    justify-content:center;
+	    flex-wrap: wrap;
+	    margin-top:15px;
+	}
+	.deck-container{
+		margin-bottom:5px;	
+		margin-top:5px;	
+	}
+	.deck-intro-container{
+		display:flex;
+		flex-direction:row;
+		justify-content:center;
+		margin-left:15px;
+		margin-right:15px;
+	}
+	.deck-deckBox{
+		height:80px;
+		padding-right:10px;
+	}
+	.deck-deckLeadImage{
+		height:60px;
+		margin-left:-40px;
+		margin-right:15px;
+	}
+	.deck-name{
+		font-size:20px;
+		font-family:Impact;
+	}
+	.deck-info{
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		text-align:left;
+	}
+	.deck-info-actions{
+		display:flex;
+		flex-direction:row;
+		justify-content:start;
+		margin-top:5px;
+	}
+	.delete-deck-msg{
+		color:yellow;
+	}
+	input,select{
+		border-radius: 5px;
+	}
+	.input-name{
+		width:120px;
+	}
+	.input-name-deck{
+		width:80px;
+	}
+	
+	
+	/*artists*/
+	.artists-container{
+		display: flex;
+	    flex-direction: row;
+	    justify-content:center;
+	    flex-wrap: wrap;
+		margin:50px 10vw 50px 10vw;
+	}
+	.artist{
+		margin:10px 30px;
+	}
+	.artist-image{
+		width:150px;
+	}
+</style>
+</head>
+<body>
+	<div class="div-center">
+		<div class="menu-pages">
+			<div class="navbar-logo">
+				<a th:href="@{/home}"><img class="navbar-logo-img" src="https://i.imgur.com/GaMfXSu.png"/></a>
+			</div>
+			<!-- redirects to loginAppController - @XMapping ("/...") -->
+			<!--  <p><a th:href="@{/list_users}">USERS</a>
+				<a th:href="@{/home}">HOME</a>
+				<a th:href="@{/register}">SIGN-UP</a>
+				<a th:href="@{/login}">LOGIN</a></p> -->
+		</div>
+		
+		
+		<div class="artists-container">
+			<div class="artist">
+				<img src="https://i.imgur.com/y3DiY9d.png" class="artist-image" />
+				<div class="artist-name">Keiji Kinebuchi</div>
+			</div>
+		
+			<div class="artist">
+				<img src="https://i.imgur.com/MMl9ptO.png" class="artist-image" />
+				<div class="artist-name">Ken Sugimori</div>
+			</div>
+		
+			<div class="artist">
+				<img src="https://i.imgur.com/1VAvz5u.png" class="artist-image" />
+				<div class="artist-name">Mitsuhiro Arita</div>
+			</div>
+		
+			<div class="artist">
+				<img src="https://i.imgur.com/umFWwXZ.png" class="artist-image" />
+				<div class="artist-name">Tomoaki Imakuni</div>
+			</div>
+		
+			<div class="artist">
+				<img src="https://i.imgur.com/1VAvz5u.png" class="artist-image" />
+				<div class="artist-name">Mitsuhiro Arita</div>
+			</div>
+		</div>
+		
+		<br>
+	</div>
+</body>
+</html>

@@ -59,8 +59,7 @@ public class SearchController {
 			name=name.replace(" ", "*");
 		}
 		try {
-//			if(partialcheckbox)
-				name=name+"*";
+			name=name+"*";
 			List<Card> listCard = searchService.getPokemon(name, setSearch);
 			model.addAttribute("listCard",listCard);
 			model.addAttribute("name",name);
@@ -318,4 +317,15 @@ public class SearchController {
 //		setService.getSets();
 //		return "Sets"; 
 //	}
+	
+	@GetMapping("/artists")
+	public String showArtists(Model model) {
+		return "artists";
+	}
+	
+	@GetMapping("/searchArtist")
+	public String searchCardsArtist(String artist, Model model) {
+		
+		return "search_artist_cards";
+	}
 }
