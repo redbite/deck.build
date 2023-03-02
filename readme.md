@@ -8,9 +8,16 @@
 <br>
 <h2>INDEX</h2>
 <p align="center">
-<img src="https://i.imgur.com/IdW7wKN.png" style="width:1000px;">
+<img src="https://i.imgur.com/eWl7HAL.png" style="width:1000px;">
 </p>
 The landing page lets the user access the home page by sign-in or login.
+<br><br>
+
+<h2>LOGIN</h2>
+<p align="center">
+<img src="https://i.imgur.com/Nahs2GP.png" style="width:1000px;">
+</p>
+The user can login with existing credetials or register a new account.
 <br><br>
 
 <h2>HOME</h2>
