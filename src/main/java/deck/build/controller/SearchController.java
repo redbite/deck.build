@@ -151,8 +151,10 @@ public class SearchController {
 		for(String card: cardsSet) {
 			if(nameCard.equals(card)) {
 				deck.getCards().remove(card);
-				if(deck.getDeckLeadImage().equals(nameCard)) {
-					deck.setDeckLeadImage("");
+				if(deck.getDeckLeadImage()!=null) {
+					if(deck.getDeckLeadImage().equals(nameCard)) {
+						deck.setDeckLeadImage("");
+					}
 				}
 				deckService.save(deck);
 				String message = "The card selected has been deleted"; 
