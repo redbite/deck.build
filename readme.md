@@ -13,7 +13,7 @@
 The landing page lets the user access the home page by sign-in or login.
 <br><br>
 
-<h2>LOGIN</h2>
+<h2>LOGIN & REGISTER</h2>
 <p align="center">
 <img src="https://i.imgur.com/Nahs2GP.png" style="width:1000px;">
 </p>

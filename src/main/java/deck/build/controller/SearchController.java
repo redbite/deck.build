@@ -66,16 +66,18 @@ public class SearchController {
 			
 			ArrayList<String> decks = deckService.getAllDeckNames();
 			//remove deckViewName, if it is not empty
-			int indexDeck = deckService.findDeckIndex(deckViewName, decks);
-			if(indexDeck!=-1) {
-				decks.remove(indexDeck);
+			if(!StringUtils.isEmpty(deckViewName)) {
+				int indexDeck = deckService.findDeckIndex(deckViewName, decks);
+				if(indexDeck!=-1) {
+					decks.remove(indexDeck);
+				}
+			}else {
+				deckViewName = "NODECK";
 			}
+			
 			Collections.reverse(decks);
 			model.addAttribute("decks",decks);
 			
-			if(StringUtils.isEmpty(deckViewName)) {
-				deckViewName = "NODECK";
-			}
 			model.addAttribute("deckViewName", deckViewName);
 			return "search_results";
 		}
