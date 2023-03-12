@@ -12,6 +12,13 @@
 				<img src="https://i.imgur.com/7OCI36I.png" style="max-width:350px;margin-top:40px;margin-bottom:50px;"/>
 			</a>
 		</div>
+		   <div style="margin:20px 35vw">
+			   	<div class="alert alert-success" role="alert"
+	                             th:if="${message}">
+			       <span style="color:green" th:text="${message}"></span>
+			   </div>
+		   </div>
+		<br>
 		<form th:action="@{/login}" method="post" style="max-width:300px; margin:0 auto;">
 			<div > <!-- border border-secondary p-3 rounded -->
 				<p>
