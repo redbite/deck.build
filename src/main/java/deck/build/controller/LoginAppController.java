@@ -47,15 +47,19 @@ public class LoginAppController {
 	
 	@PostMapping("/process_register")
 	public String processRegistration(User user, Model model) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String encodedPassword = encoder.encode(user.getPassword());
-		user.setPassword(encodedPassword);
-		userRepository.save(user);
-		
-		String message = "The registration was successful"; 
-		model.addAttribute("message",message);
-		
-		return "login"; //	src/main/resources/templates/register_success
+		try {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String encodedPassword = encoder.encode(user.getPassword());
+			user.setPassword(encodedPassword);
+			userRepository.save(user);
+			
+			String message = "The registration was successful"; 
+			model.addAttribute("message",message);
+			
+			return "login"; //	src/main/resources/templates/login
+		}catch(Exception e) {
+			return "index";
+		}
 	}
 	
 	@GetMapping("/list_users")
