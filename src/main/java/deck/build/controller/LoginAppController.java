@@ -65,18 +65,6 @@ public class LoginAppController {
 		}
 	}
 	
-	@GetMapping("/list_users")
-	public String viewUsersList(Model model) {
-		try {
-			List<User> listUsers = userRepository.findAll();
-			model.addAttribute("listUsers", listUsers);
-			
-			return "users"; //	src/main/resources/templates/users
-		}catch(Exception e) {
-			return "error";
-		}
-	}
-	
 //	@GetMapping("/home")
 //	public String viewHome(Model model) {
 //		List<Post> listPosts = postRepository.findAll();
