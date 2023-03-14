@@ -349,7 +349,8 @@ public class SearchController {
 	
 	@GetMapping("/searchArtist")
 	public String searchCardsArtist(String artist, Model model) {
-		
 		return "search_artist_cards";
 	}
+	
+	
 }
