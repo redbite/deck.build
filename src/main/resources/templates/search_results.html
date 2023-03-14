@@ -199,15 +199,6 @@
 		margin: 0 auto;
 		text-align:center;
 	}
-	/*
-	.add-menu{
-		display:flex;
-		flex-direction:row;
-		justify-content: space-around;
-    	padding-left: 70px;
-    	padding-right: 70px;
-	}
-	*/
 	.deck-selector{
 		/*margin-top: -10px;*/
 	    display: flex;
@@ -245,12 +236,6 @@
 					<a th:href="@{/register}">SIGN-UP</a>
 					<a th:href="@{/login}">LOGIN</a></p> -->
 			</div>	
-			<!-- 
-			<div>
-				<h1>Cards: <span th:text="${name}"></span></h1>
-			</div>
-			<br>
-			 -->
 			<br>
 			<form th:action="@{/searchCards}" method="get"
 				style="max-width: 600px; margin: 0 auto;">
@@ -305,15 +290,6 @@
 	                        <div class="card_left_img">
 	                          <img  class="card_img" th:src="${card.imageLarge}">
 	                        </div>
-	                      <!--  
-	                        <div class="card_right_text">
-	                          <div class="card_name"><p th:text="${card.name}"></p></div>
-	                          <div class="card_description"><p th:text="${card.flavorText}"></p></div>
-	                          <div class="card_rarity"><p th:text="${card.rarity}"></p></div>
-	                          <div class="card_set"><p th:text="${card.set}"></p></div>
-	                          <div class="card_artist"><p th:text="${card.artist}"></p></div>
-	                        </div>
-	                      --> 	
 	                     </div>
 	                      
             			<div class = "card-menu">
