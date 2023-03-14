@@ -31,9 +31,12 @@ public class LoginAppController {
 	
 	@GetMapping("/register")
 	public String showSignUpForm(Model model) {
-		model.addAttribute("user",new User());
-		
-		return "register"; //	src/main/resources/templates/register
+		try {
+			model.addAttribute("user",new User());
+			return "register"; //	src/main/resources/templates/register
+		}catch(Exception e) {
+			return "index";
+		}
 	}
 	
 	@GetMapping("/login")
@@ -64,10 +67,14 @@ public class LoginAppController {
 	
 	@GetMapping("/list_users")
 	public String viewUsersList(Model model) {
-		List<User> listUsers = userRepository.findAll();
-		model.addAttribute("listUsers", listUsers);
-		
-		return "users"; //	src/main/resources/templates/users
+		try {
+			List<User> listUsers = userRepository.findAll();
+			model.addAttribute("listUsers", listUsers);
+			
+			return "users"; //	src/main/resources/templates/users
+		}catch(Exception e) {
+			return "error";
+		}
 	}
 	
 //	@GetMapping("/home")

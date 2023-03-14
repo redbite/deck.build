@@ -82,227 +82,247 @@ public class SearchController {
 			return "search_results";
 		}
 		catch(IOException ioe){
-			return "";
+			return "error";
 		}
 	}
 	
 	@GetMapping("/home")
 	public String loadHome(Model model) {
-		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
-		Collections.reverse(decks);
-		
-		//adding deck leader image
-		for(Deck deck: decks) {
-			if(deck.getCards().isEmpty()) {
-				deck.setDeckLeadImage(defaultCard);
-			}else {
-				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
-				if(StringUtils.isEmpty(deck.getDeckLeadImage())){
-					//if it is not set any deck leader, show the one with more HP
-					deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+		try {
+			ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
+			Collections.reverse(decks);
+			
+			//adding deck leader image
+			for(Deck deck: decks) {
+				if(deck.getCards().isEmpty()) {
+					deck.setDeckLeadImage(defaultCard);
 				}else {
-					//show chosen leader
+					ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+					if(StringUtils.isEmpty(deck.getDeckLeadImage())){
+						//if it is not set any deck leader, show the one with more HP
+						deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+					}else {
+						//show chosen leader
+					}
 				}
 			}
+			
+			model.addAttribute("decks", decks);
+			
+			return "home";
+		}catch(Exception ioe){
+			return "error";
 		}
-		
-		model.addAttribute("decks", decks);
-		
-				
-//		try {
-//			ArrayList<SetCards> sets = new ArrayList<>(setService.getSets());
-//			model.addAttribute("sets",sets);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		return "home";
 	}
 	
 	@GetMapping("/addCard")
 	public String addCard(String nameDeck, String nameCard, Integer numberOfCards, 
 			String subtype, String supertype, String evolvesFrom, String artist, String hp, 
 			String series, String setName, Model model){		
-		Deck deck = deckService.addCardToDeck(nameDeck, nameCard, numberOfCards);
-		Card card = cardService.createCard(nameCard,subtype,supertype,evolvesFrom,artist, hp, series,setName);
-//		System.out.println("card after save "+card.getImageLarge()+" | SUBTYPE: "+card.getSubtype()+", evolves from: "+card.getEvolvesFrom()
-//			+" HP="+card.getHp()+ " Artist "+card.getArtist());
-		
-		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
-		//setting deck lead image
-		if(deck.getCards().isEmpty()) {
-			deck.setDeckLeadImage(defaultCard);
-		}else {
-			deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
-		}
-		model.addAttribute("deck",deck);
+		try {
+			Deck deck = deckService.addCardToDeck(nameDeck, nameCard, numberOfCards);
+			Card card = cardService.createCard(nameCard,subtype,supertype,evolvesFrom,artist, hp, series,setName);
+//			System.out.println("card after save "+card.getImageLarge()+" | SUBTYPE: "+card.getSubtype()+", evolves from: "+card.getEvolvesFrom()
+//				+" HP="+card.getHp()+ " Artist "+card.getArtist());
+			
+			ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+			//setting deck lead image
+			if(deck.getCards().isEmpty()) {
+				deck.setDeckLeadImage(defaultCard);
+			}else {
+				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+			}
+			model.addAttribute("deck",deck);
 
-		model.addAttribute("sortDeckHP",sortDeckHP);
-		String message = "The card has been added to the deck"; 
-		model.addAttribute("message",message);
-		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
-		model.addAttribute("count",countCards);
-		return "deck_builder"; //	src/main/resources/templates/
+			model.addAttribute("sortDeckHP",sortDeckHP);
+			String message = "The card has been added to the deck"; 
+			model.addAttribute("message",message);
+			Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
+			model.addAttribute("count",countCards);
+			return "deck_builder"; //	src/main/resources/templates/
+		}catch(Exception ioe){
+			return "error";
+		}
 	}
 
 	@GetMapping("/deleteCard")
 	public String deleteCard(String name, String nameCard, String creator, Model model) {
-		Deck deck = deckService.getDeck(name);
-		Set<String> cardsSet = deck.getCards().keySet();
-		for(String card: cardsSet) {
-			if(nameCard.equals(card)) {
-				deck.getCards().remove(card);
-				if(deck.getDeckLeadImage()!=null) {
-					if(deck.getDeckLeadImage().equals(nameCard)) {
-						deck.setDeckLeadImage("");
+		try{
+			Deck deck = deckService.getDeck(name);
+			Set<String> cardsSet = deck.getCards().keySet();
+			for(String card: cardsSet) {
+				if(nameCard.equals(card)) {
+					deck.getCards().remove(card);
+					if(deck.getDeckLeadImage()!=null) {
+						if(deck.getDeckLeadImage().equals(nameCard)) {
+							deck.setDeckLeadImage("");
+						}
 					}
+					deckService.save(deck);
+					String message = "The card selected has been deleted"; 
+					model.addAttribute("message",message);
+					break;
 				}
-				deckService.save(deck);
-				String message = "The card selected has been deleted"; 
-				model.addAttribute("message",message);
-				break;
 			}
+			ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+			if(deck.getCards().isEmpty()) {
+				deck.setDeckLeadImage(defaultCard);
+			}else {
+				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+			}
+			model.addAttribute("deck", deck);
+			model.addAttribute("sortDeckHP",sortDeckHP);
+			Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
+			model.addAttribute("count",countCards);
+			return "deck_builder";
+		}catch(Exception ioe){
+			return "error";
 		}
-		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
-		if(deck.getCards().isEmpty()) {
-			deck.setDeckLeadImage(defaultCard);
-		}else {
-			deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
-		}
-		model.addAttribute("deck", deck);
-		model.addAttribute("sortDeckHP",sortDeckHP);
-		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
-		model.addAttribute("count",countCards);
-		return "deck_builder";
 	}
 	
 	@GetMapping("/createDeck")
 	public String createDeck(String name, String creator, String deckBox, Model model, RedirectAttributes redirAttrs) {
-		if(name.length()>15) {
-			String message = "The deck "+name+" is too long: the maximum lenght is 15"; 
-			model.addAttribute("message",message);
-		}else {
-			Deck newDeck = deckService.createDeck(name, creator, deckBox);
-			newDeck.setDeckLeadImage(defaultCard);
-			model.addAttribute("deck",newDeck);
-			
-			String message = "The deck "+name+" was created by the user "+creator; 
-			redirAttrs.addFlashAttribute("message", message);
-			model.addAttribute("message",message);
-		}
-		
-		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
-		Collections.reverse(decks);
-		
-		//adding deck leader image
-		for(Deck deck: decks) {
-			if(deck.getCards().isEmpty()) {
-				deck.setDeckLeadImage(defaultCard);
+		try {
+			if(name.length()>15) {
+				String message = "The deck "+name+" is too long: the maximum lenght is 15"; 
+				model.addAttribute("message",message);
 			}else {
-				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
-				if(StringUtils.isEmpty(deck.getDeckLeadImage())){
-					//if it is not set any deck leader, show the one with more HP
-					deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
-				}else {
-					//show chosen leader
-				}			
+				Deck newDeck = deckService.createDeck(name, creator, deckBox);
+				newDeck.setDeckLeadImage(defaultCard);
+				model.addAttribute("deck",newDeck);
+				
+				String message = "The deck "+name+" was created by the user "+creator; 
+				redirAttrs.addFlashAttribute("message", message);
+				model.addAttribute("message",message);
 			}
+			
+			ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
+			Collections.reverse(decks);
+			
+			//adding deck leader image
+			for(Deck deck: decks) {
+				if(deck.getCards().isEmpty()) {
+					deck.setDeckLeadImage(defaultCard);
+				}else {
+					ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+					if(StringUtils.isEmpty(deck.getDeckLeadImage())){
+						//if it is not set any deck leader, show the one with more HP
+						deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+					}else {
+						//show chosen leader
+					}			
+				}
+			}
+			
+			model.addAttribute("decks", decks);
+			
+			return "home";
+		}catch(Exception ioe) {
+			return "error";
 		}
-		
-		model.addAttribute("decks", decks);
-		
-		return "home";
-
 	}   
 	
 	@GetMapping("/deleteDeck")
 	public String deleteDeck(String name, Model model) {
-		String message = deckService.deleteDeck(name);
-		model.addAttribute("message_delete",message);
-		
-		ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
-		Collections.reverse(decks);
-		
-		//adding deck leader image
-		for(Deck deck: decks) {
+		try {
+			String message = deckService.deleteDeck(name);
+			model.addAttribute("message_delete",message);
+			
+			ArrayList<Deck> decks = new ArrayList<>(deckService.getAllDecks());
+			Collections.reverse(decks);
+			
+			//adding deck leader image
+			for(Deck deck: decks) {
+				if(deck.getCards().isEmpty()) {
+					deck.setDeckLeadImage(defaultCard);
+				}else {
+					ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+					if(StringUtils.isEmpty(deck.getDeckLeadImage())){
+						//if it is not set any deck leader, show the one with more HP
+						deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+					}else {
+						//show chosen leader
+					}			}
+			}
+					
+			model.addAttribute("decks", decks);
+			
+			try {
+				ArrayList<SetCards> sets = new ArrayList<>(setService.getSets());
+				model.addAttribute("sets",sets);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			return "home";
+		}catch(Exception ioe) {
+			return "error";
+		}
+	}    
+	
+	@GetMapping("/viewDeck")
+	public String viewDeck(String name, Model model) {
+		try {
+			System.out.println("searching deck "+name);
+			Deck deck = deckService.getDeck(name);		
+			model.addAttribute("deck",deck);
+
+//			HashMap<String,Integer> sortedDeck= deckService.sortDeck(deck); 
+//			HashMap<Integer,CardCompositeX> sortedCards= deckService.sortDeck(deck); 
+//			model.addAttribute("sortedCards",sortedCards);
+
+			ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+			//setting deck lead image
 			if(deck.getCards().isEmpty()) {
 				deck.setDeckLeadImage(defaultCard);
 			}else {
-				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
 				if(StringUtils.isEmpty(deck.getDeckLeadImage())){
 					//if it is not set any deck leader, show the one with more HP
 					deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
 				}else {
 					//show chosen leader
-				}			}
-		}
-				
-		model.addAttribute("decks", decks);
-		
-		try {
-			ArrayList<SetCards> sets = new ArrayList<>(setService.getSets());
-			model.addAttribute("sets",sets);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return "home";
-	}    
-	
-	@GetMapping("/viewDeck")
-	public String viewDeck(String name, Model model) {
-		System.out.println("searching deck "+name);
-		Deck deck = deckService.getDeck(name);		
-		model.addAttribute("deck",deck);
-
-//		HashMap<String,Integer> sortedDeck= deckService.sortDeck(deck); 
-//		HashMap<Integer,CardCompositeX> sortedCards= deckService.sortDeck(deck); 
-//		model.addAttribute("sortedCards",sortedCards);
-
-		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
-		//setting deck lead image
-		if(deck.getCards().isEmpty()) {
-			deck.setDeckLeadImage(defaultCard);
-		}else {
-			if(StringUtils.isEmpty(deck.getDeckLeadImage())){
-				//if it is not set any deck leader, show the one with more HP
-				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
-			}else {
-				//show chosen leader
+				}
 			}
+			model.addAttribute("sortDeckHP",sortDeckHP);
+			
+			Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
+			model.addAttribute("count",countCards);
+			return "deck_builder";
+		}catch(Exception ioe) {
+			return "error";
 		}
-		model.addAttribute("sortDeckHP",sortDeckHP);
-		
-		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
-		model.addAttribute("count",countCards);
-		return "deck_builder";
 	}
 	
 	@GetMapping("/starCard")
 	public String starCard(String name, String nameCard, String creator, Model model) {
-		System.out.println("starCard "+name+" by "+creator+" :"+nameCard);
-		Deck deck = deckService.getDeck(name);		
-		
-		ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
-		
-		int indexStarCard = 0;
-		for (Card card : sortDeckHP) {
-			if(card.getImageLarge().equals(nameCard)) {
-				indexStarCard=sortDeckHP.indexOf(card);
-				System.out.println("Starring card "+nameCard+"="+card.getImageLarge()+" at index "+indexStarCard);
-				String message = "New card starred as deck leader";
-				model.addAttribute("message",message);
-				break;
+		try {
+			System.out.println("starCard "+name+" by "+creator+" :"+nameCard);
+			Deck deck = deckService.getDeck(name);		
+			
+			ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+			
+			int indexStarCard = 0;
+			for (Card card : sortDeckHP) {
+				if(card.getImageLarge().equals(nameCard)) {
+					indexStarCard=sortDeckHP.indexOf(card);
+					System.out.println("Starring card "+nameCard+"="+card.getImageLarge()+" at index "+indexStarCard);
+					String message = "New card starred as deck leader";
+					model.addAttribute("message",message);
+					break;
+				}
 			}
-		}
-		deck.setDeckLeadImage(sortDeckHP.get(indexStarCard).getImageLarge());
-		deckService.save(deck);
-		model.addAttribute("deck",deck);
+			deck.setDeckLeadImage(sortDeckHP.get(indexStarCard).getImageLarge());
+			deckService.save(deck);
+			model.addAttribute("deck",deck);
 
-		model.addAttribute("sortDeckHP",sortDeckHP);
-		
-		Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
-		model.addAttribute("count",countCards);
-		return "deck_builder";	
+			model.addAttribute("sortDeckHP",sortDeckHP);
+			
+			Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
+			model.addAttribute("count",countCards);
+			return "deck_builder";
+		}catch(Exception ioe) {
+			return "error";
+		}
 	}
 	
 	//testing purpose
