@@ -326,48 +326,72 @@ public class SearchController {
 	}
 	
 	@GetMapping("/plusOneCard")
-	public String plusOneCard(String name, String nameCard, String creator, String quantity, Model model) {
+	public String plusOneCard(String name, String nameCard, String creator, String cardQuantity, Model model) {
 		try {
-			System.out.println("+1Card "+name+" by "+creator+" :"+nameCard+" | quantity "+quantity);
-			Deck deck = deckService.getDeck(name);		
+			Integer cardQnt = Integer.parseInt(cardQuantity);
+			System.out.println("+1Card "+name+" by "+creator+" :"+nameCard+" | quantity "+cardQuantity);
 			
+			Deck deck = deckService.getDeck(name);		
 			HashMap<String,Integer> mapCards = deck.getCards();
 			Integer quantityCard = mapCards.get(nameCard);
-			quantityCard = quantityCard +1;
-			mapCards.put(nameCard, quantityCard);			
-			model.addAttribute("deck",deck);
+			
+//			if(cardQnt == quantityCard) {
+				System.out.println("check quantity passed");
+				quantityCard = quantityCard +1;
+				mapCards.put(nameCard, quantityCard);		
+				deckService.save(deck);
+				model.addAttribute("deck",deck);
 
-			ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
-			model.addAttribute("sortDeckHP",sortDeckHP);
+				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+				model.addAttribute("sortDeckHP",sortDeckHP);
 
-			String message = "Card quantity increased";
-			model.addAttribute("message",message);
+				Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
+				model.addAttribute("count",countCards);
+				
+				String message = "Card quantity increased";
+				model.addAttribute("message",message);
 
-			return "deck_builder";
+				return "deck_builder";
+//			}else {
+//				System.out.println("check quantity error: input quantity "+cardQnt+" | deck card quantity "+quantityCard);
+//				return "error";
+//			}
 		}catch(Exception ioe) {
 			return "error";
 		}
 	}
 	
 	@GetMapping("/minusOneCard")
-	public String minusOneCard(String name, String nameCard, String creator, String quantity, Model model) {
+	public String minusOneCard(String name, String nameCard, String creator, String cardQuantity, Model model) {
 		try {
-			System.out.println("-1Card "+name+" by "+creator+" :"+nameCard+" | quantity "+quantity);
-			Deck deck = deckService.getDeck(name);		
+			Integer cardQnt = Integer.parseInt(cardQuantity);
+			System.out.println("-1Card "+name+" by "+creator+" :"+nameCard+" | quantity "+cardQuantity);
 			
+			Deck deck = deckService.getDeck(name);		
 			HashMap<String,Integer> mapCards = deck.getCards();
 			Integer quantityCard = mapCards.get(nameCard);
-			quantityCard = quantityCard -1;
-			mapCards.put(nameCard, quantityCard);			
-			model.addAttribute("deck",deck);
 			
-			ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
-			model.addAttribute("sortDeckHP",sortDeckHP);
-			
-			String message = "Card quantity increased";
-			model.addAttribute("message",message);
-			
-			return "deck_builder";
+//			if(cardQnt == quantityCard) {
+				System.out.println("check quantity passed");
+				quantityCard = quantityCard -1;
+				mapCards.put(nameCard, quantityCard);		
+				deckService.save(deck);
+				model.addAttribute("deck",deck);
+
+				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+				model.addAttribute("sortDeckHP",sortDeckHP);
+
+				Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
+				model.addAttribute("count",countCards);
+				
+				String message = "Card quantity decreased";
+				model.addAttribute("message",message);
+
+				return "deck_builder";
+//			}else {
+//				System.out.println("check quantity error: input quantity "+cardQnt+" | deck card quantity "+quantityCard);
+//				return "error";
+//			}
 		}catch(Exception ioe) {
 			return "error";
 		}
