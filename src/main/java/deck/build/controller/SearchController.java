@@ -325,6 +325,53 @@ public class SearchController {
 		}
 	}
 	
+	@GetMapping("/plusOneCard")
+	public String plusOneCard(String name, String nameCard, String creator, String quantity, Model model) {
+		try {
+			System.out.println("+1Card "+name+" by "+creator+" :"+nameCard+" | quantity "+quantity);
+			Deck deck = deckService.getDeck(name);		
+			
+			HashMap<String,Integer> mapCards = deck.getCards();
+			Integer quantityCard = mapCards.get(nameCard);
+			quantityCard = quantityCard +1;
+			mapCards.put(nameCard, quantityCard);			
+			model.addAttribute("deck",deck);
+
+			ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+			model.addAttribute("sortDeckHP",sortDeckHP);
+
+			String message = "Card quantity increased";
+			model.addAttribute("message",message);
+
+			return "deck_builder";
+		}catch(Exception ioe) {
+			return "error";
+		}
+	}
+	
+	@GetMapping("/minusOneCard")
+	public String minusOneCard(String name, String nameCard, String creator, String quantity, Model model) {
+		try {
+			System.out.println("-1Card "+name+" by "+creator+" :"+nameCard+" | quantity "+quantity);
+			Deck deck = deckService.getDeck(name);		
+			
+			HashMap<String,Integer> mapCards = deck.getCards();
+			Integer quantityCard = mapCards.get(nameCard);
+			quantityCard = quantityCard -1;
+			mapCards.put(nameCard, quantityCard);			
+			model.addAttribute("deck",deck);
+			
+			ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+			model.addAttribute("sortDeckHP",sortDeckHP);
+			
+			String message = "Card quantity increased";
+			model.addAttribute("message",message);
+			
+			return "deck_builder";
+		}catch(Exception ioe) {
+			return "error";
+		}
+	}
 	//testing purpose
 //	@GetMapping("/searchSetsJSON")
 //	public ResponseEntity<?> getSetsJSON(Model model){

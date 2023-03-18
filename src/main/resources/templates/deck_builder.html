@@ -298,6 +298,22 @@
 		width:30px; 
 		height:23px;
 	}
+	.cardAddMinusOneButton, .cardAddPlusOneButton{
+		width:20px;
+		height: 20px;
+	}
+	.cardAddPlusOne, .cardAddMinusOne{
+		margin-left:3px;
+	}
+	.modifyQuantityCards{
+		display: flex;
+	    flex-direction: row;
+	    justify-content: center;
+	    z-index: 2;
+	    margin-top: -27px;
+	    padding-left:18px;
+	    width:50px;
+	}
 </style>
 </head>
 <body>
@@ -403,6 +419,30 @@
 									<input type="image" src="https://i.imgur.com/RJA9hNm.png" class="card-star">
 								</div>
                         	</form>
+                        </div>
+                        <div class='modifyQuantityCards'>
+                        	<div class="cardAddMinusOne">
+							<form th:action="@{/minusOneCard}" method="get">
+                        		<input type="text" th:name="name" th:value="${deck.name}" style="display:none;"/> 
+								<input type="text" th:name="nameCard" th:value="${card.imageLarge}" style="display:none;"/> 
+								<input type="text" th:name="cardQuantity" th:value="${deck.cards.get(card.imageLarge)}" style="display:none;"/> 
+					    		<input type="text" th:name="creator" th:value="${deck.creator}" style="display:none;"/>									
+								<div th:if="${deck.cards.get(card.imageLarge)} gt '1'"> <!-- -1 only if qnt >1 -->
+									<img src="https://i.imgur.com/wJOOJrZ.png" class="cardAddMinusOneButton">
+								</div>
+							</form>
+	                        </div>
+	                        <div class="cardAddPlusOne">
+	               				<form th:action="@{/plusOneCard}" method="get">
+	                        		<input type="text" th:name="name" th:value="${deck.name}" style="display:none;"/> 
+									<input type="text" th:name="nameCard" th:value="${card.imageLarge}" style="display:none;"/> 
+									<input type="text" th:name="cardQuantity" th:value="${deck.cards.get(card.imageLarge)}" style="display:none;"/> 
+						    		<input type="text" th:name="creator" th:value="${deck.creator}" style="display:none;"/>																	
+									<div th:if="${deck.cards.get(card.imageLarge)} lt '20'"> <!-- +1 only if qnt <20 -->
+										<img src="https://i.imgur.com/GIccMSn.png" class="cardAddPlusOneButton">
+									</div>
+								</form>
+	                        </div>
                         </div>
                         <div class="post-number">
                         	<span class="post-number-x">X</span>
