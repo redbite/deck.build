@@ -303,7 +303,7 @@
 		height: 20px;
 	}
 	.cardAddPlusOne, .cardAddMinusOne{
-		margin-left:3px;
+		margin-left:5px;
 	}
 	.modifyQuantityCards{
 		display: flex;
@@ -430,6 +430,9 @@
 								<div th:if="${deck.cards.get(card.imageLarge)} gt '1'"> <!-- -1 only if qnt >1 -->
 									<input type="image" src="https://i.imgur.com/wJOOJrZ.png" class="cardAddMinusOneButton">
 								</div>
+								<div th:unless="${deck.cards.get(card.imageLarge)} gt '1'">
+									<image src="https://i.imgur.com/kGKXlTU.png" class="cardAddMinusOneButton">
+								</div>
 							</form>
 	                        </div>
 	                        <div class="cardAddPlusOne">
@@ -440,6 +443,9 @@
 						    		<input type="text" th:name="creator" th:value="${deck.creator}" style="display:none;"/>																	
 									<div th:if="${deck.cards.get(card.imageLarge)} lt '20'"> <!-- +1 only if qnt <20 -->
 										<input type="image" src="https://i.imgur.com/GIccMSn.png" class="cardAddPlusOneButton">
+									</div>
+									<div th:unless="${deck.cards.get(card.imageLarge)} lt '20'">
+										<image src="https://i.imgur.com/aFadxtI.png" class="cardAddPlusOneButton">
 									</div>
 								</form>
 	                        </div>

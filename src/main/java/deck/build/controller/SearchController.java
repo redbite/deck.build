@@ -130,7 +130,9 @@ public class SearchController {
 			if(deck.getCards().isEmpty()) {
 				deck.setDeckLeadImage(defaultCard);
 			}else {
-				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+				if(StringUtils.isEmpty(deck.getDeckLeadImage())){
+					deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+				}
 			}
 			model.addAttribute("deck",deck);
 
@@ -153,6 +155,7 @@ public class SearchController {
 			for(String card: cardsSet) {
 				if(nameCard.equals(card)) {
 					deck.getCards().remove(card);
+					//removes deleted card from star card if it was the starred card
 					if(deck.getDeckLeadImage()!=null) {
 						if(deck.getDeckLeadImage().equals(nameCard)) {
 							deck.setDeckLeadImage("");
@@ -166,9 +169,12 @@ public class SearchController {
 			}
 			ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
 			if(deck.getCards().isEmpty()) {
+				//if there is no star card, get the maximum HP
 				deck.setDeckLeadImage(defaultCard);
 			}else {
-				deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+				if(StringUtils.isEmpty(deck.getDeckLeadImage())){
+					deck.setDeckLeadImage(sortDeckHP.get(0).getImageLarge());
+				}
 			}
 			model.addAttribute("deck", deck);
 			model.addAttribute("sortDeckHP",sortDeckHP);
@@ -335,27 +341,22 @@ public class SearchController {
 			HashMap<String,Integer> mapCards = deck.getCards();
 			Integer quantityCard = mapCards.get(nameCard);
 			
-//			if(cardQnt == quantityCard) {
-				System.out.println("check quantity passed");
-				quantityCard = quantityCard +1;
-				mapCards.put(nameCard, quantityCard);		
-				deckService.save(deck);
-				model.addAttribute("deck",deck);
+			System.out.println("check quantity passed");
+			quantityCard = quantityCard +1;
+			mapCards.put(nameCard, quantityCard);		
+			deckService.save(deck);
+			model.addAttribute("deck",deck);
 
-				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
-				model.addAttribute("sortDeckHP",sortDeckHP);
+			ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+			model.addAttribute("sortDeckHP",sortDeckHP);
 
-				Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
-				model.addAttribute("count",countCards);
-				
-				String message = "Card quantity increased";
-				model.addAttribute("message",message);
+			Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
+			model.addAttribute("count",countCards);
+			
+			String message = "Card quantity increased";
+			model.addAttribute("message",message);
 
-				return "deck_builder";
-//			}else {
-//				System.out.println("check quantity error: input quantity "+cardQnt+" | deck card quantity "+quantityCard);
-//				return "error";
-//			}
+			return "deck_builder";
 		}catch(Exception ioe) {
 			return "error";
 		}
@@ -371,27 +372,22 @@ public class SearchController {
 			HashMap<String,Integer> mapCards = deck.getCards();
 			Integer quantityCard = mapCards.get(nameCard);
 			
-//			if(cardQnt == quantityCard) {
-				System.out.println("check quantity passed");
-				quantityCard = quantityCard -1;
-				mapCards.put(nameCard, quantityCard);		
-				deckService.save(deck);
-				model.addAttribute("deck",deck);
-
-				ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
-				model.addAttribute("sortDeckHP",sortDeckHP);
-
-				Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
-				model.addAttribute("count",countCards);
-				
-				String message = "Card quantity decreased";
-				model.addAttribute("message",message);
-
-				return "deck_builder";
-//			}else {
-//				System.out.println("check quantity error: input quantity "+cardQnt+" | deck card quantity "+quantityCard);
-//				return "error";
-//			}
+			System.out.println("check quantity passed");
+			quantityCard = quantityCard -1;
+			mapCards.put(nameCard, quantityCard);		
+			deckService.save(deck);
+			model.addAttribute("deck",deck);
+	
+			ArrayList<Card> sortDeckHP = deckService.sortDeckHP(deck);
+			model.addAttribute("sortDeckHP",sortDeckHP);
+	
+			Integer countCards = ServiceUtilsMisc.countCards(deck.getCards());
+			model.addAttribute("count",countCards);
+			
+			String message = "Card quantity decreased";
+			model.addAttribute("message",message);
+	
+			return "deck_builder";
 		}catch(Exception ioe) {
 			return "error";
 		}
