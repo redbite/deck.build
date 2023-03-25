@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Home</title>
+<title>deck.build</title>
 <!-- <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/> -->
-<link rel="icon" href="https://img.pokemondb.net/sprites/ruby-sapphire/normal/charizard.png">
+<link rel="icon" href="https://img.pokemondb.net/sprites/ruby-sapphire/normal/blastoise.png">
 <style>
 	body {
   	 background-color: rgba(31, 31, 31, 1);
-	 font-family: Roboto, 'Nunito Sans';
+	 font-family: "Segoe UI", Roboto, 'Nunito Sans';
 	 /*font-style: italic;*/
 	 font-weight: 400;
 	 src: url(https://fonts.gstatic.com/s/nunitosans/v12/pe0oMImSLYBIv1o4X1M8cce4E9RKdmwp.woff2) format('woff2');
@@ -50,9 +50,12 @@
 		display:flex;
 		flex-direction:row;
 		justify-content:center;
-		margin:5vw;
+		margin:8vw;
 		margin-top:20px;
 		margin-bottom:20px;
+		background-color:rgba(0,0,0,0.4);
+		border-radius:30px;
+		border:2px solid rgba(0,0,0,0.6);
 	}
 	
 	.menu-welcome-pic{
@@ -67,6 +70,9 @@
 	    /*border-left: 1px solid green;*/
 	    padding-left: 15px;
 	    text-align: left;
+	   	font-family: "Segoe UI";
+		font-size:14.5px;
+	   	margin-top:10px;
 	}
 	
 	a{
@@ -86,6 +92,7 @@
 		padding-bottom:5px;
 		font-size:22px;
 		text-align: left;
+		font-weight:bold;		
 	}
 	.home-section-submit{
 		display:flex;
@@ -264,6 +271,9 @@
 	.input-name-deck{
 		width:80px;
 	}
+	p{
+		margin:2px;
+	}
 </style>
 </head>
 <body>
@@ -291,8 +301,10 @@
 				</form>
 				<!-- <p><b>deck<span style="color:red">.</span>build</b> lets you build custom decks with your favourite TCG cards.</p> -->
 				<p>Start by creating a deck choosing the name and the deckBox color, then you can search for your favourite cards, filtering by name and sets.</p>
-				<p>Any card you choose can be added in a selectable number to a deck you want to. </p>
-				<p>The decks can contain a number of cards between 40 and 60.</p>
+				<p>Any card you choose can be added, in a selectable number, to a deck you want to. </p>
+				<p>The decks should contain a number of cards between 40 and 60. If the deck is out of this range, there will be a warning.
+				You can delete a card, decrease or increase its copies via the buttons under the card in the deck viewer.</p>
+				<p>By default the deck leader card will be the one with highest HPs. You can change it via the star button. If the deck is empty, a placeholder will be displayed.</p>
 				<div>
 					
 				</div>
