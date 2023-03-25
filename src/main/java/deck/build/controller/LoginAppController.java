@@ -26,7 +26,7 @@ public class LoginAppController {
 	
 	@GetMapping("")	
 	public String viewHomePage() {
-		return "index";	//	src/main/resources/templates/index
+		return "login";	//	src/main/resources/templates/index
 	}
 	
 	@GetMapping("/register")
@@ -35,7 +35,7 @@ public class LoginAppController {
 			model.addAttribute("user",new User());
 			return "register"; //	src/main/resources/templates/register
 		}catch(Exception e) {
-			return "index";
+			return "login";
 		}
 	}
 	
@@ -45,7 +45,7 @@ public class LoginAppController {
 		if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
 			return "login";
 		}
-		return "index";
+		return "login";
 	}
 	
 	@PostMapping("/process_register")
@@ -61,7 +61,7 @@ public class LoginAppController {
 			
 			return "login"; //	src/main/resources/templates/login
 		}catch(Exception e) {
-			return "index";
+			return "login";
 		}
 	}
 	

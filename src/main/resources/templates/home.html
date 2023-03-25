@@ -137,8 +137,10 @@
 	}
 	
 	.card_img{
-		width:243px;
-		height:352px;
+		width:220px;
+		height:318px;
+		border-radius:2%;
+		box-shadow: 3px 3px 5px black;
 	}
 	
 	.posts-container{
@@ -284,7 +286,7 @@
 				<form  th:action="@{/logout}" method="post">
 					<!-- request.userPrincipal.principal gets its data from CustomUserDetails -->
 					<p>
-						Welcome <b>[[${#request.userPrincipal.principal.email}]]</b>!<input type="submit" value="LogOut" style="background-color:black; color:grey; font-weight:bold; margin-left:20px;" />
+						Welcome <span style="color:yellow">[[${#request.userPrincipal.principal.email}]]</span>!<input type="submit" value="LogOut" style="background-color:black; color:grey; font-weight:bold; margin-left:20px;" />
 					</p>
 				</form>
 				<!-- <p><b>deck<span style="color:red">.</span>build</b> lets you build custom decks with your favourite TCG cards.</p> -->
